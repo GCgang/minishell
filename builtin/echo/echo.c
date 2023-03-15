@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:26:53 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 21:04:15 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "echo.h"
+
+void	built_in_echo(void)
+{
+	write(1, "echo\n", 5);
+	return ;
+}

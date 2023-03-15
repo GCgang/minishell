@@ -6,7 +6,15 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:14 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:46:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:47:40 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#	ifndef ECHO_H
+# define ECHO_H
+
+# include "../../excute.h"
+
+void	built_in_echo(void);
+
+#endif
