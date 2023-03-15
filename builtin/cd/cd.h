@@ -6,7 +6,15 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:08 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:46:09 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:47:24 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#	ifndef CD_H
+# define CD_H
+
+# include "../../excute.h"
+
+void	built_in_cd(void);
+
+#endif
