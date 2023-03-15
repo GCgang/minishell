@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:27:01 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:59:27 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "export.h"
+
+void	built_in_export(void)
+{
+	write(1, "export\n", 7);
+	return ;
+}
