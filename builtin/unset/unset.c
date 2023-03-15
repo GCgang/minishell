@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:27:06 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:57:28 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "unset.h"
+
+void	built_in_unset(void)
+{
+	write(1, "unset\n", 6);
+	return ;
+}
