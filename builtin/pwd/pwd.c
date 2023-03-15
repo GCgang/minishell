@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:03 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:27:03 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:57:19 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pwd.h"
+
+void	built_in_pwd(void)
+{
+	write(1, "pwd\n", 4);
+	return ;
+}
