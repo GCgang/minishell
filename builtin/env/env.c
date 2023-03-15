@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:26:56 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:56:45 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
+
+void	built_in_env(void)
+{
+	write(1, "env\n", 4);
+	return ;
+}
