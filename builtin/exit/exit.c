@@ -6,7 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/14 16:26:59 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:59:25 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exit.h"
+
+void	built_in_exit(void)
+{
+	write(1, "exit\n", 5);
+	return ;
+}
