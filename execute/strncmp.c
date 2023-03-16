@@ -6,11 +6,11 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:18:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/15 20:40:08 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:25:54 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../excute.h"
+#include "../execute.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
