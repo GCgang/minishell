@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/15 21:38:12 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:54:24 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include "builtin.h"
 
-void	excute_simple_built_in(char **argv);
+void	execute_simple_built_in(char **argv);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

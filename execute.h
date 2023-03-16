@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 16:27:03 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/16 22:57:21 by hyeoan           ###   ########.fr       */
+/*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
+/*   Updated: 2023/03/16 22:53:10 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pwd.h"
+// gcc execute.c strncmp.c ../builtin/cd/cd.c ../builtin/echo/echo.c ../builtin/env/env.c ../builtin/exit/exit.c ../builtin/export/export.c ../builtin/pwd/pwd.c ../builtin/unset/unset.c
+#	ifndef EXECUTE_H
+# define EXECUTE_H
 
-void	built_in_pwd(void)
-{
-	char	*buf;
-	char	*dir;
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "builtin.h"
 
-	buf = NULL;
-	dir = getcwd(buf, PATH_MAX);
-	if (dir == NULL)
-	{} ;
-		/*
-		if (pid > 0)
-			perror("DIR PATH ERROR")
-		else if (pid == 0)
-			exit(1);
-		*/
-	printf("%s\n", dir);
-	free(dir);
-	return ;
-}
+void	execute_simple_built_in(char **argv);
+int		ft_strcmp(char *s1, char *s2);
+
+#endif

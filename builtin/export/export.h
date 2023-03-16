@@ -6,14 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/15 20:48:25 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:54:44 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #	ifndef EXPORT_H
 # define EXPORT_H
 
-# include "../../excute.h"
+# include "../../execute.h"
 
 void	built_in_export(void);
 

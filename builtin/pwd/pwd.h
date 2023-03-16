@@ -6,14 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:24 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/15 20:48:36 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:56:15 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #	ifndef PWD_H
 # define PWD_H
-
-# include "../../excute.h"
+# define PATH_MAX 1024 // limit.h -> PATH_MAX 1024 (del)
+# include "../../execute.h"
 
 void	built_in_pwd(void);
 
