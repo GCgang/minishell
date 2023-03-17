@@ -6,24 +6,20 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-<<<<<<< HEAD:execute/execute.c
-/*   Updated: 2023/03/16 22:53:08 by hyeoan           ###   ########.fr       */
-=======
-/*   Updated: 2023/03/16 22:31:42 by hyeoan           ###   ########.fr       */
->>>>>>> 08698c52d3c56c202fb69a561ab072db58466aa3:execute/excute.c
+/*   Updated: 2023/03/17 15:44:18 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
-
-void	execute_simple_built_in(char **argv)
+//gcc execute.c strcmp.c ft_putchar_fd.c ft_putstr_fd.c ft_strlen.c ../builtin/cd/cd.c ../builtin/echo/echo.c ../builtin/env/env.c ../builtin/exit/exit.c ../builtin/export/export.c ../builtin/pwd/pwd.c ../builtin/unset/unset.c
+void	execute_simple_built_in(char **argv, char **envp)
 {
 	if (ft_strcmp(argv[1], "cd") == 0)
 		built_in_cd();
 	else if (ft_strcmp(argv[1], "echo") == 0)
-		built_in_echo();
+		built_in_echo(argv);
 	else if (ft_strcmp(argv[1], "env") == 0)
-		built_in_env();
+		built_in_env(envp);
 	else if (ft_strcmp(argv[1], "exit") == 0)
 		built_in_exit();
 	else if (ft_strcmp(argv[1], "export") == 0)
@@ -46,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 
 	pipeline = 0;
 	if (pipeline == 0)
-		execute_simple_built_in(argv);
+		execute_simple_built_in(argv, envp);
 	// else
 	// {
 	// 	//pipe...
