@@ -6,11 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:14 by hyeoan            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/16 22:54:52 by hyeoan           ###   ########.fr       */
-=======
-/*   Updated: 2023/03/16 22:28:37 by hyeoan           ###   ########.fr       */
->>>>>>> 08698c52d3c56c202fb69a561ab072db58466aa3
+/*   Updated: 2023/03/17 15:44:36 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +15,6 @@
 
 # include "../../execute.h"
 
-void	built_in_echo(void);
+void	built_in_echo(char **argv);
 
 #endif
