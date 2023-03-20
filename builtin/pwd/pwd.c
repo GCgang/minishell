@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:03 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 20:33:23 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/20 16:15:47 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pwd.h"
 
-void	built_in_pwd(void)
+void	built_in_pwd(t_env *env_list)
 {
 	char	*dir;
 
@@ -20,5 +20,5 @@ void	built_in_pwd(void)
 	ft_putstr_fd(dir, 1);
 	ft_putchar_fd('\n', 1);
 	free(dir);
-	//exit_status = 0;
+	env_list->status = 0;
 }
