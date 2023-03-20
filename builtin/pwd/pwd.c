@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:03 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/17 13:18:48 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/19 20:33:23 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	built_in_pwd(void)
 {
-	char	*buf;
 	char	*dir;
 
-	buf = NULL;
-	dir = getcwd(buf, PATH_MAX);
+	dir = getcwd(NULL, PATH_MAX);
 	ft_putstr_fd(dir, 1);
 	ft_putchar_fd('\n', 1);
 	free(dir);

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 10:44:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 21:56:36 by jun              ###   ########.fr       */
+/*   Created: 2023/03/19 14:43:42 by hyeoan            #+#    #+#             */
+/*   Updated: 2023/03/19 14:43:44 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef PWD_H
-# define PWD_H
-# define PATH_MAX 1024 // limit.h -> PATH_MAX 1024 (del)
-# include "../../execute.h"
-
-void	built_in_pwd(void);
-
-#endif
+int	ft_isdigit(int c)
+{
+	if ('0' <= c && c <= '9')
+		return (1);
+	return (0);
+}

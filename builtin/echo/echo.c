@@ -3,39 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/17 20:00:03 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/19 21:56:15 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "echo.h"
 
-// void	check_echo_option(char **str, int *option_n)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (**str != '-')
-// 		return ;
-// 	else
-// 		(*str)++;
-// 	while (**str == 'n')
-// 	{
-// 		(*str)++;
-// 		(*option_n)++;
-// 	}
-// 	if (**str != ' ')
-// 	{
-		
-// 	}
-// 	if (**str == ' ' && *option_n > 0)
-// 	{
-// 		*option_n = 1;
-// 		return ;
-// 	}
-// }
 void	check_echo_option(char **str, int *option_n)
 {
 	int	i;

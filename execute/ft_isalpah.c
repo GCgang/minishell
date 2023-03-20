@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   ft_isalpah.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 10:44:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 21:56:36 by jun              ###   ########.fr       */
+/*   Created: 2023/03/19 20:53:28 by jun               #+#    #+#             */
+/*   Updated: 2023/03/19 20:53:29 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef PWD_H
-# define PWD_H
-# define PATH_MAX 1024 // limit.h -> PATH_MAX 1024 (del)
-# include "../../execute.h"
-
-void	built_in_pwd(void);
-
-#endif
+int	ft_isalpha(int c)
+{
+	if ('a' <= c && c <= 'z')
+		return (1);
+	if ('A' <= c && c <= 'Z')
+		return (1);
+	return (0);
+}

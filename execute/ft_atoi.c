@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 10:44:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 21:56:36 by jun              ###   ########.fr       */
+/*   Created: 2023/03/19 14:43:26 by hyeoan            #+#    #+#             */
+/*   Updated: 2023/03/19 20:33:29 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef PWD_H
-# define PWD_H
-# define PATH_MAX 1024 // limit.h -> PATH_MAX 1024 (del)
-# include "../../execute.h"
+#include "execute.h"
 
-void	built_in_pwd(void);
+int	ft_atoi(const char *str)
+{
+	int	result;
+	int	sign;
 
-#endif
+	result = 0;
+	sign = 1;
+	while ((9 <= *str && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str) != 0)
+	{
+		result *= 10;
+		result += (*str - '0');
+		str++;
+	}
+	return (result * sign);
+}
