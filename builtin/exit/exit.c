@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/20 20:01:19 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/21 00:08:39 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,28 @@ int	check_exit_syntax(char *exit_val)
 	return (1);
 }
 
-void	built_in_exit(t_command **cmd, t_env *env_list, pid_t pid)
+void	built_in_exit(t_command **cmd, t_env *env_list)
 {
-	if ((*cmd)->)
-	if (check_exit_syntax((*cmd)->word[1]) &&  (*cmd)->word[2])
+	if ((*cmd)->word[1] != NULL && (*cmd)->word[2] != NULL)
 	{
-		// g_exit_status = ft_atoi(exit_val);
-		;
+		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
+		env_list->status = 255;
+		return ;
 	}
-	//exit("255test") or exit("255") test
-	else if (check_exit_syntax(exit_val) && cmd_cnt >= 2)
+	else if (check_exit_syntax((*cmd)->word[1]) == 0)
 	{
-		ft_putstr_fd("Minishell: exit: too many arguments", 2);
-		// g_exit_status = 1;
+		ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
+		env_list->status = 255;
+	}
+	else if ((*cmd)->word[1] == NULL)
+	{
+		ft_putstr_fd("exit\n", 2);
+		env_list->status = 0;
 	}
 	else
 	{
-		ft_putstr_fd("Minishell: exit: numeric argument required", 2);
-		// g_exit_status = 255;
+		ft_putstr_fd("exit\n", 2);
+		env_list->status = ft_atoi((*cmd)->word[1]);
 	}
-	// exit (g_exit_status);
+	exit (env_list->status);
 }

@@ -3,81 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 17:08:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:13:38 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 
-void	change_home_dir(char *dir)
+// void	update_pwd(t_env *env_list)
+// {
+// 	char	*new_pwd;
+// 	char	*new_old_pwd;
+
+// 	new_pwd = getcwd(NULL, PATH_MAX);
+// 	new_old_pwd = ft_strdup(get_name(env_list, "OLDPWD"));
+// }
+
+char	*get_name(t_env *env_list, char *name)
 {
-	if (getenv("HOME") == NULL)
+	t_env	*tmp_list;
+	char	*tmp_name;
+
+	tmp_list = env_list->next;
+	while (tmp_list != NULL)
 	{
-		ft_putstr_fd("HOME not set", 2);
-		//g_exit_status = 1;
-		return ;
+		tmp_name = tmp_list->name;
+		if (ft_strcmp(tmp_name, name) == 0)
+			return (tmp_name);
+		tmp_list = tmp_list->next;
 	}
-	if (chdir(getenv("HOME")) == -1)
-	{
-		ft_putstr_fd("No such file or directory", 2);
-		//g_exit_status = 1;
-		return ;
-	}
-	//update_envp();
+	return (NULL);
 }
 
-void	change_new_dir(char *dir)
+void	change_home_dir(t_env *env_list)
 {
-	if (chdir(dir) == -1)
+	if (get_name(env_list, "HOME") == NULL)
 	{
-		ft_putstr_fd("No such file or directory", 2);
-		//g_exit_status = 1;
+		ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
+		env_list->status = 1;
 		return ;
 	}
-	//update_envp();
-}
-
-void	change_env_dir(char *dir)
-{
-	if (chdir(dir) == -1)
-		chdir(getenv("HOME"));
-	//update_envp();
-}
-
-void	change_oldpwd_dir(char *dir)
-{
-	if (getenv("OLDPWD") == NULL)
+	if (chdir(get_name(env_list, "HOME")) == -1)
 	{
-		ft_putstr_fd("OLDPWD not set", 2);
-		//g_exit_status = 1;
+		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
+		env_list->status = 1;
 		return ;
 	}
-	if (chdir(dir) == -1)
+	//update_pwd();
+}
+
+void	change_new_dir(t_env *env_list, char *name)
+{
+	if (chdir(name) == -1)
 	{
-		ft_putstr_fd("No such file or directory", 2);
-		//g_exit_status = 1;
+		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
+		env_list->status = 1;
 		return ;
 	}
-	//update_envp();
+	//update_pwd();
+}
+
+// void	change_env_dir(t_env *env_list)
+// {
+// 	if (chdir(dir) == -1)
+// 		chdir(getenv("HOME"));
+// 	//update_envp();
+// }
+
+void	change_oldpwd_dir(t_env *env_list)
+{
+	if (get_name(env_list, "OLDPWD") == NULL)
+	{
+		ft_putstr_fd("Minishell: cd: OLDPWD not set\n", 2);
+		env_list->status = 1;
+		return ;
+	}
+	if (chdir(get_name(env_list, "OLDPWD")) == -1)
+	{
+		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
+		env_list->status = 1;
+		return ;
+	}
+	//update_pwd();
 
 }
 
-void	built_in_cd(void)
+void	built_in_cd(t_command **cmd, t_env *env_list)
 {
-	char	*dir;
 	char	*cmd;
 
 	//cd or cd ~
-	if (dir == NULL || ft_strcmp(dir, "~") == 0)
-		change_home_dir(dir);
-	else if (dir[0] == '$')
-		change_env_dir(dir);
-	else if (dir[0] == '-')
-		change_oldpwd_dir(dir);
+	if ((*cmd)->word[1] == NULL || ft_strcmp((*cmd)->word[1], "~") == 0)
+		change_home_dir(env_list);
+	// else if ((*cmd)->word[1][0] == '$')
+	// 	change_env_dir(;
+	else if ((*cmd)->word[1] == '-')
+		change_oldpwd_dir(env_list);
 	else
-		change_new_dir(dir);
-	return ;
+		change_new_dir(env_list, (*cmd)->word[1]);
 }

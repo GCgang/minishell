@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:17 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/17 13:16:43 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:15:51 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "../../execute.h"
 
-void	built_in_env(char **envp);
+void	built_in_env(t_command **cmd, t_env *env_list);
 
 #endif

@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/17 19:16:45 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:33:52 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-void	built_in_env(char **envp)
+void	built_in_env(t_command **cmd, t_env *env_list)
 {
-	int	i;
+	t_env	*tmp_list;
 
-	i = -1;
-	// check unset PATH case
-	// if (access(PATH, F_OK) == -1)
-	// {
-	// 	perror("command not found");
-	// 	//exit_status = 127;
-	// }
-	while (envp[++i])
+	if ((*cmd)->word[1] == NULL)
 	{
-		ft_putstr_fd(envp[i], 1);
-		ft_putchar_fd('\n', 1);
+		tmp_list = env_list->next;
+		while (tmp_list != NULL)
+		{
+			if (tmp_list->name != NULL && tmp_list->val != NULL)
+			{
+				ft_putstr_fd(tmp_list->name, 1);
+				ft_putchar_fd('=', 1);
+				ft_putstr_fd(tmp_list->val, 1);
+				ft_putchar_fd('\n', 1);
+			}
+			tmp_list = tmp_list->next;
+		}
+
 	}
-	//exit_status = 0;
-	return ;
+	else
+	{
+		ft_putstr_fd("env: No such file or directory", 2);
+		env_list->status = 127;
+	}
+
 }
