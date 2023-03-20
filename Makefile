@@ -1,6 +1,6 @@
 CFLAGS = -Werror -Wall -Wextra
-CF_FLAGS = -L/opt/homebrew/opt/readline/lib -lreadline
-OBJ_FLAGS = -I/opt/homebrew/opt/readline/include
+CF_FLAGS = -L/Users/jaehjoo/.brew/opt/readline/lib -lreadline
+OBJ_FLAGS = -I/Users/jaehjoo/.brew/opt/readline/include
 PARS = -L./pars -lpars
 PARSA = ./pars/pars.a
 RM = rm -rf
