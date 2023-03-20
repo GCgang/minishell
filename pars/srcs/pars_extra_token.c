@@ -4,7 +4,7 @@
 	pars_extra_token : 환경변수, 인용 해석, 메타문자 유형별 정리
 	1. redirection 중, << 뒤에 오는 토큰은 heredoc으로 분류
 	2. record_quote : 현재 토큰의 따옴표 위치를 분석
-	3. env_search : 토큰에 존재하는 환경변수를 파싱, heredoc은 해당 토큰이 탈출 조건이기에 건드리지 않는다
+	3. env_search : 토큰에 존재하는 환경변수를 파싱, heredoc은 해당 토큰이 
 	4. split_word_ifs : 단어 분할 기준, IFS가 있는 지 확인하고 IFS에 해당하는 내용물을 별도 토큰으로 분리
 	5. remove_quote : 메타 문자가 아닌 단순 문자열인 경우, 인용 문구를 제거한다
 */

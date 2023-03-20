@@ -1,8 +1,12 @@
 #include "../include/pars.h"
 
+/*
+	extend_trim_token
+	1. 공백 제외 다른 토큰들을 분할하여 각각의 토큰으로 저장할 때 사용
+*/
 void	extend_trim_token(t_token *tgt, int num)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	char	*tmp_str;
 	char	*str;
 

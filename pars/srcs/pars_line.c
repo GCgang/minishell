@@ -6,14 +6,14 @@
 		1-a. chk_have_token : token이 존재하는지 검사
 		1-b. make_token : 인용문구, 메타문자, 단어를 기준으로 토큰을 분할
 		1-c. trim_token : 각 토큰의 양 끝단 공백, 메타문자 집합에서 불필요한 공백 제거, 각각의 메타문자 별로 토큰 분리
-		1-d. pars_extra_token : 
+		1-d. pars_extra_token : redirection 토큰 뒤에 위치한 word 토큰 세부 분류(h, v), 토큰에 있는 환경변수 변환, IFS 확인, 토큰 내 문자열 따옴표 제거
 */
 
 static void	test_print_all(t_env **env_list, t_command **com)
 {
-	t_command *tmp2;
+	t_command	*tmp2;
 	t_env		*tmp1;
-	int		idx;
+	int			idx;
 
 	tmp1 = *env_list;
 	tmp2 = *com;

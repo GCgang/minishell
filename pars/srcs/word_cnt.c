@@ -18,7 +18,7 @@ static void	word_del(t_token **token, t_token **now, t_token **before)
 
 static void	word_array(t_token **token, t_command *com)
 {
-	int	idx;
+	int		idx;
 	t_token	*now;
 	t_token	*before;
 
@@ -43,7 +43,7 @@ static void	word_array(t_token **token, t_command *com)
 
 void	word_cnt(t_token **token, t_command *com)
 {
-	int	cnt;
+	int		cnt;
 	t_token	*tmp;
 
 	tmp = *token;

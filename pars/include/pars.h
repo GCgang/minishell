@@ -1,6 +1,7 @@
 #ifndef PARS_H
 # define PARS_H
 
+# include "../../share/struct.h"
 # include "../../share/init.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);

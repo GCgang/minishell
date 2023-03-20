@@ -1,5 +1,8 @@
 #include "../include/pars.h"
 
+/*
+	word[0] path 제대로 처리
+*/
 static char	**find_and_split(t_env *env_list)
 {
 	char	**path;

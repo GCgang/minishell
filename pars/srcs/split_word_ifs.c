@@ -1,5 +1,12 @@
 #include "../include/pars.h"
 
+/*
+	split_sord_ifs
+	1. 환경 변수로 등록되어 있는 단어 구분자를 찾을 때 사용
+	2. search_ifs : 메타문자, 인용문구 제외, 문자열로 치환한 환경변수 내용물을 확인하여 구분자가 존재하는 경우, 구분자 기준 토큰을 분할
+		2-a. 분할된 토큰은 'w'(word)로 구분한다
+	3. split_ifs : 구분자로 분할하여 신규 토큰 작성이 필요할 시, 사용
+*/
 static int	split_ifs(t_token *tmp, char *ifs, int *idx)
 {
 	char	*tmp_str;

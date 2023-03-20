@@ -1,5 +1,9 @@
 #include "../include/pars.h"
 
+/*
+	remove_quote
+	1. 메타문자를 제외한 나머지 word 토큰에서 따옴표를 제거한다
+*/
 void	remove_quote(t_token *token)
 {
 	int		idx;

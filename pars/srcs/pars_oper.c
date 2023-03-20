@@ -56,7 +56,7 @@ int	pars_oper(t_token **token, t_env **env_list, t_command *com)
 	int		res;
 
 	res = 0;
-	while ((*token != 0 && (*token)->type != 'p' && res >= 0))
+	while (*token != 0 && (*token)->type != 'p' && res >= 0)
 	{
 		if (com->oper != 0)
 			free(com->oper);
