@@ -6,7 +6,7 @@
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 21:31:20 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/20 11:25:37 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	built_in_unset(char **envp)
 			//g_exit_status = 1;
 		}
 		else
+		;	
 			//delete_envp(envp);
 	}
 	return ;
