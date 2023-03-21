@@ -14,25 +14,6 @@ void	ft_bzero(void *ptr, size_t num)
 	}
 }
 
-char	*strjoin_append(char const *s1, char const *s2, char c)
-{
-	char	*temp;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	temp = (char *)malloc(s1_len + s2_len + 2);
-	if (!temp)
-		return (NULL);
-	ft_strlcpy(temp, s1, s1_len + 1);
-	temp[s1_len] = c;
-	ft_strlcat(temp, s2, s1_len + s2_len + 2);
-	return (temp);
-}
-
 void	str_tolower(char *str)
 {
 	int	idx;

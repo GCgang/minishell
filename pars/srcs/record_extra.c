@@ -1,95 +1,60 @@
 #include "../include/pars.h"
 
 /*
-	word[0] path 제대로 처리
+	path 문제점
+	1. path가 있는 경우, '/' -> access -> X : no such file or directory, '/'가 없으면 : command not found
+	2. path가 없으면 '/' 경로로 인식을 못함 : no such file or directory, builtin은 path와 상관 없이 인식
+
+	개선 예정
+	1. path는 보류
+	2. builtin은 개별로 해서 export, unset 제외 소문자로 바꾸기
 */
-static char	**find_and_split(t_env *env_list)
+
+static char	chk_extend_builtin(t_command *com, char *tgt)
 {
-	char	**path;
-
-	path = 0;
-	while (env_list != 0)
+	if (ft_strncmp(tgt, "export", 7) == 0
+		|| ft_strncmp(tgt, "unset", 6) == 0)
 	{
-		if (ft_strncmp(env_list->name, "PATH", 5) == 0)
-		{
-			path = ft_split(env_list->val, ':');
-			break ;
-		}
-		env_list = env_list->next;
+		if (ft_strncmp(com->word[0], "export", 7) == 0)
+			return ('x');
+		else if (ft_strncmp(com->word[0], "unset", 6 == 0))
+			return ('u');
 	}
-	return (path);
-}
-
-static char	*find_path(t_env *env_list, char *com)
-{
-	char	**path;
-	char	*val;
-	int		idx;
-
-	idx = -1;
-	path = find_and_split(env_list);
-	while (path != 0 && path[++idx] != 0)
-	{
-		val = strjoin_append(path[idx], com, '/');
-		if (access(val, F_OK | X_OK) == 0)
-		{
-			free_array(path);
-			return (val);
-		}
-		free(val);
-	}
-	if (path != 0)
-		free_array(path);
 	return (0);
 }
 
-static int	builtin(t_command *com)
+static int	builtin(t_command *com, char *tgt)
 {
 	if (com->word != 0)
 	{
-		if (ft_strncmp(com->word[0], "echo", 5) == 0)
+		str_tolower(tgt);
+		if (ft_strncmp(tgt, "echo", 5) == 0)
 			com->builtin = 'e';
-		else if (ft_strncmp(com->word[0], "cd", 3) == 0)
+		else if (ft_strncmp(tgt, "cd", 3) == 0)
 			com->builtin = 'c';
-		else if (ft_strncmp(com->word[0], "pwd", 4) == 0)
+		else if (ft_strncmp(tgt, "pwd", 4) == 0)
 			com->builtin = 'p';
-		else if (ft_strncmp(com->word[0], "export", 7) == 0)
-			com->builtin = 'x';
-		else if (ft_strncmp(com->word[0], "unset", 6) == 0)
-			com->builtin = 'u';
-		else if (ft_strncmp(com->word[0], "env", 4) == 0)
+		else if (ft_strncmp(tgt, "env", 4) == 0)
 			com->builtin = 'n';
-		else if (ft_strncmp(com->word[0], "exit", 5) == 0)
+		else if (ft_strncmp(tgt, "exit", 5) == 0)
 			com->builtin = 'i';
+		else
+			com->builtin = chk_extend_builtin(com, tgt);
 	}
+	if (ft_strchr("ecpni", com->builtin) != 0)
+		str_tolower(com->word[0]);
 	if (ft_strchr("ecpxuni", com->builtin) != 0)
 		return (1);
 	return (0);
 }
 
-void	record_extra(t_command *com, t_env *env_list)
+void	record_extra(t_command **com, t_env *env_list)
 {
-	char	*path;
+	char	*tmp;
 
-	path = 0;
-	if (com->word == 0 || com->word[0] == 0)
-	{
-		com->path = 0;
-		return ;
-	}
-	str_tolower(com->word[0]);
-	if ((builtin(com) == 1) || ft_strchr(com->word[0], '/' != 0))
-		path = ft_strdup(com->word[0]);
-	else
-	{
-		path = find_path(env_list, com->word[0]);
-		if (path != 0)
-		{
-			free(com->word[0]);
-			com->word[0] = ft_strdup(path);
-		}
-	}
-	if (path == 0)
-		com->path_err = 1;
-	com->path = path;
+	tmp = ft_strdup((*com)->word[0]);
+	builtin((*com), tmp);
+	free(tmp);
+	if ((*com)->next != 0)
+		record_extra(&((*com)->next), env_list);
 }

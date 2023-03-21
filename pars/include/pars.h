@@ -12,7 +12,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 void	*ft_memset(void *ptr, int value, size_t num);
 void	str_tolower(char *str);
-char	*strjoin_append(char const *s1, char const *s2, char c);
 void	ft_bzero(void *ptr, size_t num);
 
 t_token	*lstnew_token(char type, char *val);
@@ -39,6 +38,6 @@ void	change_status(t_env **env_list, int status);
 void	free_array(char **arr);
 
 int		heredoc(t_command *com, t_env **env_list);
-void	record_extra(t_command *com, t_env *env_list);
+void	record_extra(t_command **com, t_env *env_list);
 
 #endif

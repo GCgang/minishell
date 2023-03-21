@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_search.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/21 19:11:55 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pars.h"
 
 /*
@@ -8,6 +20,11 @@
 	3. conv_env_to_token : $뒤의 이름을 파싱하고 동명의 환경변수가 존재하는 지 확인
 	4. make_env_name&val : 해당 환경변수가 없는 경우, 아예 빈 환경변수를 만들어 final로 보낸다
 	5. conv_env_final : 환경변수의 내용물을 토큰에 집어 넣는다
+
+	추가 사항
+	1. $? 관련 내용 추가
+	2. 신규 환경 변수 추가하는 기능 삭제
+	3. exit_status 보는 환경변수 name->c
 */
 static void	conv_env_final(t_token *tkn, t_env *e_list, int start, int final)
 {
@@ -89,7 +106,6 @@ static void	conv_env_to_token(t_token *tkn, t_env *e_list, int *start, int q)
 	while (ft_strchr(" $\t\n\"\'/=", tkn->val[final]) == 0)
 		final++;
 	tmp = ft_substr(tkn->val, *start + 1, final - *start - 1);
-	printf("env : %s\n", tmp);
 	while (e_list != 0)
 	{
 		if (ft_strncmp(e_list->name, tmp, ft_strlen(tmp) + 1) == 0)

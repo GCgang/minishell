@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/21 15:45:03 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pars.h"
 
 /*
@@ -25,7 +37,8 @@ static void	test_print_all(t_env **env_list, t_command **com)
 	}
 	while (tmp2)
 	{
-		printf("com1 : word-> ");
+		printf("com1 : word->");
+		idx = 0;
 		while (tmp2->word[idx])
 		{
 			printf("%s ", tmp2->word[idx]);
