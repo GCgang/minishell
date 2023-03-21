@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 00:08:39 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/21 15:53:22 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,10 @@ void	built_in_exit(t_command **cmd, t_env *env_list)
 		ft_putstr_fd("exit\n", 2);
 		env_list->status = ft_atoi((*cmd)->word[1]);
 	}
+	// if(pid > 0)
+	// {
+	// 	env_list->val = ft_strdup("exit");
+	// 	return ;
+	// }
 	exit (env_list->status);
 }

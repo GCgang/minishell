@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/19 21:16:09 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/21 15:46:54 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 
 # include "../../execute.h"
 
-void	built_in_export(char **envp);
+void	built_in_export(t_command **cmd, t_env *env_list);
 
 #endif
