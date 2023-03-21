@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 14:19:40 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/22 00:18:14 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ int	check_unset_syntax(char *variable)
 
 void	delete_envp(t_env *env_list, char *name)
 {
-	t_env	*tmp_list;
+	// t_env	*tmp_list;
 
-	tmp_list = env_list->next;
-	while (tmp_list != NULL)
-	{
-		if (ft_strcmp(tmp_list->name, name) == 0)
-		{
-			//lstdelone_env(env_list, &free);
-			return ;
-		}
-		tmp_list = tmp_list->next;
-	}
+	// tmp_list = env_list->next;
+	// while (tmp_list != NULL)
+	// {
+	// 	if (ft_strcmp(tmp_list->name, name) == 0)
+	// 	{
+	// 		//lstdelone_env(env_list, &free);
+	// 		return ;
+	// 	}
+	// 	tmp_list = tmp_list->next;
+	// }
+	lseclear_env(&env_list, &free);
 }
 
 void	built_in_unset(t_command **cmd, t_env *env_list)
@@ -52,7 +53,7 @@ void	built_in_unset(t_command **cmd, t_env *env_list)
 	{
 		if (check_unset_syntax((*cmd)->word[i]) == 0)
 		{
-			ft_putstr_fd("not a valid identifier", 2);
+			ft_putstr_fd("Minishell: unset: not a valid identifier\n", 2);
 			env_list->status = 1;
 		}
 		else

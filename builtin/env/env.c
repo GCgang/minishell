@@ -6,7 +6,7 @@
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 01:33:52 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/22 00:14:14 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 	}
 	else
 	{
-		ft_putstr_fd("env: No such file or directory", 2);
+		ft_putstr_fd("Minishell: env: No such file or directory", 2);
 		env_list->status = 127;
 	}
 
