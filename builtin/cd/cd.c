@@ -6,20 +6,32 @@
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 01:13:38 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/21 09:53:42 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 
-// void	update_pwd(t_env *env_list)
-// {
-// 	char	*new_pwd;
-// 	char	*new_old_pwd;
+void	update_pwd(t_env *env_list)
+{
+	char	*new_pwd;
+	// char	*new_old_pwd;
 
-// 	new_pwd = getcwd(NULL, PATH_MAX);
-// 	new_old_pwd = ft_strdup(get_name(env_list, "OLDPWD"));
-// }
+	// new_pwd = getcwd(NULL, PATH_MAX);
+	// new_old_pwd = ft_strdup(get_name(env_list, "OLDPWD"));
+	//update pwd
+
+	/*
+		find PWD & OLDPWD -> true
+			free PWD & OLDPWD
+			update PWD val & OLDPWD val
+		else
+			init PWD & OLDPWD
+			update PWD & OLDPWD
+			update PWD val & OLDPWD val
+		
+	*/
+}
 
 char	*get_name(t_env *env_list, char *name)
 {

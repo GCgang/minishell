@@ -6,7 +6,7 @@
 /*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 01:46:54 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/21 09:33:02 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	delete_envp(t_env *env_list, char *name)
 	{
 		if (ft_strcmp(tmp_list->name, name) == 0)
 		{
-			//del list
+			//lstdelone_env(env_list, del);
 			return ;
 		}
 		tmp_list = tmp_list->next;
@@ -56,8 +56,7 @@ void	built_in_unset(t_command **cmd, t_env *env_list)
 			env_list->status = 1;
 		}
 		else
-		;	
-			//delete_envp(env_list, (*cmd)->word[i]);
+			delete_envp(env_list, (*cmd)->word[i]);
 	}
 	return ;
 }
