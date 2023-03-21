@@ -1,5 +1,18 @@
 #include "init.h"
 
+void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *))
+{
+	t_env	*tmp;
+
+	if (!before || !now || !del)
+		return ;
+	tmp = now->next;
+	del((void *)now->name);
+	del((void *)now->val);
+	before->next = tmp;
+	del((void *)now);
+}
+
 void	lstdelone_env(t_env *lst, void (*del)(void *))
 {
 	if (!lst || !del)

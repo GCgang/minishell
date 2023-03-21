@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:55:36 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/20 14:56:02 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/20 18:36:02 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_command
 	int					pipe;
 	int					pipe_in;
 	int					pipe_out;
+	char				*err_buf;
 	struct s_command	*next;
 }	t_command;
 

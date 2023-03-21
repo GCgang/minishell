@@ -23,6 +23,7 @@ void	lstadd_back_env(t_env **lst, t_env *new);
 void	lstdelone_env(t_env *lst, void (*del)(void *));
 void	lstclear_env(t_env **lst, void (*del)(void *));
 t_env	*lstnew_env(char *name, char *val);
+void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *));
 
 void	init_signal(void);
 void	heredoc_sigint_handler(int sig);
