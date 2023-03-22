@@ -28,8 +28,8 @@ static int	add_exit_status(t_env *node, t_env **env_list)
 		return (0);
 	not[0] = '0';
 	not[1] = 0;
-	node = lstnew_env(ft_strdup("c"), not);
-	node->mean = 'c';
+	node = lstnew_env(ft_strdup("?"), not);
+	node->mean = '?';
 	node->status = 0;
 	lstadd_front_env(env_list, node);
 	return (1);

@@ -30,7 +30,7 @@ static void	introduce(void)
 
 static int	chk_res(t_env *env_list, int *res)
 {
-	while (env_list->mean != 'c')
+	while (env_list->mean != '?')
 		env_list = env_list->next;
 	if (env_list->val != 0)
 	{

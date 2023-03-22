@@ -35,11 +35,11 @@ typedef struct	s_env
 
 envp로 받은 환경변수 내용물을 정리하기 위한 것
 1. name : 각 환경변수에서 '=' 기준 좌변에 해당
-2. val : 각 환경변수에서 '=' 기준 우변에 해당
+2. val : 각 환경변수에서 '=' 기준 우변에 해당, mean = '?'인 경우, "exit" 또는 "{exit_status}" 확인용
 3. mean : 각 환경변수가 무슨 의미인지 확인하기 위한 용도
 	3-a. 'e' : 일반 환경변수
-	3-b. 'c' : main 무한 반복문 탈출을 위한 조건 검사 용도
-4. status : 환경변수의 상태를 나타내기 위한 용도
+	3-b. '?' : main 무한 반복문 탈출 또는 exit_status 확인을 위한 용도
+4. status : 환경변수의 상태를 나타내기 위한 용도. 정상은 1, mean = '?'인 경우에만 0, 나머지는 exit status가 들어감
 5. 위 env는 실행부로 넘겨주는 구조체 중 하나
 
 typedef struct s_command

@@ -1,5 +1,19 @@
 #include "init.h"
 
+/*
+	unset(t_env *env_list, char *name)
+	{
+		while (env_list->next != 0)
+		{
+			if (env_list->next->name == name)
+			{
+				lstdelone_env_elem(env_list, env_list->next, &free);
+				return ;
+			}
+		}
+	}
+*/
+
 void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *))
 {
 	t_env	*tmp;
@@ -7,8 +21,10 @@ void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *))
 	if (!before || !now || !del)
 		return ;
 	tmp = now->next;
-	del((void *)now->name);
-	del((void *)now->val);
+	if (now->name != 0)
+		del((void *)now->name);
+	if (now->val != 0)
+		del((void *)now->val);
 	before->next = tmp;
 	del((void *)now);
 }
