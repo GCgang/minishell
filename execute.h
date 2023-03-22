@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/20 16:34:46 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:16:49 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_command
 # include "builtin.h"
 
 //void	execute_built_in(char **argv, char **envp);
-void	execute_built_in(t_command **cmd, t_env *env_list, pid_t pid);
+void	execute_built_in(t_command **cmd, t_env **env_list, pid_t pid);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putchar_fd(char c, int fd);

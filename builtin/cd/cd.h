@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:08 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/21 00:09:18 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/22 13:50:47 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #	ifndef CD_H
 # define CD_H
 
 # include "../../execute.h"
 
-void	built_in_cd(t_command **cmd, t_env *env_list);
+void	built_in_cd(t_command **cmd, t_env **env_list);
 
 #endif
