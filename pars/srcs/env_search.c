@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 13:18:28 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 18:40:08 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	env_search(t_token *token, t_env *env_list)
 	int	idx;
 
 	idx = -1;
+	printf("token : %s, type : %c\n", token->val, token->type);
 	while (token->val[++idx] != 0)
 	{
 		if (token->val[idx] == '\'')

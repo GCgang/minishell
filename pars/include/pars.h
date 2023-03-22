@@ -36,8 +36,10 @@ int		pars_com(t_token **token, t_env **env_list, t_command *com);
 int		pars_oper(t_token **token, t_env **env_list, t_command *com);
 void	change_status(t_env **env_list, int status);
 void	free_array(char **arr);
+void	mix_token(t_token **token);
 
 int		heredoc(t_command *com, t_env **env_list);
-void	record_extra(t_command **com, t_env *env_list);
+void	record_builtin(t_command **com, t_env *env_list);
+int		record_path(t_command **com, t_env *env_list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:15 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:44:15 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 18:32:40 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*ft_itoa(int n)
 
 	num_str = (char *)malloc(ft_num_cnt(n) + 1);
 	if (!num_str)
-		return (NULL);
+		return (0);
 	ft_insert_num(num_str, n);
 	ft_strswap(num_str);
 	return (num_str);

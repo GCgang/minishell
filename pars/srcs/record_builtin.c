@@ -64,7 +64,7 @@ static int	builtin(t_command *com, char *tgt)
 	return (0);
 }
 
-void	record_extra(t_command **com, t_env *env_list)
+void	record_builtin(t_command **com, t_env *env_list)
 {
 	char	*tmp;
 
@@ -72,5 +72,26 @@ void	record_extra(t_command **com, t_env *env_list)
 	builtin((*com), tmp);
 	free(tmp);
 	if ((*com)->next != 0)
-		record_extra(&((*com)->next), env_list);
+		record_builtin(&((*com)->next), env_list);
+}
+
+int		record_path(t_command **com, t_env *env_list)
+{
+	t_env	*tmp;
+	char	**tmp_path;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->name, "PATH", 5) == 0)
+		{
+			tmp_path = ft_split(tmp->val, ':');
+			if ((*com)->path != 0)
+				free((*com)->path);
+			(*com)->path = tmp_path;
+			return (0);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }
