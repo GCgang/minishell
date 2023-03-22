@@ -2,7 +2,9 @@ CFLAGS = -Werror -Wall -Wextra
 CF_FLAGS = -L/Users/jaehjoo/.brew/opt/readline/lib -lreadline
 OBJ_FLAGS = -I/Users/jaehjoo/.brew/opt/readline/include
 PARS = -L./pars -lpars
+EXEC = -L./exec -lexec
 PARSA = ./pars/pars.a
+EXECA = ./exec/exec.a
 RM = rm -rf
 SRC = minishell init_env init_list_utils init_signal init_utils list_clear
 SRCC = $(addsuffix .c, $(addprefix share/, $(SRC)))
@@ -13,8 +15,8 @@ NAME = minishell
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(PARSA)
-			$(CC) $(CFLAGS) $(CF_FLAGS) $(PARSA) $(OBJ) $(INCLUDES) -o $(NAME)
+$(NAME): $(OBJ) $(PARSA) $(EXECA)
+			$(CC) $(CFLAGS) $(CF_FLAGS) $(PARSA) $(EXECA) $(OBJ) $(INCLUDES) -o $(NAME)
 
 %.o: %.c $(HEADER)
 			$(CC) -c $(CFLAGS) $(OBJ_FLAGS) $< -o $@ $(INCLUDES)
@@ -22,12 +24,16 @@ $(NAME): $(OBJ) $(PARSA)
 $(PARSA):
 			make -sC ./pars/
 
+$(EXECA):
+			make -sC ./exec/
+
 clean:
 			$(RM) $(NAME) $(OBJ)
 			make -sC ./pars clean
+			make -sC ./exec clean
 
 fclean: clean
-			$(RM) $(NAME) $(OBJ) $(PARSA)
+			$(RM) $(NAME) $(OBJ) $(PARSA) $(EXECA)
 
 re:
 			make fclean
