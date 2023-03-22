@@ -75,7 +75,7 @@ void	record_builtin(t_command **com, t_env *env_list)
 		record_builtin(&((*com)->next), env_list);
 }
 
-int		record_path(t_command **com, t_env *env_list)
+int	record_path(t_command **com, t_env *env_list)
 {
 	t_env	*tmp;
 	char	**tmp_path;

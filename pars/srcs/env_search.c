@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 18:40:08 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 20:00:06 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 	4. make_env_name&val : 해당 환경변수가 없는 경우, 아예 빈 환경변수를 만들어 final로 보낸다
 	5. conv_env_final : 환경변수의 내용물을 토큰에 집어 넣는다
 
-	추가 사항
-	1. $? 관련 내용 추가
-	2. 신규 환경 변수 추가하는 기능 삭제
-	3. exit_status 보는 환경변수 name->?
+	추가 필요 사항
+	1. $"{str}" : $미출력
 */
 static void	conv_env_final(t_token *tkn, t_env *e_list, int start, int final)
 {
@@ -129,7 +127,6 @@ void	env_search(t_token *token, t_env *env_list)
 	int	idx;
 
 	idx = -1;
-	printf("token : %s, type : %c\n", token->val, token->type);
 	while (token->val[++idx] != 0)
 	{
 		if (token->val[idx] == '\'')
