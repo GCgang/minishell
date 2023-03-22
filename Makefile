@@ -1,6 +1,6 @@
 CFLAGS = -Werror -Wall -Wextra
-CF_FLAGS = -L/Users/hyeoan/.brew/opt/readline/lib -lreadline
-OBJ_FLAGS = -I/Users/hyeoan/.brew/opt/readline/include
+CF_FLAGS = -L/Users/jun/.brew/opt/readline/lib -lreadline
+OBJ_FLAGS = -I/Users/jun/.brew/opt/readline/include
 PARS = -L./pars -lpars
 PARSA = ./pars/pars.a
 EXEC = -L./exec -lexec

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 21:07:04 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/23 02:15:06 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	execute_built_in(t_command **cmd, t_env **env_list, pid_t pid)
 	else if (ft_strcmp((*cmd)->word[0], "exit") == 0)
 		built_in_exit(cmd, *env_list);
 	else if (ft_strcmp((*cmd)->word[0], "export") == 0)
-		built_in_export(cmd, *env_list);
+		built_in_export(cmd, env_list);
 	else if (ft_strcmp((*cmd)->word[0], "pwd") == 0)
 		built_in_pwd(*env_list);
 	else if (ft_strcmp((*cmd)->word[0], "unset") == 0)
@@ -66,7 +66,6 @@ void	exec(t_command **cmd, t_env **env_list, pid_t pid)
 	char *pwd = getcwd(NULL, PATH_MAX);
 	printf("pwd %s\n", pwd);
 	free(pwd);
-
 	(void)pid;
 	// else
 	// {

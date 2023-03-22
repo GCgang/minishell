@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 20:59:40 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/23 01:52:30 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_envp(t_env **env_list, char *name, char *val)
 	t_env	*new;
 	char	*env_name;
 
-	printf("name = %s val = %s\n", name, val);
 	while ((*env_list)->next != NULL)
 	{
 		before = *env_list;
@@ -39,13 +38,13 @@ void	init_envp(t_env **env_list, char *name, char *val)
 		if (ft_strcmp(env_name, name) == 0)
 		{
 			lstdelone_env_elem(before, *env_list, &free);
-			new = lstnew_env(name, ft_strdup(val));
-			if (new != NULL)
-				lstadd_back_env(env_list, new);
 			break ;
 		}
 		*env_list = (*env_list)->next;
 	}
+	new = lstnew_env(ft_strdup(name), ft_strdup(val));
+	if (new != NULL)
+		lstadd_back_env(env_list, new);
 }
 
 char	*get_name(t_env *env_list, char *name)

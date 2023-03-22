@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 22:22:31 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/23 02:16:06 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,25 @@ int	check_unset_syntax(char *variable)
 		return (0);
 	while (*variable)
 	{
-		if (ft_isalpha(*variable) == 0 \
-		|| ft_isdigit(*variable) == 0 \
-		|| *variable != '_')
-			return (0);
-		variable++;
+		if ((ft_isalpha(*variable) == 0 && ft_isdigit(*variable) == 0) && *variable != '_')			return (0);
+			variable++;
 	}
 	return (1);
 }
 
 void	delete_envp(t_env *env_list, char *name)
 {
-	// del env del export
-	(void)env_list;
-	(void)name;
-	// t_env	*tmp_list;
+	t_env	*before;
+	char	*del_name;
 
-	// tmp_list = env_list->next;
-	// while (tmp_list != NULL)
-	// {
-	// 	if (ft_strcmp(tmp_list->name, name) == 0)
-	// 	{
-	// 		//lstdelone_env(env_list, &free);
-	// 		return ;
-	// 	}
-	// 	tmp_list = tmp_list->next;
-	// }
-	return ;
-	//lseclear_env(&env_list, &free);
+	while (env_list->next != NULL)
+	{
+		before = env_list;
+		del_name = env_list->next->name;
+		if (ft_strcmp(del_name, name) == 0)
+			lstdelone_env_elem(before, env_list, &free);
+		break ;
+	}
 }
 
 void	built_in_unset(t_command **cmd, t_env *env_list)
@@ -53,6 +44,7 @@ void	built_in_unset(t_command **cmd, t_env *env_list)
 	int	i;
 
 	i = 0;
+	env_list->status = 0;
 	while ((*cmd)->word[++i])
 	{
 		if (check_unset_syntax((*cmd)->word[i]) == 0)
