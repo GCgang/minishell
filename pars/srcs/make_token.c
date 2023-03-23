@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:50 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 13:58:24 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 16:37:50 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 	3. word_and_oper : 메타문자로 구성된 문장 또는 단어만으로 구성된 문장으로 분할
 	4. input_token : 1 ~ 3 과정을 거친 문장을 직접 분할하여 토큰으로 넣는다.
 		4-a. 메타문자인 경우, token->type = t, 아닌 경우, token->type = w
+	
+	개편안
+	1. single_quote, double_quote, word, oper로 분할
+	2. token 중, w에서 w로 이어지는 경우 둘은 융합하고 나머지 하나 del
+	3. 
 */
 static void	input_token(char *now, t_token **token, int *len, char *meta)
 {

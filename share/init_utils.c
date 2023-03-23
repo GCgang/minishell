@@ -5,8 +5,11 @@ size_t	ft_strlen(const char *str)
 	size_t	idx;
 
 	idx = 0;
-	while (str[idx])
-		idx++;
+	if (str != NULL)
+	{
+		while (str[idx])
+			idx++;
+	}
 	return (idx);
 }
 
@@ -48,6 +51,8 @@ char	*ft_strdup(const char *s1)
 
 	idx = 0;
 	len = 0;
+	if (s1 == NULL)
+		return (NULL);
 	while (s1[len])
 		len++;
 	dest = (char *)malloc(len + 1);

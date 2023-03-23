@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:24 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 14:01:31 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:09:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	chk_meta_token_err(t_token *token)
 
 int	chk_oper_token(t_token *token)
 {
-	if (token->type == 't' && token->val[0] == '|')
+	if (token->type == 't' && (token->val[0] == '|' || token->val[0] == '&'))
 	{
 		printf("Minishell: Syntax error near unexpected token '%s'\n",
 			token->val);

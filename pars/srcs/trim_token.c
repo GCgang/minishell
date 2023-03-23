@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trim_token.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 19:51:38 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/22 19:51:39 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pars.h"
 
 /*
@@ -9,6 +21,24 @@
 
 	error 수정 필요
 	1. w와 w 사이에 'b'가 없으면 두 토큰을 붙이고 한 토큰 삭제
+
+	if (word[0])
+	{
+		if (word[1])
+		{
+			strjoin ...
+		}
+		else
+		{
+			if (ft_strchr(word[0], " ") != 0)
+				if (access(word[0], F_OK | X_OK) == 0)
+					printf("minishell: %s: command not found\n", word[0]);
+			else
+				if (access(word[0], F_OK | X_OK) == 0)
+					perror();
+			return (0);
+		}
+	}
 */
 t_token	*connect_newlst(t_token *tmp, char *val)
 {

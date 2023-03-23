@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 16:27:16 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:40 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,12 @@ static void	test_print_all(t_env **env_list, t_command **com)
 			idx++;
 		}
 		printf("\n");
-		printf("com2 : path->%s, oper->%s, oper_val->%s, val_type->%c\n", tmp2->path, tmp2->oper, tmp2->oper_val, tmp2->val_type);
+		printf("com2 : ");
+		idx = -1;
+		while (tmp2->path != 0 && tmp2->path[++idx])
+			printf("%s ", tmp2->path[idx]);
+		printf("\n");
+		printf("oper->%s, oper_val->%s, val_type->%c\n", tmp2->oper, tmp2->oper_val, tmp2->val_type);
 		printf("com3 : builtin->%c, std_in->%d, std_out->%d, std_err->%d, pipe->%d, pipe_in->%d, pipe_out->%d\n", tmp2->builtin, tmp2->std_in, tmp2->std_out, tmp2->std_err, tmp2->pipe, tmp2->pipe_in, tmp2->pipe_out);
 		tmp2 = tmp2->next;
 	}
@@ -77,6 +82,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 	if (chk > 0)
 	{
 		make_token(line, meta, token);
+		mix_token(token);
 		trim_token(token);
 		if (chk_oper_token(*token) != 0)
 		{
@@ -86,7 +92,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 		pars_extra_token(token, *env_list);
 		if (make_com(token, env_list, &com) == 0)
 			test_print_all(env_list, &com);
-		exec(&com, env_list,  1);
+		exec(&com, env_list, 1);
 		//clear_all(&com, token);
 	}
 	//clear_all(token, com);

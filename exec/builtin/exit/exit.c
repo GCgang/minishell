@@ -6,12 +6,13 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 21:06:49 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/23 19:18:33 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
+// long long max
 int	check_exit_syntax(char *exit_val)
 {
 	int	i;
@@ -27,15 +28,16 @@ int	check_exit_syntax(char *exit_val)
 
 void	built_in_exit(t_command **cmd, t_env *env_list)
 {
-	if ((*cmd)->word[1] != NULL && (*cmd)->word[2] != NULL)
-	{
-		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
-		env_list->status = 255;
-		return ;
-	}
-	else if (check_exit_syntax((*cmd)->word[1]) == 0)
+	if (check_exit_syntax((*cmd)->word[1]) == 0)
 	{
 		ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
+		env_list->status = 255;
+		// exit();
+		//return ;
+	}
+	else if ((*cmd)->word[1] != NULL && (*cmd)->word[2] != NULL)
+	{
+		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
 		env_list->status = 255;
 		return ;
 	}

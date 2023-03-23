@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:44:58 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/22 18:30:47 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 
 	now = *token;
 	before = now;
-	while (now != 0 && now->type != 'p')
+	while (now != 0)
 	{
 		if (before != now && before->type == 'r'
 			&& ft_strncmp(before->val, "<<", 3) == 0)
@@ -69,7 +69,7 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 	}
 	split_word_ifs(token, env_list);
 	now = *token;
-	while (now != 0 && now->type != 'p')
+	while (now != 0)
 	{
 		if (now->type != 'r')
 			remove_quote(now);

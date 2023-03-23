@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 02:16:06 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/23 16:32:23 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,28 @@ int	check_unset_syntax(char *variable)
 		return (0);
 	while (*variable)
 	{
-		if ((ft_isalpha(*variable) == 0 && ft_isdigit(*variable) == 0) && *variable != '_')			return (0);
-			variable++;
+		if ((ft_isalpha(*variable) == 0 && ft_isdigit(*variable) == 0) && *variable != '_')
+			return (0);
+		variable++;
 	}
 	return (1);
 }
 
 void	delete_envp(t_env *env_list, char *name)
 {
-	t_env	*before;
+	t_env	*tmp;
 	char	*del_name;
 
-	while (env_list->next != NULL)
+	tmp = env_list;
+	while (tmp->next != NULL)
 	{
-		before = env_list;
-		del_name = env_list->next->name;
+		del_name = tmp->next->name;
 		if (ft_strcmp(del_name, name) == 0)
-			lstdelone_env_elem(before, env_list, &free);
-		break ;
+		{
+			lstdelone_env_elem(tmp, tmp->next, &free);
+			break ;
+		}
+		tmp = tmp->next;
 	}
 }
 

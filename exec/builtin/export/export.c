@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 02:15:52 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/23 16:12:48 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ void	print_export(t_env *env_list)
 	tmp_list = env_list;
 	while (tmp_list != NULL)
 	{
-		if (tmp_list->name != NULL && tmp_list->val != NULL)
+		if (tmp_list->name != NULL )
 		{
 			ft_putstr_fd("declare -x ", 1);
 			ft_putstr_fd(tmp_list->name, 1);
-			ft_putchar_fd('=', 1);
-			ft_putstr_fd(tmp_list->val, 1);
+			if (tmp_list->val != NULL)
+			{
+				ft_putchar_fd('=', 1);
+				ft_putchar_fd('"', 1);
+				ft_putstr_fd(tmp_list->val, 1);
+				ft_putchar_fd('"', 1);
+			}
 			ft_putchar_fd('\n', 1);
 		}
 		tmp_list = tmp_list->next;
@@ -49,30 +54,31 @@ void	sort_export()
 	//sorting
 }
 
-// void	update_export_envp(t_env **env_list, char *name)
-// {
-// 	char	*new_name;
-// 	char	*new_value;
-// 	char	*equl;
+void	update_export_envp(t_env **env_list, char *name)
+{
+	char	*new_name;
+	char	*new_value;
+	char	*equl;
 
-// 	equl = ft_strchr(name, '=');
-// 	new_name = ft_substr(name, 0, (ft_strlen(name) - ft_strlen(equl)));
-// 	if (equl == NULL)
-// 	{
-// 		free(new_name);
-// 		//init_export(export_list, name, NULL);
-// 	}
-// 	else
-// 	{
-// 		new_value = ft_substr(equl, 1, ft_strlen(equl) - 1);
-// 		if (new_value == NULL)
-// 			new_value = "";
-// 		init_envp(env_list, new_name, new_value);
-// 		//init_export(export_list, new_name, new_value);
-// 		free(new_value);
-// 	}
-// 	free(new_name);
-// }
+	equl = ft_strchr(name, '=');
+	new_name = ft_substr(name, 0, (ft_strlen(name) - ft_strlen(equl)));
+	if (equl == NULL)
+	{
+		if (get_value(*env_list, new_name) == NULL)
+			init_envp(env_list, name, NULL);
+		free(new_name);
+		return ;
+	}
+	else
+	{
+		new_value = ft_substr(equl, 1, ft_strlen(equl) - 1);
+		if (new_value == NULL)
+			new_value = "";
+		init_envp(env_list, new_name, new_value);
+		free(new_value);
+	}
+	free(new_name);
+}
 
 void	built_in_export(t_command **cmd, t_env **env_list)
 {
@@ -96,9 +102,10 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 			}
 			else
 			{
-				//update_export_envp(env_list, (*cmd)->word[i]);
+				update_export_envp(env_list, (*cmd)->word[i]);
 				(*env_list)->status = 0;
 			}
 		}
 	}
+	print_export((*env_list)->next);
 }

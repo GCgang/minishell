@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 01:52:30 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/23 19:36:48 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 
+// unset OLDPWD 
 void	update_pwd(t_env **env_list)
 {
 	char	*pwd;
@@ -27,20 +28,20 @@ void	update_pwd(t_env **env_list)
 
 void	init_envp(t_env **env_list, char *name, char *val)
 {
-	t_env	*before;
+	t_env	*tmp;
 	t_env	*new;
 	char	*env_name;
 
-	while ((*env_list)->next != NULL)
+	tmp = *env_list;
+	while (tmp->next != NULL)
 	{
-		before = *env_list;
-		env_name = before->next->name;
+		env_name = tmp->next->name;
 		if (ft_strcmp(env_name, name) == 0)
 		{
-			lstdelone_env_elem(before, *env_list, &free);
+			lstdelone_env_elem(tmp, tmp->next, &free);
 			break ;
 		}
-		*env_list = (*env_list)->next;
+		tmp = tmp->next;
 	}
 	new = lstnew_env(ft_strdup(name), ft_strdup(val));
 	if (new != NULL)

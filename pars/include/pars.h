@@ -21,7 +21,6 @@ void	lstclear_token(t_token **lst, void (*del)(void *));
 t_token	*connect_newlst(t_token *tmp, char *val);
 
 void	pars_line(char *line, t_token **token, t_env **env_list);
-void	exec(t_command **cmd, t_env **env_list, pid_t pid);
 int		chk_have_token(char *line, char *meta);
 void	make_token(char *line, char *meta, t_token **token);
 void	trim_token(t_token **token);
@@ -37,8 +36,11 @@ int		pars_com(t_token **token, t_env **env_list, t_command *com);
 int		pars_oper(t_token **token, t_env **env_list, t_command *com);
 void	change_status(t_env **env_list, int status);
 void	free_array(char **arr);
+void	mix_token(t_token **token);
 
 int		heredoc(t_command *com, t_env **env_list);
-void	record_extra(t_command **com, t_env *env_list);
+void	record_builtin(t_command **com, t_env *env_list);
+int		record_path(t_command **com, t_env *env_list);
 
+void	exec(t_command **cmd, t_env **env_list, pid_t pid);
 #endif
