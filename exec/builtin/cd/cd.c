@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 19:36:48 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/24 01:20:59 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,21 @@ void	update_pwd(t_env **env_list)
 {
 	char	*pwd;
 
+	if (get_name(*env_list, "OLDPWD") == NULL)
+		init_envp(env_list, "OLDPWD", NULL);
 	if (get_name(*env_list, "PWD") != NULL)
 	{
 		init_envp(env_list, "OLDPWD", get_value(*env_list, "PWD"));
+		pwd = getcwd(NULL, PATH_MAX);
+		if (pwd == NULL)
+		{
+			(*env_list)->status = 1;
+			return ;
+		}
+		init_envp(env_list, "PWD", pwd);
+		free(pwd);
 	}
-	pwd = getcwd(NULL, PATH_MAX);
-	init_envp(env_list, "PWD", pwd);
-	free(pwd);
+	(*env_list)->status = 0;
 }
 
 void	init_envp(t_env **env_list, char *name, char *val)
@@ -96,7 +104,6 @@ void	change_home_dir(t_env **env_list)
 		return ;
 	}
 	update_pwd(env_list);
-	(*env_list)->status = 0;
 }
 
 void	change_new_dir(t_env **env_list, char *name)
@@ -108,7 +115,6 @@ void	change_new_dir(t_env **env_list, char *name)
 		return ;
 	}
 	update_pwd(env_list);
-	(*env_list)->status = 0;
 }
 
 // void	change_env_dir(t_env *env_list)
@@ -120,20 +126,19 @@ void	change_new_dir(t_env **env_list, char *name)
 
 void	change_oldpwd_dir(t_env **env_list)
 {
-	if (get_name(*env_list, "OLDPWD") == NULL)
+	if (get_value(*env_list, "OLDPWD") == NULL)
 	{
 		ft_putstr_fd("Minishell: cd: OLDPWD not set\n", 2);
 		(*env_list)->status = 1;
 		return ;
 	}
-	else if (chdir(get_name(*env_list, "OLDPWD")) == -1)
+	else if (chdir(get_value(*env_list, "OLDPWD")) == -1)
 	{
 		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
 		(*env_list)->status = 1;
 		return ;
 	}
 	update_pwd(env_list);
-	(*env_list)->status = 0;
 }
 
 void	built_in_cd(t_command **cmd, t_env **env_list)
