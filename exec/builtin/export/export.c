@@ -6,12 +6,13 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 16:12:48 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/24 20:14:42 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
 
+// sorting
 int	check_export_syntax(char *cmd)
 {
 	if (ft_isalpha(*cmd) == 0 && *cmd != '_')
@@ -49,20 +50,31 @@ void	print_export(t_env *env_list)
 	}
 }
 
-void	sort_export()
+void	sort_export(t_env **env_list)
 {
-	//sorting
+	(void)env_list;
+	return ;
+	// t_env	*copy;
+	// t_env	*tmp;
+	// char	*env_name;
+
+	// tmp = *env_list;
+	// while (tmp != NULL)
+	// {
+	// 	while (tmp->next != NULL)
+	// 	if (ft_strcmp(tmp->name, tmp->next->name) == 1)
+	// }
 }
 
 void	update_export_envp(t_env **env_list, char *name)
 {
 	char	*new_name;
 	char	*new_value;
-	char	*equl;
+	char	*equal;
 
-	equl = ft_strchr(name, '=');
-	new_name = ft_substr(name, 0, (ft_strlen(name) - ft_strlen(equl)));
-	if (equl == NULL)
+	equal = ft_strchr(name, '=');
+	new_name = ft_substr(name, 0, (ft_strlen(name) - ft_strlen(equal)));
+	if (equal == NULL)
 	{
 		if (get_value(*env_list, new_name) == NULL)
 			init_envp(env_list, name, NULL);
@@ -71,7 +83,7 @@ void	update_export_envp(t_env **env_list, char *name)
 	}
 	else
 	{
-		new_value = ft_substr(equl, 1, ft_strlen(equl) - 1);
+		new_value = ft_substr(equal, 1, ft_strlen(equal) - 1);
 		if (new_value == NULL)
 			new_value = "";
 		init_envp(env_list, new_name, new_value);
@@ -87,7 +99,7 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		//sort_export()
+		sort_export(env_list);
 		print_export((*env_list)->next);
 		(*env_list)->status = 0;
 	}
@@ -107,5 +119,5 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 			}
 		}
 	}
-	print_export((*env_list)->next);
+	print_export((*env_list)->next); //
 }

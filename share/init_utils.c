@@ -32,6 +32,8 @@ char	*ft_strchr(const char *str, int c)
 
 	idx = 0;
 	tgt = (unsigned char)c;
+	if (str == NULL)
+		return (NULL);
 	while (str[idx])
 	{
 		if (str[idx] == tgt)

@@ -6,19 +6,19 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 13:11:14 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/24 16:01:13 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-// long long max
+// long long max -9223372036854775808 ~ 9223372036854775807
 int	check_exit_syntax(char *exit_val)
 {
 	int	i;
 
 	i = -1;
-	while (exit_val[++i])
+	while (exit_val != 0 && exit_val[++i])
 	{
 		if (ft_isdigit(exit_val[i]) == 0)
 			return (0);
@@ -49,7 +49,7 @@ void	built_in_exit(t_command **cmd, t_env *env_list)
 	else
 	{
 		ft_putstr_fd("exit\n", 2);
-		env_list->status = ft_atoi((*cmd)->word[1]);
+		env_list->status = ft_atol((*cmd)->word[1]);
 	}
 	exit (env_list->status);
 }

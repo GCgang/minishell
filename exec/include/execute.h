@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 16:22:46 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:58:32 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # include "builtin.h"
 
 //void	execute_built_in(char **argv, char **envp);
-void	exec(t_command **cmd, t_env **env_list, pid_t pid);
-void	execute_built_in(t_command **cmd, t_env **env_list, pid_t pid);
-int		ft_strcmp(char *s1, char *s2);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-int	    ft_isalpha(int c);
+void			exec(t_command **cmd, t_env **env_list, pid_t pid);
+void			execute_built_in(t_command **cmd, t_env **env_list, pid_t pid);
+int				ft_strcmp(char *s1, char *s2);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putstr_fd(char *s, int fd);
+int				ft_isdigit(int c);
+int				ft_isalpha(int c);
+long long		ft_atol(const char *str);
 
 #endif

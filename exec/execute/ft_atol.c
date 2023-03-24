@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 14:43:26 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 13:01:01 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:54:45 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atol(const char *str)
 {
-	int	result;
-	int	sign;
+	long long	result;
+	long long	before;
+	int			sign;
 
 	result = 0;
 	sign = 1;
@@ -29,8 +30,13 @@ int	ft_atoi(const char *str)
 	}
 	while (ft_isdigit(*str) != 0)
 	{
-		result *= 10;
-		result += (*str - '0');
+		before = result;
+		result *= 10 + (*str - '0');
+		if (before > result)
+		{
+			ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
+			return (255);
+		}
 		str++;
 	}
 	return (result * sign);

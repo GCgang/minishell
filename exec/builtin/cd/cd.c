@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 01:20:59 by jun              ###   ########.fr       */
+/*   Updated: 2023/03/24 20:15:03 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
 
-// unset OLDPWD 
+// PWD update
 void	update_pwd(t_env **env_list)
 {
 	char	*pwd;
@@ -33,6 +33,30 @@ void	update_pwd(t_env **env_list)
 	}
 	(*env_list)->status = 0;
 }
+
+// void	update_pwd(t_env **env_list)
+// {
+// 	char	*pwd;
+
+// 	if (get_name(*env_list, "OLDPWD") != NULL)
+// 	{
+// 		init_envp(env_list, "OLDPWD", pwd);
+// 	}
+// 	if (get_name(*env_list, "PWD") != NULL)
+// 	{
+// 		if (get_name(*env_list, "OLDPWD") != NULL)
+// 			init_envp(env_list, "OLDPWD", get_value(*env_list, "PWD"));
+// 		pwd = getcwd(NULL, PATH_MAX);
+// 		if (pwd == NULL)
+// 		{
+// 			(*env_list)->status = 1;
+// 			return ;
+// 		}
+// 		init_envp(env_list, "PWD", pwd);
+// 		free(pwd);
+// 	}
+// 	(*env_list)->status = 0;
+// }
 
 void	init_envp(t_env **env_list, char *name, char *val)
 {
@@ -98,7 +122,6 @@ void	change_home_dir(t_env **env_list)
 	}
 	else if (chdir(get_value(*env_list, "HOME")) == -1)
 	{
-		printf("get_name = %s\n", get_value(*env_list, "HOME"));
 		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
 		(*env_list)->status = 1;
 		return ;
