@@ -50,43 +50,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (temp);
 }
 
-static char	*ft_trimcpy(size_t start, size_t end, char const *str)
-{
-	char	*part_str;
-
-	if (start > end)
-	{
-		part_str = (char *)malloc(1);
-		if (!part_str)
-			return (NULL);
-		part_str[0] = 0;
-		return (part_str);
-	}
-	part_str = (char *)malloc(end - start + 2);
-	if (!part_str)
-		return (NULL);
-	ft_strlcpy(part_str, str + start, end - start + 2);
-	return (part_str);
-}
-
-char	*ft_strtrim(char const *str, char const *set)
-{
-	size_t		start;
-	size_t		end;
-
-	if (!str || !set)
-		return (NULL);
-	start = 0;
-	end = ft_strlen(str);
-	if (end)
-		end--;
-	while (str[start] && ft_strchr(set, str[start]))
-		start++;
-	while (end && ft_strchr(set, str[end]))
-		end--;
-	return (ft_trimcpy(start, end, str));
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*temp;

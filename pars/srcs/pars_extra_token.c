@@ -67,7 +67,6 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 		before = now;
 		now = now->next;
 	}
-	split_word_ifs(token, env_list);
 	now = *token;
 	while (now != 0)
 	{

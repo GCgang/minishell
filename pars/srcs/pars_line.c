@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 19:04:05 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/23 16:37:51 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 	{
 		make_token(line, meta, token);
 		mix_token(token);
+		rotate_env_token(token, env_list);
 		trim_token(token);
-		if (chk_oper_token(*token) != 0)
+		if (chk_oper_token(*token, env_list) != 0)
 		{
 			lstclear_token(token, &free);
 			return ;

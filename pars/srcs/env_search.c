@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 20:00:06 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 13:02:29 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,86 @@
 	4. make_env_name&val : 해당 환경변수가 없는 경우, 아예 빈 환경변수를 만들어 final로 보낸다
 	5. conv_env_final : 환경변수의 내용물을 토큰에 집어 넣는다
 
-	추가 필요 사항
-	1. $"{str}" : $미출력
+	개선 필요 사항
+	1. 환경변수 목록에서 원하는 내용이 없을 시, 제거
+	2. 환경변수 변환 시, 구분자가 존재하는 경우, 토큰 분리
+
+	1. search $
+	2. if $ - double quote or none quote
+	3. start = loca$ plus, final = first contact meta
+	4. find env name match start ~ final
+	5. if match mathe-name, val, start, final \ else none, 0, start, final
+	6. use strdup, strjoin \ trans literal
+		6-1. if qoute -> trans literal, if none -> if $blank -> trans literal -> sep ' '
 */
+
+/*static void	trans_env_token(t_token *token, char **tgt, int **loca, int q)
+{
+	char	*tmp;
+
+	token->val[loca[0][0]] = 0;
+	token->val[loca[0][1]] = 0;
+	tmp = ft_strjoin(token->val, *tgt);
+	free(token->val);
+	token->val = ft_strjoin(tmp, token->val + loca[0][1]);
+	free(tmp);
+	token->quote[loca[0][0]] = 0;
+	token->quote[loca[0][1]] = 0;
+	tmp = ft_strjoin(token->quote, *tgt);
+
+}
+
+static void	chk_env_token(t_token *token, t_env *env_list, int **loca, int q)
+{
+	char	*tmp;
+
+	loca[0][1] = loca[0][0] + 1;
+	while (ft_strchr(" $\n\t\"\'=/", token[loca[0][1]]) == 0)
+		(loca[0][1])++;
+	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
+	while (env_list)
+	{
+		if (ft_strncmp(tmp, env_list->name + 1, ft_strlen(tmp)) == 0)
+			break ;
+		env_list = env_list->next;
+	}
+	free(tmp);
+	if (env_list != 0)
+	{
+		tmp = ft_strdup(env_list->val);
+		trans_env_token(token, &tmp, loca, q);
+	}
+	else
+	{
+		tmp = ft_strdup("");
+		trans_env_token(token, &tmp, loca, q);
+	}
+}
+
+void	env_search(t_token *token, t_env *env_list)
+{
+	char	loca[2];
+
+	loca[0] = -1;
+	while (token->val[++(loca[0])])
+	{
+		if (token->val[++(loca[0])] != '\'')
+			while (token->val[loca[0]] != 0 && token->val[loca[0]] != '\'')
+				(loca[0])++;
+		else if (token->val[loca[0]] != '\"')
+		{
+			while (token->val[++(loca[0])] != '\"')
+				if (token->val[loca[0]] == '$')
+					chk_env_token(token, env_list, &loca, 1);
+		}
+		else
+		{
+			while (token->val[loca[0]] == '$')
+				chk_env_token(token, env_list, &loca, 0);
+		}
+	}
+}*/
+
 static void	conv_env_final(t_token *tkn, t_env *e_list, int start, int final)
 {
 	char	*tmp_val;
