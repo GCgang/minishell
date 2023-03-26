@@ -6,11 +6,65 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/22 18:28:19 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:49:06 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+void	init_envp(t_env **env_list, char *name, char *val)
+{
+	t_env	*tmp;
+	t_env	*new;
+	char	*env_name;
+
+	tmp = *env_list;
+	while (tmp->next != NULL)
+	{
+		env_name = tmp->next->name;
+		if (ft_strcmp(env_name, name) == 0)
+		{
+			lstdelone_env_elem(tmp, tmp->next, &free);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	new = lstnew_env(ft_strdup(name), ft_strdup(val));
+	if (new != NULL)
+		lstadd_back_env(env_list, new);
+}
+
+char	*get_name(t_env *env_list, char *name)
+{
+	t_env	*tmp_list;
+	char	*tmp_name;
+
+	tmp_list = env_list->next;
+	while (tmp_list != NULL)
+	{
+		tmp_name = tmp_list->name;
+		if (ft_strcmp(tmp_name, name) == 0)
+			return (tmp_name);
+		tmp_list = tmp_list->next;
+	}
+	return (NULL);
+}
+
+char	*get_value(t_env *env_list, char *name)
+{
+	t_env	*tmp_list;
+	char	*tmp_name;
+
+	tmp_list = env_list->next;
+	while (tmp_list != NULL)
+	{
+		tmp_name = tmp_list->name;
+		if (ft_strcmp(tmp_name, name) == 0)
+			return (tmp_list->val);
+		tmp_list = tmp_list->next;
+	}
+	return (NULL);
+}
 
 void	built_in_env(t_command **cmd, t_env *env_list)
 {
