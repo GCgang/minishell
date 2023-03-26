@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/26 20:57:03 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 21:58:03 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,52 @@ void	execute_built_in(t_command **cmd, t_env **env_list, pid_t pid)
 		built_in_unset(cmd, *env_list);
 	(void)pid;
 }
-
 // void	leaks(void)
 // {
 // 	system("leaks minishell");
 // }
 
+// void	execute_bin(t_command **cmd, t_env	**env_list);
+// void	child_process();
+// void	parent_process();
+// void	execute(t_command **cmd, t_env **env_list)
+// {
+// 	int		idx;
+// 	int		*pipe_fd;
+// 	pid_t	pid;
+
+// 	idx = -1;
+// 	while (++idx < pipe_cnt)
+// 	{
+// 		if (pipe(pipe_fd) == -1)
+// 			exit(1); //error
+// 		pid = fork();
+// 		if (pid == -1)
+// 			exit(1); //error
+// 		else if (pid == 0)
+// 			child_process();
+// 		else
+// 			parent_process();
+// 	}
+// 	while (idx--)
+// 		waitpid(-1, NULL, 0);
+// }
+
 void	exec(t_command **cmd, t_env **env_list, pid_t pid)
 {
+	int	pipeline;
+	int	builtin;
+
+	pipeline = 0;
+	builtin = 1;
+	if (pipeline == 0)
+	{
+		if (builtin)
+			execute_built_in(cmd, env_list, 1);
+		// else
+		// 	execute_bin(cmd, env_list);
+	}
+	// else
+	// 	execute(cmd, env_list);
 	(void)pid;
-	execute_built_in(cmd, env_list, 1);
 }
