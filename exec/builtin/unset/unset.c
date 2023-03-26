@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/23 16:32:23 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 20:33:17 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ int	check_unset_syntax(char *variable)
 		return (0);
 	while (*variable)
 	{
-		if ((ft_isalpha(*variable) == 0 && ft_isdigit(*variable) == 0) && *variable != '_')
+		if (ft_isalpha(*variable) == 0
+			&& ft_isdigit(*variable) == 0
+			&& *variable != '_')
+		{
 			return (0);
+		}
 		variable++;
 	}
 	return (1);
