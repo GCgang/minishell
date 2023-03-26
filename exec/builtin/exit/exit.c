@@ -6,13 +6,12 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 16:01:13 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:50:41 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-// long long max -9223372036854775808 ~ 9223372036854775807
 int	check_exit_syntax(char *exit_val)
 {
 	int	i;
@@ -32,8 +31,6 @@ void	built_in_exit(t_command **cmd, t_env *env_list)
 	{
 		ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
 		env_list->status = 255;
-		// exit();
-		//return ;
 	}
 	else if ((*cmd)->word[1] != NULL && (*cmd)->word[2] != NULL)
 	{
