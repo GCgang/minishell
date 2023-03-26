@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 19:34:34 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:47:18 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void	built_in_echo(t_command **cmd, t_env *env_list)
 	else
 	{
 		while ((*cmd)->word[++idx] != NULL)
-		{
 			if (check_echo_option((*cmd)->word[idx], &option_n) == 0)
 				break ;
-		}
 		while ((*cmd)->word[idx] != NULL)
 		{
 			ft_putstr_fd((*cmd)->word[idx], 1);

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:14 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 12:16:30 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:49:24 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../../include/execute.h"
 
 void	built_in_echo(t_command **cmd, t_env *env_list);
-// void	check_echo_option(char **cmd, int *option_n, int *idx);
 int		check_echo_option(char *cmd, int *option_n);
 
 #endif
