@@ -6,13 +6,12 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/24 20:14:42 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:53:35 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
 
-// sorting
 int	check_export_syntax(char *cmd)
 {
 	if (ft_isalpha(*cmd) == 0 && *cmd != '_')
@@ -30,10 +29,11 @@ void	print_export(t_env *env_list)
 {
 	t_env	*tmp_list;
 
+	tmp_list = sort_export(env_list);
 	tmp_list = env_list;
 	while (tmp_list != NULL)
 	{
-		if (tmp_list->name != NULL )
+		if (tmp_list->name != NULL)
 		{
 			ft_putstr_fd("declare -x ", 1);
 			ft_putstr_fd(tmp_list->name, 1);
@@ -48,22 +48,36 @@ void	print_export(t_env *env_list)
 		}
 		tmp_list = tmp_list->next;
 	}
+	free(tmp_list);
 }
 
-void	sort_export(t_env **env_list)
+t_env	*sort_export(t_env *env_list)
 {
-	(void)env_list;
-	return ;
-	// t_env	*copy;
-	// t_env	*tmp;
-	// char	*env_name;
+	t_env	*n_list;
+	t_env	*result;
+	char	*name;
+	char	*val;
 
-	// tmp = *env_list;
-	// while (tmp != NULL)
-	// {
-	// 	while (tmp->next != NULL)
-	// 	if (ft_strcmp(tmp->name, tmp->next->name) == 1)
-	// }
+	result = env_list;
+	while (env_list != NULL)
+	{
+		n_list = env_list->next;
+		while (n_list != NULL)
+		{
+			if (ft_strcmp(env_list->name, n_list->name) > 0)
+			{
+				name = n_list->name;
+				val = n_list->val;
+				n_list->name = env_list->name;
+				n_list->val = env_list->val;
+				env_list->name = name;
+				env_list->val = val;
+			}
+			n_list = n_list->next;
+		}
+		env_list = env_list->next;
+	}
+	return (result);
 }
 
 void	update_export_envp(t_env **env_list, char *name)
@@ -99,7 +113,6 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		sort_export(env_list);
 		print_export((*env_list)->next);
 		(*env_list)->status = 0;
 	}
@@ -119,5 +132,18 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 			}
 		}
 	}
-	print_export((*env_list)->next); //
 }
+
+//norm
+// void	swap_list(t_env *env_list, t_env *n_list)
+// {
+// 	char	*name;
+// 	char	*val;
+
+// 	name = n_list->name;
+// 	val = n_list->val;
+// 	n_list->name = env_list->name;
+// 	n_list->val = env_list->val;
+// 	env_list->name = name;
+// 	env_list->val = val;
+// }
