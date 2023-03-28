@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 20:08:54 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 14:32:52 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,29 @@ static void	test_print_all(t_env **env_list, t_command **com)
 	{
 		printf("com1 : word->");
 		idx = 0;
-		while (tmp2->word[idx])
+		while (tmp2->word != 0 && tmp2->word[idx])
 		{
 			printf("%s, %p", tmp2->word[idx], tmp2->word[idx]);
 			idx++;
 		}
-		printf("%s, %p", tmp2->word[idx], tmp2->word[idx]);
 		printf("\n");
 		printf("com2 : ");
 		idx = -1;
 		while (tmp2->path != 0 && tmp2->path[++idx])
 			printf("%s ", tmp2->path[idx]);
 		printf("\n");
-		printf("oper->%s, oper_val->%s, val_type->%c\n", tmp2->oper, tmp2->oper_val, tmp2->val_type);
-		printf("com3 : builtin->%c, std_in->%d, std_out->%d, std_err->%d, pipe->%d, pipe_in->%d, pipe_out->%d\n", tmp2->builtin, tmp2->std_in, tmp2->std_out, tmp2->std_err, tmp2->pipe, tmp2->pipe_in, tmp2->pipe_out);
+		idx = -1;
+		printf("redir : ");
+		while (tmp2->redir != 0 && tmp2->redir[++idx])
+			printf("%s ", tmp2->redir[idx]);
+		printf("\n");
+		idx = -1;
+		printf("redir_val : ");
+		while (tmp2->redir_val != 0 && tmp2->redir_val[++idx])
+			printf("%s ", tmp2->redir_val[idx]);
+		printf("\n");
+		printf("val_type->%c\n", tmp2->val_type);
+		printf("com3 : builtin->%c, std_in->%d, std_out->%d, std_err->%d, pipe->%d, pipe_in->%d, pipe_out->%d\n", tmp2->builtin, tmp2->std_in, tmp2->std_out, tmp2->std_err, tmp2->pipe, tmp2->pipe_fd[0], tmp2->pipe_fd[1]);
 		tmp2 = tmp2->next;
 	}
 }
@@ -84,7 +93,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 			|| rotate_env_token(token, env_list) || mix_token(token)
 			|| trim_token(token) || chk_oper_token(*token, env_list))
 		{
-			lstclear_token(token, &free);
+			lstclear_token(token);
 			return ;
 		}
 		removing_quote(token);

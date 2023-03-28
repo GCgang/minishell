@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_extra_token.c                                 :+:      :+:    :+:   */
+/*   removing_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 16:04:03 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:52:20 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	record_quote(t_token *token)
 	idx = 0;
 	while (token != 0 && token->val != 0 && token->val[idx] != 0)
 	{
-		token->quote = (char *)malloc(sizeof(char) * (ft_strlen(token->val) + 1));
+		token->quote = (char *)malloc(sizeof(char)
+				* (ft_strlen(token->val) + 1));
 		token->quote[ft_strlen(token->val)] = 0;
 		if (token->val[idx] == '\'')
 			chk_quote(token, '\'', &idx);

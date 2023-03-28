@@ -15,10 +15,9 @@ void	ft_bzero(void *ptr, size_t num);
 
 t_token	*lstnew_token(char type, char *val);
 void	lstadd_back_token(t_token **lst, t_token *new);
-void	lstdelone_token(t_token *lst, void (*del)(void *));
-void	lstclear_token(t_token **lst, void (*del)(void *));
-void	lstdelone_token_elem(t_token *before, t_token *now,
-			void (*del)(void *));
+void	lstdelone_token(t_token *lst);
+void	lstclear_token(t_token **lst);
+void	lstdelone_token_elem(t_token *before, t_token *now);
 
 void	pars_line(char *line, t_token **token, t_env **env_list);
 int		chk_have_token(char *line, char *meta);
@@ -29,14 +28,12 @@ void	removing_quote(t_token **token);
 int		env_search(t_token *token, t_env *env_list);
 void	word_cnt(t_token **token, t_command *com);
 int		make_com(t_token **token, t_env **env_list, t_command **com);
-int		pars_com(t_token **token, t_env **env_list, t_command *com);
-int		pars_oper(t_token **token, t_env **env_list, t_command *com);
+int		pars_com(t_token **token, t_command *com);
 void	change_status(t_env **env_list, int status);
 void	free_array(char **arr);
 int		mix_token(t_token **token);
 int		rotate_env_token(t_token **token, t_env **env_list);
 
-int		heredoc(t_command *com, t_env **env_list);
 void	record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);
 

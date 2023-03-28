@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:38:23 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 18:56:15 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:56:06 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	fusion_token(t_token **token)
 	if (now->val != 0)
 		free(now->val);
 	now->val = tmp_str;
-	lstdelone_token_elem(now, now->next, &free);
+	lstdelone_token_elem(now, now->next);
 	if (now->type == 't' && (ft_strncmp(now->val, "<<", 3) == 0
-		|| ft_strncmp(now->val, ">>", 3) == 0))
+			|| ft_strncmp(now->val, ">>", 3) == 0))
 		return (1);
 	return (2);
 }
@@ -74,9 +74,9 @@ static int	select_phase(t_token **now, t_token **after)
 	else if ((*now)->type == 't' && (*after)->type == 't')
 	{
 		if ((!ft_strncmp((*now)->val, "<", 2)
-			&& !ft_strncmp((*after)->val, "<", 2))
+				&& !ft_strncmp((*after)->val, "<", 2))
 			|| (!ft_strncmp((*now)->val, ">", 2)
-			&& !ft_strncmp((*after)->val, ">", 2)))
+				&& !ft_strncmp((*after)->val, ">", 2)))
 			return (fusion_token(now));
 		else
 			return (1);
@@ -87,7 +87,7 @@ static int	select_phase(t_token **now, t_token **after)
 int	mix_token(t_token **token)
 {
 	t_token	*now;
-	int	select;
+	int		select;
 
 	now = *token;
 	while (now->next != 0)

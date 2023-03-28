@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:58 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 18:47:55 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 14:29:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	word_del(t_token **token, t_token **now, t_token **before)
 	if (*token == *now)
 	{
 		*token = (*now)->next;
-		lstdelone_token(*now, &free);
+		lstdelone_token(*now);
 		*now = *token;
 	}
 	else
 	{
 		(*before)->next = (*now)->next;
-		lstdelone_token(*now, &free);
+		lstdelone_token(*now);
 		*now = (*before)->next;
 	}
 }
@@ -66,16 +66,19 @@ void	word_cnt(t_token **token, t_command *com)
 		{
 			tmp = tmp->next;
 			if (tmp != 0 && tmp->type == 'w')
-				tmp->type = 'v';
+				tmp->type = 'h';
 		}
 		else
 			cnt++;
 		if (tmp != 0)
 			tmp = tmp->next;
 	}
-	com->word = (char **)malloc(sizeof(char *) * (cnt + 1));
-	if (com->word == 0)
-		return ;
-	com->word[cnt] = 0;
-	word_array(token, com);
+	if (cnt != 0)
+	{
+		com->word = (char **)malloc(sizeof(char *) * (cnt + 1));
+		if (com->word == 0)
+			return ;
+		com->word[cnt] = 0;
+		word_array(token, com);	
+	}
 }

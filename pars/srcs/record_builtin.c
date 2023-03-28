@@ -68,9 +68,12 @@ void	record_builtin(t_command **com, t_env *env_list)
 {
 	char	*tmp;
 
-	tmp = ft_strdup((*com)->word[0]);
-	builtin((*com), tmp);
-	free(tmp);
+	if ((*com)->word != 0)
+	{
+		tmp = ft_strdup((*com)->word[0]);
+		builtin((*com), tmp);
+		free(tmp);
+	}
 	if ((*com)->next != 0)
 		record_builtin(&((*com)->next), env_list);
 }

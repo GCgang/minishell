@@ -20,11 +20,11 @@ size_t	ft_strlen(const char *str);
 
 void	lstadd_front_env(t_env **lst, t_env *new);
 void	lstadd_back_env(t_env **lst, t_env *new);
-void	lstdelone_env(t_env *lst, void (*del)(void *));
-void	lstclear_env(t_env **lst, void (*del)(void *));
-void	lstclear_com(t_command **lst, void (*del)(void *));
+void	lstdelone_env(t_env *lst);
+void	lstclear_env(t_env **lst);
+void	lstclear_com(t_command **lst);
 t_env	*lstnew_env(char *name, char *val);
-void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *));
+void	lstdelone_env_elem(t_env *before, t_env *now);
 void	clear_all(t_token **token, t_env **env_list, t_command **com);
 
 void	init_signal(void);
