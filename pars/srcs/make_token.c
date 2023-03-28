@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:50 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 19:50:36 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 20:07:29 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 	3. $ 뒤 meta char는 해석 안 함
 	4. 위 내용을 고려하여 make_token 시, $변수만 구별하여 제작 필요
 */
-static void	input_token(char *now, t_token **token, int *len, char *meta)
+static int	input_token(char *now, t_token **token, int *len, char *meta)
 {
 	t_token	*tmp;
 	char	*val;
@@ -33,6 +33,8 @@ static void	input_token(char *now, t_token **token, int *len, char *meta)
 	if (now != 0 && *len != 0)
 	{
 		val = (char *)malloc(sizeof(char) * (*len + 1));
+		if (!val)
+			return (1);
 		ft_strlcpy(val, now, *len + 1);
 		if (ft_strchr(meta, now[0]) != 0)
 			tmp = lstnew_token('t', val);
@@ -40,10 +42,13 @@ static void	input_token(char *now, t_token **token, int *len, char *meta)
 			tmp = lstnew_token('e', val);
 		else
 			tmp = lstnew_token('w', val);
+		if (!tmp)
+			return (1);
 		lstadd_back_token(token, tmp);
 		now = 0;
 		*len = 0;
 	}
+	return (0);
 }
 
 static char	*quote(char *line, int *idx, int *len, char quote)
@@ -74,7 +79,7 @@ static char	*sep_none_quote(char *line, int *idx, int *len)
 	return (line + *idx - *len);
 }
 
-void	make_token(char *line, char *meta, t_token **token)
+int	make_token(char *line, char *meta, t_token **token)
 {
 	int		idx;
 	int		len;
@@ -86,11 +91,17 @@ void	make_token(char *line, char *meta, t_token **token)
 	while (line[idx] != 0)
 	{
 		now = quote(line, &idx, &len, '\'');
-		input_token(now, token, &len, meta);
+		if (input_token(now, token, &len, meta))
+			return (1);
 		now = quote(line, &idx, &len, '\"');
-		input_token(now, token, &len, meta);
+		if (input_token(now, token, &len, meta))
+			return (1);
 		now = sep_none_quote(line, &idx, &len);
 		if (len == 1)
-			input_token(now, token, &len, meta);
+		{
+			if (input_token(now, token, &len, meta))
+				return (1);
+		}
 	}
+	return (0);
 }

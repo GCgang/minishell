@@ -14,40 +14,42 @@
 	}
 */
 
-void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *))
+void	lstdelone_env_elem(t_env *before, t_env *now)
 {
 	t_env	*tmp;
 
-	if (!before || !now || !del)
+	if (!before || !now)
 		return ;
 	tmp = now->next;
 	if (now->name != 0)
-		del((void *)now->name);
+		free((void *)now->name);
 	if (now->val != 0)
-		del((void *)now->val);
+		free((void *)now->val);
 	before->next = tmp;
-	del((void *)now);
+	free((void *)now);
 }
 
-void	lstdelone_env(t_env *lst, void (*del)(void *))
+void	lstdelone_env(t_env *lst)
 {
-	if (!lst || !del)
+	if (!lst)
 		return ;
-	del((void *)lst->name);
-	del((void *)lst->val);
+	if (lst->name)
+		free((void *)lst->name);
+	if (lst->val)
+		free((void *)lst->val);
 	free(lst);
 }
 
-void	lstclear_env(t_env **lst, void (*del)(void *))
+void	lstclear_env(t_env **lst)
 {
 	t_env	*cur;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
 	while (*lst)
 	{
 		cur = (*lst)->next;
-		lstdelone_env(*lst, del);
+		lstdelone_env(*lst);
 		*lst = cur;
 	}
 	*lst = 0;

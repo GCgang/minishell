@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_extra_token.c                                 :+:      :+:    :+:   */
+/*   removing_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 18:30:47 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 17:01:45 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 	4. split_word_ifs : 단어 분할 기준, IFS가 있는 지 확인하고 IFS에 해당하는 내용물을 별도 토큰으로 분리
 	5. remove_quote : 메타 문자가 아닌 단순 문자열인 경우, 인용 문구를 제거한다
 */
+
 static void	chk_quote(t_token *token, char tgt, int *idx)
 {
 	token->quote[*idx] = '1';
 	(*idx)++;
-	while (token->val[*idx] != tgt)
+	while (token->val[*idx] != 0 && token->val[*idx] != tgt)
 	{
 		token->quote[*idx] = '0';
 		(*idx)++;
@@ -32,13 +33,18 @@ static void	chk_quote(t_token *token, char tgt, int *idx)
 	token->quote[*idx] = '1';
 }
 
-static void	record_quote(t_token *token)
+static int	record_quote(t_token *token)
 {
 	int	idx;
 
 	idx = 0;
-	while (token != 0 && token->val[idx] != 0)
+	while (token != 0 && token->val != 0 && token->val[idx] != 0)
 	{
+		token->quote = (char *)malloc(sizeof(char)
+				* (ft_strlen(token->val) + 1));
+		if (token->quote == 0)
+			return (1);
+		token->quote[ft_strlen(token->val)] = 0;
 		if (token->val[idx] == '\'')
 			chk_quote(token, '\'', &idx);
 		else if (token->val[idx] == '\"')
@@ -47,9 +53,39 @@ static void	record_quote(t_token *token)
 			token->quote[idx] = '0';
 		idx++;
 	}
+	return (0);
 }
 
-void	pars_extra_token(t_token **token, t_env *env_list)
+static int	remove_quote(t_token *token)
+{
+	int		idx;
+	char	*tmp;
+
+	idx = -1;
+	while (token->val != 0 && token->val[++idx] != 0)
+	{
+		if ((token->val[idx] == '\'' || token->val[idx] == '\"')
+			&& token->quote[idx] == '1')
+		{
+			token->val[idx] = 0;
+			tmp = ft_strjoin(token->val, token->val + idx + 1);
+			if (tmp == 0)
+				return (1);
+			free(token->val);
+			token->val = tmp;
+			token->quote[idx] = 0;
+			tmp = ft_strjoin(token->quote, token->quote + idx + 1);
+			if (tmp == 0)
+				return (1);
+			free(token->quote);
+			token->quote = tmp;
+			idx--;
+		}
+	}
+	return (0);
+}
+
+int	removing_quote(t_token **token)
 {
 	t_token	*now;
 	t_token	*before;
@@ -61,9 +97,8 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 		if (before != now && before->type == 'r'
 			&& ft_strncmp(before->val, "<<", 3) == 0)
 			now->type = 'h';
-		record_quote(now);
-		if (now->type != 'h')
-			env_search(now, env_list);
+		if (record_quote(now))
+			return (1);
 		before = now;
 		now = now->next;
 	}
@@ -71,7 +106,9 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 	while (now != 0)
 	{
 		if (now->type != 'r')
-			remove_quote(now);
+			if (remove_quote(now))
+				return (1);
 		now = now->next;
 	}
+	return (0);
 }

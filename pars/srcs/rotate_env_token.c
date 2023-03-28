@@ -6,25 +6,43 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:04:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 18:56:22 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 19:26:39 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pars.h"
 
-static void	special_pars_env(t_token **token, t_env **env_list, int type)
+static int	special_pars_env(t_token **token, int type)
 {
-	char	*tmp_str;
-
-	tmp_str = (*token)->val;
+	if ((*token)->val != 0)
+		free((*token)->val);
 	if (type == 0)
+	{
 		(*token)->val = ft_strdup("minishell");
+		if ((*token)->val == 0)
+			return (1);
+	}
 	else
-		(*token)->val = ft_strdup((*env_list)->val);
-	free(tmp_str);
+	{
+		(*token)->val = ft_itoa(g_exit_status);
+		if ((*token)->val == 0)
+			return (1);
+	}
+	return (0);
 }
 
-void	rotate_env_token(t_token **token, t_env **env_list)
+static int	pars_env(t_token **now, t_env **env_list)
+{
+	(*now)->type = 'w';
+	if (ft_strncmp((*now)->val, "$0", 3) == 0)
+		return (special_pars_env(now, 0));
+	else if (ft_strncmp((*now)->val, "$?", 3) == 0)
+		return (special_pars_env(now, 1));
+	else
+		return (env_search(*now, *env_list));
+}
+
+int	rotate_env_token(t_token **token, t_env **env_list)
 {
 	t_token	*tmp;
 
@@ -38,15 +56,15 @@ void	rotate_env_token(t_token **token, t_env **env_list)
 		}
 		else if (tmp->type == 'e')
 		{
-			if (ft_strncmp(tmp->val, "$0", 3) == 0)
-				special_pars_env(&tmp, env_list, 0);
-			else if (ft_strncmp(tmp->val, "$?", 3) == 0)
-				special_pars_env(&tmp, env_list, 1);
-			else
-				env_search(tmp, *env_list);
-			tmp->type = 'w';
+			if (pars_env(&tmp, env_list))
+				return (1);
+		}
+		else if (tmp->val[0] == '\"')
+		{
+			if (env_search(tmp, *env_list))
+				return (1);
 		}
 		tmp = tmp->next;
 	}
-	mix_token(token);
+	return (0);
 }

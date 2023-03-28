@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:55:36 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 17:06:11 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 19:40:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_command
 	char				**word;
 	char				**path;
 	int					path_err;
-	char				*oper;
-	char				*oper_val;
+	char				**redir;
+	char				**redir_val;
 	char				val_type;
 	char				builtin;
 	int					std_in;
@@ -46,8 +46,6 @@ typedef struct s_command
 	int					std_in_dup1;
 	int					std_out_dup1;
 	int					pipe;
-	int					pipe_in;
-	int					pipe_out;
 	int					pipe_fd[2];
 	char				*err_buf;
 	struct s_command	*next;

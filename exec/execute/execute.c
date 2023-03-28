@@ -6,14 +6,14 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 18:31:57 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 20:45:01 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
 int	is_built_in(char **word)
-{	
+{
 	if (word != NULL && word[0] != NULL)
 	{
 		if (ft_strcmp(word[0], "cd") == 0)
@@ -81,7 +81,6 @@ char	*check_cmd(t_command *process)
 
 	i = -1;
 	temp = ft_strjoin("/", process->word[1]);
-	printf("temp = %s\n", temp);
 	if (access(temp, X_OK) == 0)
 		return (temp);
 	while (process->path[++i] != NULL)
@@ -103,6 +102,8 @@ void	run_execve(t_command *process)
 	int		j;
 
 	i = 1;
+	printf("\n\n\n\n\n");
+	printf("proc = %s\n", process->word[0]);
 	while (process->word[i] != NULL)
 		i++;
 	cmds = (char **)malloc(sizeof(char *) * (i));
@@ -110,13 +111,11 @@ void	run_execve(t_command *process)
 	while (j < i)
 	{
 		cmds[j] = process->word[j + 1];
+		printf("word = %s\n", process->word[j + 1]);
 		j++;
 	}
 	cmds[i] = NULL;
 	path_cmd = check_cmd(process);
-	printf("path cmd = %s\n", path_cmd);
-	printf("!!!!!!!!!!!!!!!!!!\n\n\n\n\n");
-	exit(1);
 	if (path_cmd == NULL)
 	{
 		ft_putstr_fd("Minishell: ", 2);
@@ -124,6 +123,8 @@ void	run_execve(t_command *process)
 		ft_putstr_fd(": command not found\n", 2);
 		return ;
 	}
+	printf("\n\npath_cmd = %s\n\n", path_cmd);
+	printf("\n\ncmds = %s\n\n", cmds[0]);
 	execve(path_cmd, cmds, NULL);
 }
 
@@ -193,17 +194,3 @@ void	exec(t_command **cmd, t_env **env_list)
 		execute_binary(cmd, env_list);
 	}
 }
-
-
-/*
-#include <stdio.h>
-#include <unistd.h>
-
-int main(int argc, char **argv, char **envp)
-{
-	char *command[] = {"/bin/ls", "ls", "asdfj", "asdfj", "saddfi", "asdfij", "asdf0", "main.c", "asfdsd", "main.c", 0};
-	execve(command[0], command, envp);
-	printf("execve failed\n");
-	return (0);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:10 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 19:22:15 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	delete_envp(t_env *env_list, char *name)
 		del_name = tmp->next->name;
 		if (ft_strcmp(del_name, name) == 0)
 		{
-			lstdelone_env_elem(tmp, tmp->next, &free);
+			lstdelone_env_elem(tmp, tmp->next);
 			break ;
 		}
 		tmp = tmp->next;

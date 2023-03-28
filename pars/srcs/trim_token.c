@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:38 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 20:01:25 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:10:48 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,25 @@
 	trim_token : 각 토큰에서 불필요한 공백을 제거하고 공백으로만 이루어진 토큰도 제거(인용 제외)
 */
 
-void	trim_token(t_token **token)
+int	trim_token(t_token **token)
 {
 	t_token	*now;
 
 	now = *token;
-	if (now->type == 't' && ft_strncmp(now->val, " ", 2) != 0)
+	if (now->type == 't' && ft_strncmp(now->val, " ", 2) == 0)
 	{
 		*token = (*token)->next;
-		lstdelone_token(now, &free);
+		lstdelone_token(now);
 		now = *token;
 	}
-	while (now->next != 0)
+	while (now != 0 && now->next != 0)
 	{
 		if (now->next->type == 't' && ft_strncmp(now->next->val, " ", 2) == 0)
-			lstdelone_token_elem(now, now->next, &free);
-		now = now->next;
+			lstdelone_token_elem(now, now->next);
+		if (now->next != 0 && now->next->type != 't')
+			now = now->next;
 	}
-	now = *token;
-	while (now)
-	{
-		now = now->next;
-	}
+	if (*token == 0)
+		return (1);
+	return (0);
 }
