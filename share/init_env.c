@@ -19,22 +19,6 @@ static t_env	*conv_env(char *front, char *back)
 	return (node);
 }
 
-static int	add_exit_status(t_env *node, t_env **env_list)
-{
-	char	*not;
-
-	not = malloc(sizeof(char) * 2);
-	if (!not)
-		return (0);
-	not[0] = '0';
-	not[1] = 0;
-	node = lstnew_env(ft_strdup("?"), not);
-	node->mean = '?';
-	node->status = 0;
-	lstadd_front_env(env_list, node);
-	return (1);
-}
-
 int	init_env(char **envp, t_env **env_list)
 {
 	int		idx;
@@ -56,5 +40,5 @@ int	init_env(char **envp, t_env **env_list)
 	}
 	node = conv_env("OLDPWD", 0);
 	lstadd_back_env(env_list, node);
-	return (add_exit_status(node, env_list));
+	return (1);
 }

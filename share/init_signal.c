@@ -26,6 +26,7 @@ static void	sigquit_handler(int sig)
 static void	sigint_handler(int sig)
 {
 	(void)sig;
+	g_exit_status = 1;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -35,6 +36,7 @@ static void	sigint_handler(int sig)
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
+	g_exit_status = 1;
 	printf("\n");
 	exit(1);
 }

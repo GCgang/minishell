@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:57:22 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 14:59:54 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 18:10:39 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,11 @@
 		d. introduce : 처음에 보기 좋게 만들어 줄 아스키 아트
 	3. chk_res : env_list에서 exit가 나왔는 지 확인. exit가 있는 경우 종료
 */
+
+int	g_exit_status;
+
 static void	introduce(void)
 {
-}
-
-static int	chk_res(t_env *env_list, int *res)
-{
-	while (env_list->mean != '?')
-		env_list = env_list->next;
-	if (env_list->val != 0)
-	{
-		if (!(ft_strncmp(env_list->val, "exit", 5)))
-		{
-			*res = env_list->status;
-			return (1);
-		}
-	}
-	return (0);
 }
 
 static int	init_chk(int ac, char **envp, t_env **env_list)
@@ -78,8 +66,6 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 		pars_line(line, &tokens, &env_list);
 		free(line);
-		if (chk_res(env_list, &res) != 0)
-			break ;
 	}
 	clear_all(&tokens, &env_list, 0);
 	return (res);

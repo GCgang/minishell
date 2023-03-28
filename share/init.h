@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/28 18:50:22 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INIT_H
 # define INIT_H
 
@@ -12,6 +24,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../pars/include/pars.h"
+
+int		g_exit_status;
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);

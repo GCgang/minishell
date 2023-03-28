@@ -6,13 +6,13 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:04:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 18:49:14 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 19:26:39 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pars.h"
 
-static int	special_pars_env(t_token **token, t_env **env_list, int type)
+static int	special_pars_env(t_token **token, int type)
 {
 	if ((*token)->val != 0)
 		free((*token)->val);
@@ -24,7 +24,7 @@ static int	special_pars_env(t_token **token, t_env **env_list, int type)
 	}
 	else
 	{
-		(*token)->val = ft_strdup((*env_list)->val);
+		(*token)->val = ft_itoa(g_exit_status);
 		if ((*token)->val == 0)
 			return (1);
 	}
@@ -35,9 +35,9 @@ static int	pars_env(t_token **now, t_env **env_list)
 {
 	(*now)->type = 'w';
 	if (ft_strncmp((*now)->val, "$0", 3) == 0)
-		return (special_pars_env(now, env_list, 0));
+		return (special_pars_env(now, 0));
 	else if (ft_strncmp((*now)->val, "$?", 3) == 0)
-		return (special_pars_env(now, env_list, 1));
+		return (special_pars_env(now, 1));
 	else
 		return (env_search(*now, *env_list));
 }

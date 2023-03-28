@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 14:32:52 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 18:57:15 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 	{
 		if (make_token(line, meta, token) || mix_token(token)
 			|| rotate_env_token(token, env_list) || mix_token(token)
-			|| trim_token(token) || chk_oper_token(*token, env_list))
+			|| trim_token(token) || chk_oper_token(*token)
+			|| removing_quote(token))
 		{
 			lstclear_token(token);
 			return ;
 		}
-		removing_quote(token);
 		if (make_com(token, env_list, &com) == 0)
 			test_print_all(env_list, &com);//exec(&com, env_list);
 	}
