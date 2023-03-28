@@ -32,10 +32,10 @@ int	init_env(char **envp, t_env **env_list)
 		equal = ft_strchr(envp[idx], '=');
 		*equal = 0;
 		if (ft_strncmp(envp[idx], "OLDPWD", 7) != 0)
+		{
 			node = conv_env(envp[idx], equal + 1);
-		else
-			node = conv_env(envp[idx], 0);
-		lstadd_back_env(env_list, node);
+			lstadd_back_env(env_list, node);
+		}
 		idx++;
 	}
 	node = conv_env("OLDPWD", 0);

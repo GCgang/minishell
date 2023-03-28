@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:38 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 14:01:41 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:10:58 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int	trim_token(t_token **token)
 		lstdelone_token(now);
 		now = *token;
 	}
-	while (now->next != 0)
+	while (now != 0 && now->next != 0)
 	{
 		if (now->next->type == 't' && ft_strncmp(now->next->val, " ", 2) == 0)
 			lstdelone_token_elem(now, now->next);
-		now = now->next;
+		if (now != 0 && now->next != 0 && now->next->type != 't')
+			now = now->next;
 	}
+	if (*token == 0)
+		return (1);
 	return (0);
 }
