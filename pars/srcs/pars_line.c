@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 16:37:51 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 20:08:54 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static void	test_print_all(t_env **env_list, t_command **com)
 		idx = 0;
 		while (tmp2->word[idx])
 		{
-			printf("%s ", tmp2->word[idx]);
+			printf("%s, %p", tmp2->word[idx], tmp2->word[idx]);
 			idx++;
 		}
+		printf("%s, %p", tmp2->word[idx], tmp2->word[idx]);
 		printf("\n");
 		printf("com2 : ");
 		idx = -1;
@@ -71,29 +72,24 @@ static void	cpy_meta(char *meta, char *tmp)
 
 void	pars_line(char *line, t_token **token, t_env **env_list)
 {
-	int			chk;
 	char		meta[11];
 	t_command	*com;
 
 	*token = 0;
 	com = 0;
 	cpy_meta(meta, "()<>\t\n |&;");
-	chk = chk_have_token(line, meta);
-	if (chk > 0)
+	if (chk_have_token(line, meta) > 0)
 	{
-		make_token(line, meta, token);
-		mix_token(token);
-		rotate_env_token(token, env_list);
-		trim_token(token);
-		if (chk_oper_token(*token, env_list) != 0)
+		if (make_token(line, meta, token) || mix_token(token)
+			|| rotate_env_token(token, env_list) || mix_token(token)
+			|| trim_token(token) || chk_oper_token(*token, env_list))
 		{
 			lstclear_token(token, &free);
 			return ;
 		}
-		pars_extra_token(token, *env_list);
+		removing_quote(token);
 		if (make_com(token, env_list, &com) == 0)
 			test_print_all(env_list, &com);//exec(&com, env_list);
-		//clear_all(&com, token);
 	}
-	//clear_all(token, com);
+	clear_all(token, 0, &com);
 }

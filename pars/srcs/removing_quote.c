@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 18:30:47 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 16:04:03 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	chk_quote(t_token *token, char tgt, int *idx)
 {
 	token->quote[*idx] = '1';
 	(*idx)++;
-	while (token->val[*idx] != tgt)
+	while (token->val[*idx] != 0 && token->val[*idx] != tgt)
 	{
 		token->quote[*idx] = '0';
 		(*idx)++;
@@ -37,8 +37,10 @@ static void	record_quote(t_token *token)
 	int	idx;
 
 	idx = 0;
-	while (token != 0 && token->val[idx] != 0)
+	while (token != 0 && token->val != 0 && token->val[idx] != 0)
 	{
+		token->quote = (char *)malloc(sizeof(char) * (ft_strlen(token->val) + 1));
+		token->quote[ft_strlen(token->val)] = 0;
 		if (token->val[idx] == '\'')
 			chk_quote(token, '\'', &idx);
 		else if (token->val[idx] == '\"')
@@ -49,7 +51,35 @@ static void	record_quote(t_token *token)
 	}
 }
 
-void	pars_extra_token(t_token **token, t_env *env_list)
+static void	remove_quote(t_token *token)
+{
+	int		idx;
+	char	*tmp_val;
+	char	*tmp_quote;
+
+	idx = 0;
+	while (token->val != 0 && token->val[idx] != 0)
+	{
+		if ((token->val[idx] == '\'' || token->val[idx] == '\"')
+			&& token->quote[idx] == '1')
+		{
+			token->val[idx] = 0;
+			tmp_val = ft_strjoin(token->val, token->val + idx + 1);
+			free(token->val);
+			token->val = tmp_val;
+			token->quote[idx] = 0;
+			tmp_quote = ft_strjoin(token->quote, token->quote + idx + 1);
+			free(token->quote);
+			token->quote = tmp_quote;
+			idx--;
+			if (token->type == 'h')
+				token->type = 'H';
+		}
+		idx++;
+	}
+}
+
+void	removing_quote(t_token **token)
 {
 	t_token	*now;
 	t_token	*before;
@@ -62,8 +92,6 @@ void	pars_extra_token(t_token **token, t_env *env_list)
 			&& ft_strncmp(before->val, "<<", 3) == 0)
 			now->type = 'h';
 		record_quote(now);
-		if (now->type != 'h')
-			env_search(now, env_list);
 		before = now;
 		now = now->next;
 	}

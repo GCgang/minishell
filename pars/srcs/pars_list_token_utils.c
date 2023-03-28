@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:07 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/22 16:43:27 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 19:07:33 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	lstdelone_token(t_token *lst, void (*del)(void *))
 	if (!lst || !del)
 		return ;
 	if (lst->val != 0)
-		del(lst->val);
+		del((void *)lst->val);
 	if (lst->quote != 0)
-		del(lst->quote);
-	free(lst);
+		del((void *)lst->quote);
+	del((void *)lst);
 }
 
 t_token	*lstnew_token(char type, char *val)

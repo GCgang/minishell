@@ -5,6 +5,8 @@ void	ft_bzero(void *ptr, size_t num)
 	size_t			idx;
 	unsigned char	*temp;
 
+	if (!ptr)
+		return ;
 	idx = 0;
 	temp = (unsigned char *)ptr;
 	while (idx < num)
@@ -19,6 +21,8 @@ void	str_tolower(char *str)
 	int	idx;
 
 	idx = 0;
+	if (str != 0)
+		return ;
 	while (str[idx])
 	{
 		if (65 <= str[idx] && str[idx] <= 90)
@@ -32,6 +36,8 @@ void	*ft_memset(void *ptr, int value, size_t num)
 	size_t			idx;
 	unsigned char	*temp;
 
+	if (!ptr)
+		return (ptr);
 	idx = 0;
 	temp = (unsigned char *)ptr;
 	while (idx < num)
@@ -49,6 +55,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 
 	dest_size = 0;
 	src_size = 0;
+	if (!dest || !src)
+		return (0);
 	while (dest[dest_size] && dest_size < size)
 		dest_size++;
 	while (src[src_size] && (dest_size + src_size + 1 < size))

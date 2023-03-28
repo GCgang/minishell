@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:38:23 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/23 19:55:40 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/24 18:56:15 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,81 @@
 	5. 
 */
 
-static void	fusion_token(t_token **token)
+static int	fusion_token(t_token **token)
 {
 	t_token	*now;
 	char	*tmp_str;
 
 	now = *token;
 	tmp_str = ft_strjoin(now->val, now->next->val);
+	if (!tmp_str)
+		return (0);
 	if (now->val != 0)
 		free(now->val);
 	now->val = tmp_str;
 	lstdelone_token_elem(now, now->next, &free);
+	if (now->type == 't' && (ft_strncmp(now->val, "<<", 3) == 0
+		|| ft_strncmp(now->val, ">>", 3) == 0))
+		return (1);
+	return (2);
 }
 
-void	mix_token(t_token **token)
+static char	*ft_strchr_null(const char *str, int c)
+{
+	size_t			idx;
+	unsigned char	tgt;
+
+	idx = 0;
+	tgt = (unsigned char)c;
+	if (str == 0)
+		return (0);
+	while (str[idx])
+	{
+		if (str[idx] == tgt)
+			return ((char *)str + idx);
+		idx++;
+	}
+	return (0);
+}
+
+static int	select_phase(t_token **now, t_token **after)
+{
+	if ((*now)->type == 'w' && (*after)->type == 'w')
+		return (fusion_token(now));
+	else if ((*now)->type == 'e' && (*after)->type == 'w')
+	{
+		if (!ft_strchr_null("0123456789", (*now)->val[1]) && (*after)->val[0]
+			&& (*after)->val[0] != '\'' && (*after)->val[0] != '\"')
+			return (fusion_token(now));
+		else
+			return (1);
+	}
+	else if ((*now)->type == 't' && (*after)->type == 't')
+	{
+		if ((!ft_strncmp((*now)->val, "<", 2)
+			&& !ft_strncmp((*after)->val, "<", 2))
+			|| (!ft_strncmp((*now)->val, ">", 2)
+			&& !ft_strncmp((*after)->val, ">", 2)))
+			return (fusion_token(now));
+		else
+			return (1);
+	}
+	return (1);
+}
+
+int	mix_token(t_token **token)
 {
 	t_token	*now;
+	int	select;
 
 	now = *token;
 	while (now->next != 0)
 	{
-		if (now->type == 'w' && now->next->type == 'w')
-			fusion_token(&now);
-		else if (now->type == 'e' && now->next->type == 'w')
-		{
-			if (now->val[1] != 0 && ft_strchr("0123456789", now->val[1]) == 0
-				&& now->next->val[0] != 0 && now->next->val[0] != '\'' && now->next->val[0] != '\"')
-				fusion_token(&now);
-			else
-				now = now->next;
-		}
-		else if (now->type == 't' && now->next->type == 't')
-		{
-			if ((now->val[0] == '<' && now->next->val[0] == '<')
-				|| (now->val[0] == '>' && now->next->val[0] == '>'))
-				fusion_token(&now);
-		}
-		else
+		select = select_phase(&now, &(now->next));
+		if (select == 0)
+			return (1);
+		else if (select == 1)
 			now = now->next;
 	}
+	return (0);
 }

@@ -54,6 +54,8 @@ int	chk_have_token(char *line, char *meta)
 	int	idx;
 
 	idx = 0;
+	if (!line[0])
+		return (0);
 	while (line[idx] != 0)
 	{
 		if (chk_quote(line, &idx, '\'') == -42)
