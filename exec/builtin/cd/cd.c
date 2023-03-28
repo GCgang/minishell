@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:20 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:59:27 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	change_oldpwd_dir(t_env **env_list)
 
 void	built_in_cd(t_command **cmd, t_env **env_list)
 {
-	if ((*cmd)->word[1] == NULL) // || ft_strcmp((*cmd)->word[1], "~") == 0
+	if ((*cmd)->word[1] == NULL)
 		change_home_dir(env_list);
 	else if (ft_strcmp((*cmd)->word[1], "-") == 0)
 		change_oldpwd_dir(env_list);

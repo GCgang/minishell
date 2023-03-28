@@ -41,5 +41,5 @@ int		heredoc(t_command *com, t_env **env_list);
 void	record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);
 
-void	exec(t_command **cmd, t_env **env_list, pid_t pid);
+void	exec(t_command **cmd, t_env **env_list);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:09 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:13:49 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,16 @@
 # include "builtin.h"
 
 //void	execute_built_in(char **argv, char **envp);
-void			exec(t_command **cmd, t_env **env_list, pid_t pid);
-void			execute_built_in(t_command **cmd, t_env **env_list, pid_t pid);
+void			exec(t_command **cmd, t_env **env_list);
+void			execute_built_in(t_command **cmd, t_env **env_list, int pipe);
+
+int				is_built_in(char **word);
+char			*check_cmd(t_command *process);
+void			run_execve(t_command *process);
+void			child_process(t_command **process, t_env **env_list);
+void			parent_process(t_command **cmd);
+void			execute_binary(t_command **cmd, t_env **env_list);
+
 int				ft_strcmp(char *s1, char *s2);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);

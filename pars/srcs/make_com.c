@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:46 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 16:39:19 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:06:29 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	init_command(t_command **com)
 	(*com)->pipe = 0;
 	(*com)->pipe_out = 0;
 	(*com)->pipe_in = 0;
+	(*com)->pipe_fd[0] = 0;
+	(*com)->pipe_fd[1] = 0;
 	(*com)->err_buf = 0;
 	(*com)->next = 0;
 }

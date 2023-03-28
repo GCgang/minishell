@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:18 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:59:11 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void	built_in_echo(t_command **cmd, t_env *env_list)
 			ft_putchar_fd('\n', 1);
 	}
 	env_list->status = 0;
-	return ;
 }

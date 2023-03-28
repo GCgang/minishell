@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 16:20:35 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:02:37 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 		if (make_com(token, env_list, &com) == 0)
 		{
 			test_print_all(env_list, &com);
-			exec(&com, env_list, 1);
+			exec(&com, env_list);
 		}
 		//clear_all(&com, token);
 	}
