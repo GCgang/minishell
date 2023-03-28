@@ -1,7 +1,7 @@
 #ifndef INIT_H
 # define INIT_H
 
-# include <struct.h>
+# include "struct.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,8 +22,10 @@ void	lstadd_front_env(t_env **lst, t_env *new);
 void	lstadd_back_env(t_env **lst, t_env *new);
 void	lstdelone_env(t_env *lst, void (*del)(void *));
 void	lstclear_env(t_env **lst, void (*del)(void *));
+void	lstclear_com(t_command **lst, void (*del)(void *));
 t_env	*lstnew_env(char *name, char *val);
 void	lstdelone_env_elem(t_env *before, t_env *now, void (*del)(void *));
+void	clear_all(t_token **token, t_env **env_list, t_command **com);
 
 void	init_signal(void);
 void	heredoc_sigint_handler(int sig);

@@ -81,6 +81,6 @@ int	main(int ac, char **av, char **envp)
 		if (chk_res(env_list, &res) != 0)
 			break ;
 	}
-	lstclear_env(&env_list, &free);
+	clear_all(&tokens, &env_list, 0);
 	return (res);
 }
