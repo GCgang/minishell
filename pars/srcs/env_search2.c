@@ -47,11 +47,13 @@ void	trim_env_token(t_token *token, t_env *env_list, int **loca)
 	}
 }
 
-int	trans_env_token(t_token *token, char **tgt, int **loca)
+int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 {
 	char	*tmp;
 	char	*tmp2;
 
+	if (flag == 0 && token->next && token->next->val[0] == '\"')
+		(*tgt)[0] = 0;
 	loca[0][2] = ft_strlen(*tgt);
 	token->val[loca[0][0]] = 0;
 	if (token->val[0] == 0)

@@ -19,6 +19,29 @@
 	3. 구분한 $는 추후 IFS 구분자 시, 사용
 */
 
+static char		*find_special_env(t_token *token, int **loca)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_substr(token->val, loca[0][0], loca[0][1] - loca[0][0]);
+	if (!tmp)
+		return (0);
+	tmp2 = tmp;
+	if (ft_strncmp(tmp2, "$0", 3) == 0)
+		tmp = ft_strdup("minishell");
+	else if (ft_strncmp(tmp2, "$?", 3) == 0)
+		tmp = ft_itoa(g_exit_status);
+	else if (!tmp2[loca[0][0]] + 1)
+		tmp = ft_strdup("$");
+	else
+		tmp = ft_strdup("");
+	free(tmp2);
+	if (!tmp)
+		return (0);
+	return (tmp);
+}
+
 static t_env	*compare_env_token(char *token, t_env *env_list)
 {
 	while (env_list)
@@ -30,7 +53,7 @@ static t_env	*compare_env_token(char *token, t_env *env_list)
 	return (env_list);
 }
 
-static int	is_env(t_token *token, t_env *env_list, int **loca)
+static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 {
 	char	*tmp;
 
@@ -45,15 +68,10 @@ static int	is_env(t_token *token, t_env *env_list, int **loca)
 	if (env_list != 0)
 		tmp = ft_strdup(env_list->val);
 	else
-	{
-		if (!token->val[loca[0][0] + 1])
-			tmp = ft_strdup("$");
-		else
-			tmp = ft_strdup("");
-	}
+		tmp = find_special_env(token, loca);
 	if (tmp == 0)
 		return (err_msg("Error : Malloc failed(is_env)"));
-	if (trans_env_token(token, &tmp, loca))
+	if (trans_env_token(token, &tmp, loca, flag))
 		return (err_msg("Error : Malloc failed(trans_env_token)"));
 	return (0);
 }
@@ -93,7 +111,7 @@ int	env_search(t_token *token, t_env *env_list)
 		flag = find_icon(token->val, &loca);
 		if (flag == 0 || flag == 1)
 		{
-			if (is_env(token, env_list, &loca))
+			if (is_env(token, env_list, &loca, flag))
 				return (1);
 			if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 				trim_env_token(token, env_list, &loca);

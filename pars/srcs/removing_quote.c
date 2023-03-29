@@ -43,12 +43,12 @@ static int	record_quote(t_token **token)
 
 	idx = 0;
 	tmp = *token;
+	tmp->quote = (char *)malloc(sizeof(char)
+			* (ft_strlen(tmp->val) + 1));
+	if (tmp->quote == 0)
+		return (1);
 	while (tmp != 0 && tmp->val != 0 && tmp->val[idx] != 0)
 	{
-		tmp->quote = (char *)malloc(sizeof(char)
-				* (ft_strlen(tmp->val) + 1));
-		if (tmp->quote == 0)
-			return (1);
 		tmp->quote[ft_strlen(tmp->val)] = 0;
 		if (tmp->val[idx] == '\'')
 			chk_quote(&tmp, '\'', &idx);
@@ -67,7 +67,6 @@ static int	remove_quote(t_token **token)
 	char	*tmp;
 
 	idx = -1;
-	printf("token->val : %s, token->quote : %s\n", (*token)->val, (*token)->quote);
 	while ((*token)->val != 0 && (*token)->val[++idx] != 0)
 	{
 		if (((*token)->val[idx] == '\'' || (*token)->val[idx] == '\"')

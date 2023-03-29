@@ -46,7 +46,7 @@ void	free_array(char **arr);
 int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
-int		trans_env_token(t_token *token, char **tgt, int **loca);
+int		trans_env_token(t_token *token, char **tgt, int **loca, int flag);
 
 int		record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);

@@ -34,11 +34,9 @@ static int	special_pars_env(t_token **token, int type)
 static int	pars_env(t_token **now, t_env **env_list)
 {
 	(*now)->type = 'w';
-	if (ft_strncmp((*now)->val, "$0", 3) == 0
-		|| ft_strncmp((*now)->val, "\"$0\"", 5) == 0)
+	if (ft_strncmp((*now)->val, "$0", 3) == 0)
 		return (special_pars_env(now, 0));
-	else if (ft_strncmp((*now)->val, "$?", 3) == 0
-			|| ft_strncmp((*now)->val, "\"$?\"", 5) == 0)
+	else if (ft_strncmp((*now)->val, "$?", 3) == 0)
 		return (special_pars_env(now, 1));
 	else
 		return (env_search(*now, *env_list));
