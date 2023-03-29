@@ -44,5 +44,6 @@ void	clear_all(t_token **token, t_env **env_list, t_command **com);
 void	init_signal(void);
 void	heredoc_sigint_handler(int sig);
 int		init_env(char **envp, t_env **env_list);
+int		err_msg(char *str);
 
 #endif

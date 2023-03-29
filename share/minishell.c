@@ -34,17 +34,15 @@ static void	introduce(void)
 static int	init_chk(int ac, char **envp, t_env **env_list)
 {
 	if (ac > 1)
-	{
-		printf("Error : You don't need to insert argument\n");
-		return (1);
-	}
+		return (err_msg("Error : You don't need to insert argument"));
 	init_signal();
-	init_env(envp, env_list);
+	if (init_env(envp, env_list) == 1)
+		return (err_msg("Error : Malloc failed(init_env)"));
 	introduce();
 	return (0);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char**envp)
 {
 	char	*line;
 	t_env	*env_list;

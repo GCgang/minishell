@@ -14,7 +14,14 @@ static t_env	*conv_env(char *front, char *back)
 	t_env	*node;
 
 	name = ft_strdup(front);
+	if (name == 0)
+		return (0);
 	val = ft_strdup(back);
+	if (val == 0)
+	{
+		free(name);
+		return (0);
+	}
 	node = lstnew_env(name, val);
 	return (node);
 }
@@ -34,11 +41,15 @@ int	init_env(char **envp, t_env **env_list)
 		if (ft_strncmp(envp[idx], "OLDPWD", 7) != 0)
 		{
 			node = conv_env(envp[idx], equal + 1);
+			if (node == 0)
+				return (0);
 			lstadd_back_env(env_list, node);
 		}
 		idx++;
 	}
 	node = conv_env("OLDPWD", 0);
+	if (node == 0)
+		return (0);
 	lstadd_back_env(env_list, node);
 	return (1);
 }
