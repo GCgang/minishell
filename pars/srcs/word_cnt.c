@@ -28,7 +28,7 @@ static void	word_del(t_token **token, t_token **now, t_token **before)
 	}
 }
 
-static void	word_array(t_token **token, t_command *com)
+static int	word_array(t_token **token, t_command *com)
 {
 	int		idx;
 	t_token	*now;
@@ -42,6 +42,8 @@ static void	word_array(t_token **token, t_command *com)
 		if (now->type == 'w')
 		{
 			com->word[idx] = ft_strdup(now->val);
+			if (com->word[idx] == 0)
+				return (err_msg("Error : Malloc failed(word_array)"));
 			word_del(token, &now, &before);
 			idx++;
 		}
@@ -51,12 +53,13 @@ static void	word_array(t_token **token, t_command *com)
 			now = now->next;
 		}
 	}
+	return (0);
 }
 
-void	word_cnt(t_token **token, t_command *com)
+static int chk_cnt(t_token **token)
 {
-	int		cnt;
 	t_token	*tmp;
+	int		cnt;
 
 	tmp = *token;
 	cnt = 0;
@@ -73,12 +76,23 @@ void	word_cnt(t_token **token, t_command *com)
 		if (tmp != 0)
 			tmp = tmp->next;
 	}
+	return (cnt);
+}
+
+int	word_cnt(t_token **token, t_command *com)
+{
+	int		cnt;
+
+	cnt = chk_cnt(token);
+	printf("cnt : %d\n", cnt);
 	if (cnt != 0)
 	{
 		com->word = (char **)malloc(sizeof(char *) * (cnt + 1));
 		if (com->word == 0)
-			return ;
+			return (err_msg("Error : Malloc failed(word_cnt)"));
 		com->word[cnt] = 0;
-		word_array(token, com);	
+		if (word_array(token, com))
+			return (1);	
 	}
+	return (0);
 }

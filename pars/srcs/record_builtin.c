@@ -64,18 +64,21 @@ static int	builtin(t_command *com, char *tgt)
 	return (0);
 }
 
-void	record_builtin(t_command **com, t_env *env_list)
+int	record_builtin(t_command **com, t_env *env_list)
 {
 	char	*tmp;
 
 	if ((*com)->word != 0)
 	{
 		tmp = ft_strdup((*com)->word[0]);
+		if (tmp == 0)
+			return (err_msg("Error : Malloc failed(word_cnt)"));
 		builtin((*com), tmp);
 		free(tmp);
 	}
 	if ((*com)->next != 0)
 		record_builtin(&((*com)->next), env_list);
+	return (0);
 }
 
 int	record_path(t_command **com, t_env *env_list)
@@ -89,6 +92,8 @@ int	record_path(t_command **com, t_env *env_list)
 		if (ft_strncmp(tmp->name, "PATH", 5) == 0)
 		{
 			tmp_path = ft_split(tmp->val, ':');
+			if (tmp_path == 0)
+				return (err_msg("Error : Malloc failed(record_path)"));
 			if ((*com)->path != 0)
 				free((*com)->path);
 			(*com)->path = tmp_path;

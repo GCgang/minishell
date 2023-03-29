@@ -71,9 +71,8 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 
 	order = 0;
 	init_command(com);
-	word_cnt(token, *com);
-	if (pars_com(token, *com) == -1)
-		return (-1);
+	if (word_cnt(token, *com) || pars_com(token, *com))
+		return (1);
 	(*com)->order = order;
 	while ((*token) != 0 && (*token)->type == 'p')
 	{
@@ -84,11 +83,9 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 		tmp = *com;
 		while (tmp->next != 0)
 			tmp = tmp->next;
-		word_cnt(token, tmp);
-		if (pars_com(token, tmp))
-			return (-1);
+		if (word_cnt(token, tmp) || pars_com(token, tmp))
+			return (1);
 		tmp->order = ++order;
 	}
-	record_builtin(com, *env_list);
-	return (record_path(com, *env_list));
+	return (record_builtin(com, *env_list) && record_path(com, *env_list));
 }

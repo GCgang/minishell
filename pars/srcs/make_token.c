@@ -43,7 +43,7 @@ static int	input_token(char *now, t_token **token, int *len, char *meta)
 		else
 			tmp = lstnew_token('w', val);
 		if (!tmp)
-			return (1);
+			return (err_msg("Error : Malloc failed(input_token)"));
 		lstadd_back_token(token, tmp);
 		now = 0;
 		*len = 0;

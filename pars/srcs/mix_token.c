@@ -30,7 +30,7 @@ static int	fusion_token(t_token **token)
 	now = *token;
 	tmp_str = ft_strjoin(now->val, now->next->val);
 	if (!tmp_str)
-		return (0);
+		return (err_msg("Error : Malloc failed(fusion_token)") - 1);
 	if (now->val != 0)
 		free(now->val);
 	now->val = tmp_str;

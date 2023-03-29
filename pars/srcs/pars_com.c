@@ -24,13 +24,13 @@ static int	input_redir(t_command *com, t_token **token)
 		{
 			com->redir[idx] = ft_strdup((*token)->val);
 			if (com->redir[idx] == 0)
-				return (1);
+				return (err_msg("Error : Malloc failed(input_redir)"));
 		}
 		else
 		{
 			com->redir_val[idx] = ft_strdup((*token)->val);
 			if (com->redir_val[idx] == 0)
-				return (1);
+				return (err_msg("Error : Malloc failed(input_redir)"));
 			idx++;
 		}
 		tmp = (*token);
@@ -44,11 +44,11 @@ static int	malloc_redir(t_command *com, int cnt)
 {
 	com->redir = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (com->redir == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(malloc_redir)"));
 	com->redir[cnt] = 0;
 	com->redir_val = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (com->redir_val == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(malloc_redir)"));
 	com->redir_val[cnt] = 0;
 	return (0);
 }
