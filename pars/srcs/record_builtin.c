@@ -97,7 +97,6 @@ int	record_path(t_command **com, t_env *env_list)
 			if ((*com)->path != 0)
 				free((*com)->path);
 			(*com)->path = tmp_path;
-			return (0);
 		}
 		tmp = tmp->next;
 	}

@@ -87,5 +87,5 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 			return (1);
 		tmp->order = ++order;
 	}
-	return (record_builtin(com, *env_list) && record_path(com, *env_list));
+	return (record_builtin(com, *env_list) || record_path(com, *env_list));
 }

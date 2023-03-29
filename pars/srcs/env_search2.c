@@ -52,8 +52,6 @@ int	trans_env_token(t_token *token, char **tgt, int **loca)
 	char	*tmp;
 	char	*tmp2;
 
-	if (token->next && token->next->val[0] == '\"')
-		(*tgt)[0] = 0;
 	loca[0][2] = ft_strlen(*tgt);
 	token->val[loca[0][0]] = 0;
 	if (token->val[0] == 0)
