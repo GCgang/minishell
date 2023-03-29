@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:07 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:45:07 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:48:45 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static t_token	*lstlast_token(t_token *lst)
 {
@@ -36,28 +36,30 @@ void	lstadd_back_token(t_token **lst, t_token *new)
 		*lst = new;
 }
 
-void	lstclear_token(t_token **lst, void (*del)(void *))
+void	lstclear_token(t_token **lst)
 {
 	t_token	*cur;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
 	while (*lst)
 	{
 		cur = (*lst)->next;
-		lstdelone_token(*lst, del);
+		lstdelone_token(*lst);
 		*lst = cur;
 	}
 	*lst = 0;
 }
 
-void	lstdelone_token(t_token *lst, void (*del)(void *))
+void	lstdelone_token(t_token *lst)
 {
-	if (!lst || !del)
+	if (!lst)
 		return ;
-	del(lst->val);
-	del(lst->quote);
-	free(lst);
+	if (lst->val != 0)
+		free((void *)lst->val);
+	if (lst->quote != 0)
+		free((void *)lst->quote);
+	free((void *)lst);
 }
 
 t_token	*lstnew_token(char type, char *val)

@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:25 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:45:26 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:49:07 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
@@ -18,6 +18,8 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	size_t	src_len;
 
 	src_len = 0;
+	if (!dest || !src)
+		return (0);
 	while (src[src_len])
 		src_len++;
 	if (!size || !dest)
@@ -48,43 +50,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcpy(temp, s1, s1_len + 1);
 	ft_strlcat(temp, s2, s1_len + s2_len + 1);
 	return (temp);
-}
-
-static char	*ft_trimcpy(size_t start, size_t end, char const *str)
-{
-	char	*part_str;
-
-	if (start > end)
-	{
-		part_str = (char *)malloc(1);
-		if (!part_str)
-			return (NULL);
-		part_str[0] = 0;
-		return (part_str);
-	}
-	part_str = (char *)malloc(end - start + 2);
-	if (!part_str)
-		return (NULL);
-	ft_strlcpy(part_str, str + start, end - start + 2);
-	return (part_str);
-}
-
-char	*ft_strtrim(char const *str, char const *set)
-{
-	size_t		start;
-	size_t		end;
-
-	if (!str || !set)
-		return (NULL);
-	start = 0;
-	end = ft_strlen(str);
-	if (end)
-		end--;
-	while (str[start] && ft_strchr(set, str[start]))
-		start++;
-	while (end && ft_strchr(set, str[end]))
-		end--;
-	return (ft_trimcpy(start, end, str));
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_status.c                                    :+:      :+:    :+:   */
+/*   pars_utils3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 15:44:15 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:44:15 by jaehjoo          ###   ########.fr       */
+/*   Created: 2023/03/29 19:49:30 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/29 19:49:31 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static int	ft_num_cnt(int n)
 {
@@ -65,7 +65,7 @@ static void	ft_insert_num(char *num_str, int n)
 	num_str[idx] = 0;
 }
 
-static char	*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*num_str;
 
@@ -75,17 +75,4 @@ static char	*ft_itoa(int n)
 	ft_insert_num(num_str, n);
 	ft_strswap(num_str);
 	return (num_str);
-}
-
-void	change_status(t_env **env_list, int status)
-{
-	t_env	*tmp;
-
-	tmp = *env_list;
-	while (tmp->mean != '?')
-		tmp = tmp->next;
-	tmp->status = status;
-	if (tmp->val != 0)
-		free(tmp->val);
-	tmp->val = ft_itoa(tmp->status);
 }

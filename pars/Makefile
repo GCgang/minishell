@@ -4,7 +4,27 @@ ARFLAGS = rc
 NAME = pars.a
 HEADER = ./include/pars.h
 RM = rm -f
-SRC = ./srcs/change_status ./srcs/chk_have_token ./srcs/chk_oper_token ./srcs/env_search ./srcs/free_array ./srcs/heredoc ./srcs/make_com ./srcs/make_token ./srcs/pars_com ./srcs/pars_extra_token ./srcs/pars_line ./srcs/pars_list_token_utils ./srcs/pars_oper ./srcs/pars_split_utils ./srcs/pars_utils ./srcs/pars_utils2 ./srcs/record_extra ./srcs/remove_quote ./srcs/split_word_ifs ./srcs/trim_token ./srcs/word_cnt ./srcs/extend_trim_token
+SRC = ./srcs/utils/pars_list_token_utils \
+	  ./srcs/utils/pars_list_token_utils2 \
+	  ./srcs/utils/pars_split_utils \
+	  ./srcs/utils/pars_utils \
+	  ./srcs/utils/pars_utils2 \
+	  ./srcs/utils/pars_utils3 \
+	  ./srcs/utils/free_array \
+	  ./srcs/tokenizer/chk_close_quote \
+	  ./srcs/tokenizer/make_token \
+	  ./srcs/tokenizer/mix_token \
+	  ./srcs/tokenizer/rotate_env_token \
+	  ./srcs/tokenizer/env_search \
+	  ./srcs/tokenizer/env_search2 \
+	  ./srcs/tokenizer/chk_oper_token \
+	  ./srcs/command/make_com \
+	  ./srcs/command/pars_com \
+	  ./srcs/tokenizer/removing_quote \
+	  ./srcs/pars_line \
+	  ./srcs/command/record_builtin \
+	  ./srcs/tokenizer/trim_token \
+	  ./srcs/command/word_cnt
 SRCC = $(addsuffix .c, $(SRC))
 OBJ = $(addsuffix .o, $(SRC))
 
