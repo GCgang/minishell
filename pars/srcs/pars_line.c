@@ -89,8 +89,8 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 	cpy_meta(meta, "()<>\t\n |&;");
 	if (chk_have_token(line, meta) > 0)
 	{
-		if (make_token(line, meta, token) || mix_token(token)
-			|| rotate_env_token(token, env_list) || mix_token(token)
+		if (make_token(line, meta, token) || mix_token(token, 0)
+			|| rotate_env_token(token, env_list) || mix_token(token, 1)
 			|| trim_token(token) || chk_oper_token(*token)
 			|| removing_quote(token))
 		{

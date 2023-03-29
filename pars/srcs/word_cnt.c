@@ -84,7 +84,6 @@ int	word_cnt(t_token **token, t_command *com)
 	int		cnt;
 
 	cnt = chk_cnt(token);
-	printf("cnt : %d\n", cnt);
 	if (cnt != 0)
 	{
 		com->word = (char **)malloc(sizeof(char *) * (cnt + 1));

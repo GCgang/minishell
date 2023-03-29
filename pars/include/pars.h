@@ -43,7 +43,7 @@ int		word_cnt(t_token **token, t_command *com);
 int		make_com(t_token **token, t_env **env_list, t_command **com);
 int		pars_com(t_token **token, t_command *com);
 void	free_array(char **arr);
-int		mix_token(t_token **token);
+int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
 int		trans_env_token(t_token *token, char **tgt, int **loca);
