@@ -69,7 +69,5 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	if (token->val == 0)
 		return (free_str(&tmp, &tmp2));
 	free_str(&tmp, &tmp2);
-	if (!ft_strncmp(token->val, "\"\"", 3) || !(token->val[0]))
-		(loca[0][0])--;
 	return (0);
 }

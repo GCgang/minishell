@@ -25,7 +25,7 @@ static char	*find_special_env(t_token *token, int **loca)
 		tmp = ft_strdup("minishell");
 	else if (ft_strncmp(tmp2, "$?", 3) == 0)
 		tmp = ft_itoa(g_exit_status);
-	else if (!tmp2[loca[0][0] + 1])
+	else if (!tmp2[1])
 		tmp = ft_strdup("$");
 	else
 		tmp = ft_strdup("");
@@ -72,17 +72,22 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 static int	find_icon(char *tgt, int **loca)
 {
 	if (tgt[loca[0][0]] == '\'')
-		while (tgt[++(loca[0][0])] != '\'')
-			;
-	else if (tgt[loca[0][0]] == '\"' && tgt[loca[0][0] + 1] != 0)
 	{
-		while (tgt[++(loca[0][0])] != '\"')
+		(loca[0][0])++;
+		while (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\'')
+			(loca[0][0])++;
+	}
+	else if (tgt[loca[0][0]] == '\"')
+	{
+		(loca[0][0])++;
+		while (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\"')
 		{
 			if (tgt[loca[0][0]] == '$')
 				return (1);
+			(loca[0][0])++;
 		}
 	}
-	else if (tgt[loca[0][0]] != '\"')
+	else if (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\"')
 	{
 		if (tgt[loca[0][0]] == '$')
 			return (0);
@@ -109,7 +114,8 @@ int	env_search(t_token *token, t_env *env_list)
 			if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 				trim_env_token(token, env_list, &loca);
 		}
-		(loca[0])++;
+		if (token->val[loca[0]] != 0)
+			(loca[0])++;
 	}
 	free(loca);
 	return (0);
