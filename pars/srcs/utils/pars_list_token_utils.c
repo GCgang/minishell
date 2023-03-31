@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:07 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:48:45 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 20:05:42 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ t_token	*lstnew_token(char type, char *val)
 		return (0);
 	tmp->type = type;
 	tmp->val = val;
-	tmp->quote = (char *)malloc(sizeof(char) * (ft_strlen(val) + 1));
-	ft_bzero(tmp->quote, ft_strlen(val) + 1);
-	if (!(tmp->quote))
-		return (0);
-	tmp->quote[ft_strlen(val)] = 0;
 	tmp->next = 0;
 	return (tmp);
 }

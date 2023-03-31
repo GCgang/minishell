@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 15:57:13 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 17:27:01 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 		(loca[0][1])++;
 	else
 		while (token->val[loca[0][1]]
-			&& !ft_strchr(" \"\'/|&", token->val[loca[0][1]]))
+			&& !ft_strchr(" $\"\'/|&", token->val[loca[0][1]]))
 			(loca[0][1])++;
 	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
 	if (tmp == 0)

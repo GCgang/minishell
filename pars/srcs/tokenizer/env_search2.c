@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:47:29 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 14:32:23 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 19:43:58 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	if (token->val == 0)
 		return (free_str(&tmp, &tmp2));
 	free_str(&tmp, &tmp2);
+	free(*tgt);
 	return (0);
 }
