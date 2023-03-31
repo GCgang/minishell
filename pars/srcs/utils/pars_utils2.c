@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:53 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 16:36:30 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:49:12 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 void	ft_bzero(void *ptr, size_t num)
 {

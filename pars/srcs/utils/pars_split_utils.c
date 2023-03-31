@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:21 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:45:22 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:49:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static char	**ft_free(char **split_wd, size_t cur)
 {

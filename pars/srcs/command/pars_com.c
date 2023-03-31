@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:54 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 14:16:48 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:56:50 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static int	input_redir(t_command *com, t_token **token)
 {

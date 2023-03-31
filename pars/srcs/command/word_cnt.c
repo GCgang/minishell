@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:58 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 14:29:00 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:56:58 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static void	word_del(t_token **token, t_token **now, t_token **before)
 {

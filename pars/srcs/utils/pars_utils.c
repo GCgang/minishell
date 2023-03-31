@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:25 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/24 14:26:25 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:49:07 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {

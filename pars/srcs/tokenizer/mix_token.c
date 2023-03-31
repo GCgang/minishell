@@ -6,21 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:38:23 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 13:56:06 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 15:44:29 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
-
-/*
-	인용 부호를 제외하고 나머지 문자들을 조합한다.
-	1. w + w => w
-	2. e + w => if (e[1] != 0 && ft_strchr("0123456789", e[1]) != 0 && w[0] != 0 && ft_strchr("\"\'", w[0]) != 0) return (none fusion) else (fusion)
-	3. t + t => if ((t0 == < && t1 == <) || (t0 == > && t1 == >)) return (fusion) else return (none fusion)
-	4. e + e => (x)
-		4-1. 4번은 1차 문자 집합이 된 이후에 rotate_token에서 융합
-	5. 
-*/
+#include "../../include/pars.h"
 
 static int	fusion_token(t_token **token)
 {
@@ -63,10 +53,9 @@ static int	select_phase(t_token **now, t_token **after, int flag)
 {
 	if ((*now)->type == 'w' && (*after)->type == 'w' && flag == 1)
 		return (fusion_token(now));
-	else if ((*now)->type == 'e' && (*after)->type == 'w')
+	else if ((*now)->type == 'e' && (*after)->type != 't')
 	{
-		if (!ft_strchr_null("0123456789", (*now)->val[1]) && (*after)->val[0]
-			&& (*after)->val[0] != '\'' && (*after)->val[0] != '\"')
+		if ((*after)->val[0] && !ft_strchr_null("\'\"", (*after)->val[0]))
 			return (fusion_token(now));
 		else
 			return (1);

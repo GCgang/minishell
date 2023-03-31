@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:25:47 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/30 13:33:03 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	lstclear_token(t_token **lst);
 void	lstdelone_token_elem(t_token *before, t_token *now);
 
 void	pars_line(char *line, t_token **token, t_env **env_list);
-int		chk_have_token(char *line, char *meta);
+int		chk_close_quote(char *line);
 int		make_token(char *line, char *meta, t_token **token);
 int		trim_token(t_token **token);
 int		chk_oper_token(t_token *token);
@@ -47,6 +47,7 @@ int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
 int		trans_env_token(t_token *token, char **tgt, int **loca, int flag);
+void	exec(t_command **cmd, t_env **env_list);
 
 int		record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);

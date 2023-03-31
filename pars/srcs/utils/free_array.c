@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_list_token_utils2.c                           :+:      :+:    :+:   */
+/*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 19:53:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:54:47 by jaehjoo          ###   ########.fr       */
+/*   Created: 2023/03/21 15:44:37 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/29 19:49:21 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
-void	lstdelone_token_elem(t_token *before, t_token *now)
+void	free_array(char **arr)
 {
-	t_token	*tmp;
+	int	idx;
 
-	if (!before || !now)
-		return ;
-	tmp = now->next;
-	if (now->val != 0)
-		free((void *)now->val);
-	before->next = tmp;
-	free((void *)now);
+	idx = -1;
+	if (arr != 0)
+	{
+		while (arr[++idx] != 0)
+			free(arr[idx]);
+		free(arr);
+	}
 }

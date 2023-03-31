@@ -1,14 +1,16 @@
-#include "../include/pars.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   record_builtin.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/29 19:50:28 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/03/31 15:58:08 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-	path 문제점
-	1. path가 있는 경우, '/' -> access -> X : no such file or directory, '/'가 없으면 : command not found
-	2. path가 없으면 '/' 경로로 인식을 못함 : no such file or directory, builtin은 path와 상관 없이 인식
-
-	개선 예정
-	1. path는 보류
-	2. builtin은 개별로 해서 export, unset 제외 소문자로 바꾸기
-*/
+#include "../../include/pars.h"
 
 static char	*ft_strchr_null(const char *str, int c)
 {

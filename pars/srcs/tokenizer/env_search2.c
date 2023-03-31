@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:47:29 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:17:35 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 14:32:23 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static int	free_str(char **del_0, char **del_1)
 {
@@ -32,7 +32,7 @@ void	trim_env_token(t_token *token, t_env *env_list, int **loca)
 	ifs = ' ';
 	while (env_list)
 	{
-		if (ft_strncmp(env_list->name, "IFS", 4) == 0)
+		if (!ft_strncmp(env_list->name, "IFS", 4))
 			ifs = env_list->val[0];
 		env_list = env_list->next;
 	}
@@ -52,7 +52,8 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	char	*tmp;
 	char	*tmp2;
 
-	if (flag == 0 && token->next && token->next->val[0] == '\"')
+	if (flag == 0 && token->next && token->next->val[0] == '\"'
+		&& ((*tgt)[0] == '$' || (*tgt)[0] == '\0'))
 		(*tgt)[0] = 0;
 	loca[0][2] = ft_strlen(*tgt);
 	token->val[loca[0][0]] = 0;
@@ -69,7 +70,5 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	if (token->val == 0)
 		return (free_str(&tmp, &tmp2));
 	free_str(&tmp, &tmp2);
-	if (!ft_strncmp(token->val, "\"\"", 3) || !(token->val[0]))
-		(loca[0][0])--;
 	return (0);
 }

@@ -6,20 +6,13 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:36:05 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 15:57:13 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
-/*
-	env_search
-	1. 인용문구를 찾는다
-	2. 인용문구가 내에 $, 인용문구 없는데 $ 각각 구분
-	3. 구분한 $는 추후 IFS 구분자 시, 사용
-*/
-
-static char		*find_special_env(t_token *token, int **loca)
+static char	*find_special_env(t_token *token, int **loca)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -28,11 +21,9 @@ static char		*find_special_env(t_token *token, int **loca)
 	if (!tmp)
 		return (0);
 	tmp2 = tmp;
-	if (ft_strncmp(tmp2, "$0", 3) == 0)
-		tmp = ft_strdup("minishell");
-	else if (ft_strncmp(tmp2, "$?", 3) == 0)
+	if (ft_strncmp(tmp2, "$?", 3) == 0)
 		tmp = ft_itoa(g_exit_status);
-	else if (!tmp2[loca[0][0]] + 1)
+	else if (!tmp2[1])
 		tmp = ft_strdup("$");
 	else
 		tmp = ft_strdup("");
@@ -58,8 +49,12 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 	char	*tmp;
 
 	loca[0][1] = loca[0][0] + 1;
-	while (ft_strchr(" $\n\t\"\'=/\\", token->val[loca[0][1]]) == 0)
+	if (token->val[loca[0][1]] && ft_strchr("$?", token->val[loca[0][1]]))
 		(loca[0][1])++;
+	else
+		while (token->val[loca[0][1]]
+			&& !ft_strchr(" \"\'/|&", token->val[loca[0][1]]))
+			(loca[0][1])++;
 	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
 	if (tmp == 0)
 		return (err_msg("Error : Malloc failed(is_env)"));
@@ -79,17 +74,22 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 static int	find_icon(char *tgt, int **loca)
 {
 	if (tgt[loca[0][0]] == '\'')
-		while (tgt[++(loca[0][0])] != '\'')
-			;
-	else if (tgt[loca[0][0]] == '\"' && tgt[loca[0][0] + 1] != 0)
 	{
-		while (tgt[++(loca[0][0])] != '\"')
+		(loca[0][0])++;
+		while (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\'')
+			(loca[0][0])++;
+	}
+	else if (tgt[loca[0][0]] == '\"')
+	{
+		(loca[0][0])++;
+		while (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\"')
 		{
 			if (tgt[loca[0][0]] == '$')
 				return (1);
+			(loca[0][0])++;
 		}
 	}
-	else if (tgt[loca[0][0]] != '\"')
+	else if (tgt[loca[0][0]] != 0 && tgt[loca[0][0]] != '\"')
 	{
 		if (tgt[loca[0][0]] == '$')
 			return (0);
@@ -116,7 +116,8 @@ int	env_search(t_token *token, t_env *env_list)
 			if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 				trim_env_token(token, env_list, &loca);
 		}
-		(loca[0])++;
+		if (token->val[loca[0]] != 0)
+			(loca[0])++;
 	}
 	free(loca);
 	return (0);

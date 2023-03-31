@@ -1,19 +1,5 @@
 #include "init.h"
 
-/*
-	unset(t_env *env_list, char *name)
-	{
-		while (env_list->next != 0)
-		{
-			if (env_list->next->name == name)
-			{
-				lstdelone_env_elem(env_list, env_list->next, &free);
-				return ;
-			}
-		}
-	}
-*/
-
 void	lstdelone_env_elem(t_env *before, t_env *now)
 {
 	t_env	*tmp;

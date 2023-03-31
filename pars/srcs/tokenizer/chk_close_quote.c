@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:19 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/21 15:44:20 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:55:59 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static int	chk_quote(char *line, int *idx, char quote)
 {
@@ -30,26 +30,13 @@ static int	chk_quote(char *line, int *idx, char quote)
 	return (0);
 }
 
-static int	chk_word_and_oper(char *line, int *idx, char *meta)
+static void	chk_none_quote(char *line, int *idx)
 {
-	if (ft_strchr(meta, line[*idx]) != 0 && line[*idx] != 0)
-	{
-		while (ft_strchr(meta, line[*idx]) != 0 && line[*idx] != 0)
-			(*idx)++;
-		return (1);
-	}
-	else if (line[*idx] != '\'' && line[*idx] != '\"' && line[*idx] != 0)
-	{
-		while (ft_strchr(meta, line[*idx]) == 0 && line[*idx] != 0
-			&& line[*idx] != '\'' && line[*idx] != '\"')
-			(*idx)++;
-		if ((line[*idx] != '\'' && line[*idx] != '\"') || line[*idx] == 0)
-			return (1);
-	}
-	return (0);
+	if (line[*idx] != 0 && line[*idx] != '\'' && line[*idx] != '\"')
+		(*idx)++;
 }
 
-int	chk_have_token(char *line, char *meta)
+int	chk_close_quote(char *line)
 {
 	int	idx;
 
@@ -62,7 +49,7 @@ int	chk_have_token(char *line, char *meta)
 			return (0);
 		if (chk_quote(line, &idx, '\"') == -42)
 			return (0);
-		chk_word_and_oper(line, &idx, meta);
+		chk_none_quote(line, &idx);
 	}
 	return (1);
 }

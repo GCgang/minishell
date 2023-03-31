@@ -6,20 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 17:01:45 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:56:27 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
-
-/*
-	pars_extra_token : 환경변수, 인용 해석, 메타문자 유형별 정리
-	1. redirection 중, << 뒤에 오는 토큰은 heredoc으로 분류
-	2. record_quote : 현재 토큰의 따옴표 위치를 분석
-	3. env_search : 토큰에 존재하는 환경변수를 파싱, heredoc은 해당 토큰이 
-	4. split_word_ifs : 단어 분할 기준, IFS가 있는 지 확인하고 IFS에 해당하는 내용물을 별도 토큰으로 분리
-	5. remove_quote : 메타 문자가 아닌 단순 문자열인 경우, 인용 문구를 제거한다
-*/
+#include "../../include/pars.h"
 
 static void	chk_quote(t_token **token, char tgt, int *idx)
 {

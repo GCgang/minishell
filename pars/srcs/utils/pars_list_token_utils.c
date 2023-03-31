@@ -6,11 +6,11 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:07 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 16:23:09 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/29 19:48:45 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pars.h"
+#include "../../include/pars.h"
 
 static t_token	*lstlast_token(t_token *lst)
 {
