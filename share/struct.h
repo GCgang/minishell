@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:55:36 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:40:00 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 19:39:56 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ typedef struct s_command
 	int					std_err;
 	int					std_in_dup1;
 	int					std_out_dup1;
+	int					in_file_fd;
+	int					out_file_fd;
 	int					pipe;
-	int					pipe_fd[2];
+	int					even_fd[2];
+	int					odd_fd[2];
 	char				*err_buf;
 	struct s_command	*next;
 }	t_command;

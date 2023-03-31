@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:19 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:28:49 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../../include/execute.h"
 
 int		check_exit_syntax(char *exit_val);
-void	built_in_exit(t_command **cmd, t_env *env_list);
+void	built_in_exit(t_command **cmd);
 
 #endif

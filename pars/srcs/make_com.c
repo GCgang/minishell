@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_com.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:46 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 14:23:49 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 20:42:24 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ static int	init_command(t_command **com)
 	(*com)->std_out = 1;
 	(*com)->std_err = 2;
 	(*com)->pipe = 0;
-	(*com)->pipe_fd[0] = 0;
-	(*com)->pipe_fd[1] = 0;
+	(*com)->even_fd[0] = 0;
+	(*com)->even_fd[1] = 0;
+	(*com)->odd_fd[0] = 0;
+	(*com)->odd_fd[1] = 0;
 	(*com)->err_buf = 0;
 	(*com)->next = 0;
 	return (0);
@@ -71,9 +73,8 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 
 	order = 0;
 	init_command(com);
-	word_cnt(token, *com);
-	if (pars_com(token, *com) == -1)
-		return (-1);
+	if (word_cnt(token, *com) || pars_com(token, *com))
+		return (1);
 	(*com)->order = order;
 	while ((*token) != 0 && (*token)->type == 'p')
 	{
@@ -84,11 +85,9 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 		tmp = *com;
 		while (tmp->next != 0)
 			tmp = tmp->next;
-		word_cnt(token, tmp);
-		if (pars_com(token, tmp))
-			return (-1);
+		if (word_cnt(token, tmp) || pars_com(token, tmp))
+			return (1);
 		tmp->order = ++order;
 	}
-	record_builtin(com, *env_list);
-	return (record_path(com, *env_list));
+	return (record_builtin(com, *env_list) || record_path(com, *env_list));
 }

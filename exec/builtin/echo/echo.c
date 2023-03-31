@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 13:59:11 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:21:09 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_echo_option(char *cmd, int *option_n)
 	return (0);
 }
 
-void	built_in_echo(t_command **cmd, t_env *env_list)
+void	built_in_echo(t_command **cmd)
 {
 	int		idx;
 	int		option_n;
@@ -47,13 +47,16 @@ void	built_in_echo(t_command **cmd, t_env *env_list)
 				break ;
 		while ((*cmd)->word[idx] != NULL)
 		{
-			ft_putstr_fd((*cmd)->word[idx], 1);
+			// ft_putstr_fd((*cmd)->word[idx], 1);
+			ft_putstr_fd((*cmd)->word[idx], (*cmd)->std_out);
 			if ((*cmd)->word[idx + 1] != NULL)
-				ft_putchar_fd(' ', 1);
+				ft_putchar_fd(' ', (*cmd)->std_out);
+				// ft_putchar_fd(' ', 1);
 			idx++;
 		}
 		if (option_n == 0)
-			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', (*cmd)->std_out);
+			// ft_putchar_fd('\n', 1);
 	}
-	env_list->status = 0;
+	g_exit_status = 0;
 }

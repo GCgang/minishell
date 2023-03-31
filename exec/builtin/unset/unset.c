@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 19:22:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:14:56 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ void	built_in_unset(t_command **cmd, t_env *env_list)
 	int	i;
 
 	i = 0;
-	env_list->status = 0;
 	while ((*cmd)->word[++i])
 	{
 		if (check_unset_syntax((*cmd)->word[i]) == 0)
 		{
 			ft_putstr_fd("Minishell: unset: not a valid identifier\n", 2);
-			env_list->status = 1;
+			g_exit_status = 1;
 		}
 		else
 			delete_envp(env_list, (*cmd)->word[i]);
 	}
+	g_exit_status = 0;
 	return ;
 }

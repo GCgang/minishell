@@ -6,7 +6,7 @@ EXEC = -L./exec -lexec
 PARSA = ./pars/pars.a
 EXECA = ./exec/exec.a
 RM = rm -rf
-SRC = minishell init_env init_list_utils init_signal init_utils clear_all list_clear_com list_clear_env
+SRC = minishell init_env init_list_utils init_signal init_utils list_clear_env list_clear_com clear_all err_msg
 SRCC = $(addsuffix .c, $(addprefix share/, $(SRC)))
 OBJ = $(SRCC:c=o)
 HEADER = ./share/init.h

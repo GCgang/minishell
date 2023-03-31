@@ -21,7 +21,7 @@ static int	chk_quote(char *line, int *idx, char quote)
 			(*idx)++;
 		if (line[*idx] != quote)
 		{
-			printf("Error : Don't have closed quote\n");
+			err_msg("Error : Don't have closed quote");
 			return (-42);
 		}
 		(*idx)++;

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 19:22:06 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:22:55 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,14 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 		{
 			if (tmp_list->name != NULL && tmp_list->val != NULL)
 			{
-				ft_putstr_fd(tmp_list->name, 1);
+				// ft_putstr_fd(tmp_list->name, 1);
+				// ft_putchar_fd('=', 1);
+				// ft_putstr_fd(tmp_list->val, 1);
+				// ft_putchar_fd('\n', 1);
+				ft_putstr_fd(tmp_list->name, (*cmd)->std_out);
 				ft_putchar_fd('=', 1);
-				ft_putstr_fd(tmp_list->val, 1);
-				ft_putchar_fd('\n', 1);
+				ft_putstr_fd(tmp_list->val, (*cmd)->std_out);
+				ft_putchar_fd('\n', (*cmd)->std_out);
 			}
 			tmp_list = tmp_list->next;
 		}
@@ -90,6 +94,6 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd((*cmd)->word[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		env_list->status = 127;
+		g_exit_status = 127;
 	}
 }

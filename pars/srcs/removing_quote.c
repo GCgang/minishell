@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   removing_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 17:01:45 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 12:01:34 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,64 +21,69 @@
 	5. remove_quote : 메타 문자가 아닌 단순 문자열인 경우, 인용 문구를 제거한다
 */
 
-static void	chk_quote(t_token *token, char tgt, int *idx)
+static void	chk_quote(t_token **token, char tgt, int *idx)
 {
-	token->quote[*idx] = '1';
+	t_token	*tmp;
+
+	tmp = *token;
+	tmp->quote[*idx] = '1';
 	(*idx)++;
-	while (token->val[*idx] != 0 && token->val[*idx] != tgt)
+	while (tmp->val[*idx] != 0 && tmp->val[*idx] != tgt)
 	{
-		token->quote[*idx] = '0';
+		tmp->quote[*idx] = '0';
 		(*idx)++;
 	}
-	token->quote[*idx] = '1';
+	tmp->quote[*idx] = '1';
 }
 
-static int	record_quote(t_token *token)
+static int	record_quote(t_token **token)
 {
-	int	idx;
+	int		idx;
+	t_token	*tmp;
 
 	idx = 0;
-	while (token != 0 && token->val != 0 && token->val[idx] != 0)
+	tmp = *token;
+	while (tmp != 0 && tmp->val != 0 && tmp->val[idx] != 0)
 	{
-		token->quote = (char *)malloc(sizeof(char)
-				* (ft_strlen(token->val) + 1));
-		if (token->quote == 0)
+		tmp->quote = (char *)malloc(sizeof(char)
+				* (ft_strlen(tmp->val) + 1));
+		if (tmp->quote == 0)
 			return (1);
-		token->quote[ft_strlen(token->val)] = 0;
-		if (token->val[idx] == '\'')
-			chk_quote(token, '\'', &idx);
-		else if (token->val[idx] == '\"')
-			chk_quote(token, '\"', &idx);
+		tmp->quote[ft_strlen(tmp->val)] = 0;
+		if (tmp->val[idx] == '\'')
+			chk_quote(&tmp, '\'', &idx);
+		else if (tmp->val[idx] == '\"')
+			chk_quote(&tmp, '\"', &idx);
 		else
-			token->quote[idx] = '0';
+			tmp->quote[idx] = '0';
 		idx++;
 	}
 	return (0);
 }
 
-static int	remove_quote(t_token *token)
+static int	remove_quote(t_token **token)
 {
 	int		idx;
 	char	*tmp;
 
 	idx = -1;
-	while (token->val != 0 && token->val[++idx] != 0)
+	while ((*token)->val != 0 && (*token)->val[++idx] != 0)
 	{
-		if ((token->val[idx] == '\'' || token->val[idx] == '\"')
-			&& token->quote[idx] == '1')
+		if (((*token)->val[idx] == '\'' || (*token)->val[idx] == '\"')
+			&& (*token)->quote[idx] == '1')
 		{
-			token->val[idx] = 0;
-			tmp = ft_strjoin(token->val, token->val + idx + 1);
+			(*token)->val[idx] = 0;
+			tmp = ft_strjoin((*token)->val, (*token)->val + idx + 1);
 			if (tmp == 0)
 				return (1);
-			free(token->val);
-			token->val = tmp;
-			token->quote[idx] = 0;
-			tmp = ft_strjoin(token->quote, token->quote + idx + 1);
+			free((*token)->val);
+			(*token)->val = tmp;
+			(*token)->quote[idx] = 0;
+			tmp = ft_strjoin((*token)->quote, (*token)->quote + idx + 1);
 			if (tmp == 0)
 				return (1);
-			free(token->quote);
-			token->quote = tmp;
+			free((*token)->quote);
+			(*token)->quote = tmp;
 			idx--;
 		}
 	}
@@ -97,7 +102,7 @@ int	removing_quote(t_token **token)
 		if (before != now && before->type == 'r'
 			&& ft_strncmp(before->val, "<<", 3) == 0)
 			now->type = 'h';
-		if (record_quote(now))
+		if (record_quote(&now))
 			return (1);
 		before = now;
 		now = now->next;
@@ -106,7 +111,7 @@ int	removing_quote(t_token **token)
 	while (now != 0)
 	{
 		if (now->type != 'r')
-			if (remove_quote(now))
+			if (remove_quote(&now))
 				return (1);
 		now = now->next;
 	}

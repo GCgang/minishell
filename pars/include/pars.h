@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 19:44:16 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/29 14:10:47 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ int		trim_token(t_token **token);
 int		chk_oper_token(t_token *token);
 int		removing_quote(t_token **token);
 int		env_search(t_token *token, t_env *env_list);
-void	word_cnt(t_token **token, t_command *com);
+int		word_cnt(t_token **token, t_command *com);
 int		make_com(t_token **token, t_env **env_list, t_command **com);
 int		pars_com(t_token **token, t_command *com);
 void	free_array(char **arr);
-int		mix_token(t_token **token);
+int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
 int		trans_env_token(t_token *token, char **tgt, int **loca);
 
-void	record_builtin(t_command **com, t_env *env_list);
+int		record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);
-
 void	exec(t_command **cmd, t_env **env_list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 13:59:27 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:06:10 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	update_pwd(t_env **env_list, char *old_pwd)
 	if (get_name(*env_list, "PWD") != NULL)
 		init_envp(env_list, "PWD", pwd);
 	free(pwd);
-	(*env_list)->status = 0;
+	g_exit_status = 0;
 }
 
 void	change_home_dir(t_env **env_list)
@@ -33,13 +33,13 @@ void	change_home_dir(t_env **env_list)
 	if (get_name(*env_list, "HOME") == NULL)
 	{
 		ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
-		(*env_list)->status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	else if (chdir(get_value(*env_list, "HOME")) == -1)
 	{
 		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
-		(*env_list)->status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	update_pwd(env_list, old_pwd);
@@ -54,7 +54,7 @@ void	change_new_dir(t_env **env_list, char *name)
 	if (chdir(name) == -1)
 	{
 		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
-		(*env_list)->status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	update_pwd(env_list, old_pwd);
@@ -69,13 +69,13 @@ void	change_oldpwd_dir(t_env **env_list)
 	if (get_value(*env_list, "OLDPWD") == NULL)
 	{
 		ft_putstr_fd("Minishell: cd: OLDPWD not set\n", 2);
-		(*env_list)->status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	else if (chdir(get_value(*env_list, "OLDPWD")) == -1)
 	{
 		ft_putstr_fd("Minishell: cd: No such file or directory\n", 2);
-		(*env_list)->status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	update_pwd(env_list, old_pwd);

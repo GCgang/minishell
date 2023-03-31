@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 18:50:22 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/03/31 12:04:55 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "../pars/include/pars.h"
 
 int		g_exit_status;
+char 	*g_line;
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);
@@ -44,5 +45,6 @@ void	clear_all(t_token **token, t_env **env_list, t_command **com);
 void	init_signal(void);
 void	heredoc_sigint_handler(int sig);
 int		init_env(char **envp, t_env **env_list);
+int		err_msg(char *str);
 
 #endif

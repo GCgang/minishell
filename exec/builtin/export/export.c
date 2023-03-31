@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 15:39:50 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 16:27:08 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_export_syntax(char *cmd)
 	return (1);
 }
 
-void	print_export(t_env *env_list)
+void	print_export(t_command **cmd, t_env *env_list)
 {
 	t_env	*tmp_list;
 
@@ -35,16 +35,23 @@ void	print_export(t_env *env_list)
 	{
 		if (tmp_list->name != NULL)
 		{
-			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(tmp_list->name, 1);
+			// ft_putstr_fd("declare -x ", 1);
+			// ft_putstr_fd(tmp_list->name, 1);
+			ft_putstr_fd("declare -x ", (*cmd)->std_out);
+			ft_putstr_fd(tmp_list->name, (*cmd)->std_out);
 			if (tmp_list->val != NULL)
 			{
-				ft_putchar_fd('=', 1);
-				ft_putchar_fd('"', 1);
-				ft_putstr_fd(tmp_list->val, 1);
-				ft_putchar_fd('"', 1);
+				// ft_putchar_fd('=', 1);
+				// ft_putchar_fd('"', 1);
+				// ft_putstr_fd(tmp_list->val, 1);
+				// ft_putchar_fd('"', 1);
+				ft_putchar_fd('=', (*cmd)->std_out);
+				ft_putchar_fd('"', (*cmd)->std_out);
+				ft_putstr_fd(tmp_list->val, (*cmd)->std_out);
+				ft_putchar_fd('"', (*cmd)->std_out);
 			}
-			ft_putchar_fd('\n', 1);
+			// ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', (*cmd)->std_out);
 		}
 		tmp_list = tmp_list->next;
 	}
@@ -113,8 +120,8 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		print_export((*env_list)->next);
-		(*env_list)->status = 0;
+		print_export(cmd, (*env_list)->next);
+		g_exit_status = 0;
 	}
 	else
 	{
@@ -123,27 +130,13 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 			if (check_export_syntax((*cmd)->word[i]) == 0)
 			{
 				ft_putstr_fd("Minishell: export: not a valid identifier\n", 2);
-				(*env_list)->status = 1;
+				g_exit_status = 1;
 			}
 			else
 			{
 				update_export_envp(env_list, (*cmd)->word[i]);
-				(*env_list)->status = 0;
+				g_exit_status = 0;
 			}
 		}
 	}
 }
-
-//norm
-// void	swap_list(t_env *env_list, t_env *n_list)
-// {
-// 	char	*name;
-// 	char	*val;
-
-// 	name = n_list->name;
-// 	val = n_list->val;
-// 	n_list->name = env_list->name;
-// 	n_list->val = env_list->val;
-// 	env_list->name = name;
-// 	env_list->val = val;
-// }

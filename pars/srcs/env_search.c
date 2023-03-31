@@ -39,7 +39,7 @@ static int	is_env(t_token *token, t_env *env_list, int **loca)
 		(loca[0][1])++;
 	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
 	if (tmp == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(is_env)"));
 	env_list = compare_env_token(tmp, env_list);
 	free(tmp);
 	if (env_list != 0)
@@ -52,9 +52,9 @@ static int	is_env(t_token *token, t_env *env_list, int **loca)
 			tmp = ft_strdup("");
 	}
 	if (tmp == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(is_env)"));
 	if (trans_env_token(token, &tmp, loca))
-		return (1);
+		return (err_msg("Error : Malloc failed(trans_env_token)"));
 	return (0);
 }
 
@@ -86,7 +86,7 @@ int	env_search(t_token *token, t_env *env_list)
 
 	loca = (int *)malloc(sizeof(int) * 3);
 	if (!loca)
-		return (1);
+		return (err_msg("Error : Malloc failed(env_search)"));
 	loca[0] = 0;
 	while (token->val != 0 && token->val[loca[0]])
 	{

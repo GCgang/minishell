@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:38 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/28 20:10:48 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/28 20:10:58 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	trim_token(t_token **token)
 	}
 	while (now != 0 && now->next != 0)
 	{
-		if (now->next->type == 't' && ft_strncmp(now->next->val, " ", 2) == 0)
+		if (now->next->type == 't' && !ft_strncmp(now->next->val, " ", 2))
 			lstdelone_token_elem(now, now->next);
-		if (now->next != 0 && now->next->type != 't')
+		if (now->next != 0 && ft_strncmp(now->next->val, " ", 2))
 			now = now->next;
 	}
-	if (*token == 0)
-		return (1);
 	return (0);
 }

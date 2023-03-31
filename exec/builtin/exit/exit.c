@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 13:28:53 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,28 @@ int	check_exit_syntax(char *exit_val)
 	return (1);
 }
 
-void	built_in_exit(t_command **cmd, t_env *env_list)
+void	built_in_exit(t_command **cmd)
 {
 	if (check_exit_syntax((*cmd)->word[1]) == 0)
 	{
 		ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
-		env_list->status = 255;
+		g_exit_status = 255;
 	}
 	else if ((*cmd)->word[1] != NULL && (*cmd)->word[2] != NULL)
 	{
 		ft_putstr_fd("Minishell: exit: too many arguments\n", 2);
-		env_list->status = 255;
+		g_exit_status = 255;
 		return ;
 	}
 	else if ((*cmd)->word[1] == NULL)
 	{
 		ft_putstr_fd("exit\n", 2);
-		env_list->status = 0;
+		g_exit_status = -258;
 	}
 	else
 	{
 		ft_putstr_fd("exit\n", 2);
-		env_list->status = ft_atol((*cmd)->word[1]);
+		g_exit_status = ft_atol((*cmd)->word[1]);
 	}
-	exit (env_list->status);
+	exit (g_exit_status);
 }
