@@ -66,6 +66,8 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	tmp2 = ft_strdup(token->val + loca[0][1]);
 	if (tmp2 == 0)
 		return (free_str(&tmp, 0));
+	if (token->val != 0)
+		free(token->val);
 	token->val = ft_strjoin(tmp, tmp2);
 	if (token->val == 0)
 		return (free_str(&tmp, &tmp2));
