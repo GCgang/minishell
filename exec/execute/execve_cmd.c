@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:54:02 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 15:08:35 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:28:37 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ char	*check_cmd(t_command *process, t_env **env_list)
 	return (NULL);
 }
 
-void	run_execve(t_command *process, t_env **env_list)
+void	run_execve(t_command *process, t_env **env_list, char **envp)
 {
 	char	*path_cmd;
 	int		ret;
 
 	path_cmd = check_cmd(process, env_list);
-	ret = execve(path_cmd, process->word, NULL);
+	ret = execve(path_cmd, process->word, envp);
 	if (ret == -1)
 	{
 		if (ft_strchr(process->word[0], '/') != NULL || get_value(*env_list, "PATH") == NULL)

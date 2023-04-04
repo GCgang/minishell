@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 16:27:27 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:28:34 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void			only_built_in(t_command *process, t_env **env_list);
 void			execute_built_in(t_command **cmd, t_env **env_list);
 
 char			*check_cmd(t_command *process, t_env **env_list);
-void			run_execve(t_command *process, t_env **env_list);
+void			run_execve(t_command *process, t_env **env_list, char **envp);
 
 void			execute_binary(t_command **process, \
-											t_env **env_list, int cmd_cnt);
+											t_env **env_list, int cmd_cnt, char **envp);
 void			child_process(t_command **process, \
-											t_env **env_list, int cmd_cnt);
+											t_env **env_list, int cmd_cnt, char **envp);
 void			parent_process(t_command **process);
-void			exec(t_command **cmd, t_env **env_list);
+void			exec(t_command **cmd, t_env **env_list, char **envp);
 void			wait_process(int cmd_cnt);
 
 int				ft_strcmp(char *s1, char *s2);

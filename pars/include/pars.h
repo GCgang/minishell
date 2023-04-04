@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:09:32 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 19:25:18 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lstdelone_token(t_token *lst);
 void	lstclear_token(t_token **lst);
 void	lstdelone_token_elem(t_token *before, t_token *now);
 
-void	pars_line(char *line, t_token **token, t_env **env_list);
+void	pars_line(char *line, t_token **token, t_env **env_list, char **envp);
 int		chk_close_quote(char *line);
 int		make_token(char *line, char *meta, t_token **token);
 int		trim_token(t_token **token);
@@ -46,7 +46,7 @@ int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
 int		trans_env_token(t_token *token, char **tgt, int **loca, int flag);
-void	exec(t_command **cmd, t_env **env_list);
+void	exec(t_command **cmd, t_env **env_list, char **envp);
 
 int		record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);

@@ -6,13 +6,13 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 17:04:19 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:27:36 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-void	execute_binary(t_command **process, t_env **env_list, int cmd_cnt)
+void	execute_binary(t_command **process, t_env **env_list, int cmd_cnt, char **envp)
 {
 	pid_t		pid;
 
@@ -22,7 +22,7 @@ void	execute_binary(t_command **process, t_env **env_list, int cmd_cnt)
 	if (pid == -1)
 		exit(1);
 	else if (pid == 0)
-		child_process(process, env_list, cmd_cnt);
+		child_process(process, env_list, cmd_cnt, envp);
 	else if (pid > 0)
 		parent_process(process);
 }
@@ -37,18 +37,16 @@ void	parent_process(t_command **process)
 	close((*process)->pipe_fd[1]);
 }
 
-void	child_process(t_command **process, t_env **env_list, int cmd_cnt)
+void	child_process(t_command **process, t_env **env_list, int cmd_cnt, char **envp)
 {
 	if ((*process)->std_in != 0)
 		child_stdin_dup2((*process)->std_in, STDIN_FILENO);
 	else if (cmd_cnt > 0)
 		child_stdin_dup2((*process)->backup_fd, STDIN_FILENO);
-
 	if ((*process)->std_out != 1)
 		child_stdout_dup2((*process)->std_out, STDOUT_FILENO);
 	else if ((*process)->pipe)
 		dup2((*process)->pipe_fd[1], STDOUT_FILENO);
-
 	close((*process)->pipe_fd[0]);
 	close((*process)->pipe_fd[1]);
 	if (is_built_in((*process)->word[0]))
@@ -58,12 +56,12 @@ void	child_process(t_command **process, t_env **env_list, int cmd_cnt)
 	}
 	else
 	{
-		run_execve(*process, env_list);
+		run_execve(*process, env_list, envp);
 		exit(g_exit_status);
 	}
 }
 
-void	exec(t_command **cmd, t_env **env_list)
+void	exec(t_command **cmd, t_env **env_list, char **envp)
 {
 	t_command	*process;
 	int			cmd_cnt;
@@ -80,7 +78,7 @@ void	exec(t_command **cmd, t_env **env_list)
 			if (is_built_in(process->word[0]) && process->pipe == 0 && cmd_cnt == 0)
 				only_built_in(process, env_list);
 			else
-				execute_binary(&process, env_list, cmd_cnt);
+				execute_binary(&process, env_list, cmd_cnt, envp);
 			cmd_cnt++;
 		}
 		process = process->next;

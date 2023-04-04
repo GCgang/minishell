@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:13:30 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 16:54:47 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:06:54 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	check_here_document(t_command *process)
 					return ;
 				}
 				here_document(tmp_proc, idx);
-				tmp_proc->redir[idx] = "<";
+				free(tmp_proc->redir[idx]);
+				tmp_proc->redir[idx] = ft_strdup("<");
 			}
 		}
 		tmp_proc = tmp_proc->next;

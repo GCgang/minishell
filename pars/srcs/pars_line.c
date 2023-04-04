@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 18:47:40 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:25:09 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	cpy_special(char *spe, char *tmp)
 	spe[idx] = 0;
 }
 
-void	pars_line(char *line, t_token **token, t_env **env_list)
+void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 {
 	char		spe[5];
 	t_command	*com;
@@ -91,7 +91,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list)
 		if (make_com(token, env_list, &com) == 0)
 		{
 			//test_print_all(env_list, &com);
-			exec(&com, env_list);
+			exec(&com, env_list, envp);
 		}
 	}
 	clear_all(token, 0, &com);
