@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:50:28 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 15:58:08 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 14:13:31 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ int	record_path(t_command **com, t_env *env_list)
 		}
 		tmp = tmp->next;
 	}
+	if ((*com)->next != 0)
+		record_path(&((*com)->next), env_list);
 	return (0);
 }

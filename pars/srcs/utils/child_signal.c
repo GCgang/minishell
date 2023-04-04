@@ -1,53 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signal.c                                      :+:      :+:    :+:   */
+/*   child_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 19:11:12 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 14:28:20 by jaehjoo          ###   ########.fr       */
+/*   Created: 2023/04/04 14:24:54 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/04/04 14:32:33 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include "../../include/pars.h"
 
-static void	dead_echo(void)
+static void	revive_echo(void)
 {
 	struct termios	term;
 
 	tcgetattr(0, &term);
-	term.c_lflag &= ~(ECHOCTL);
+	term.c_lflag &= ECHOCTL;
 	tcsetattr(0, 0, &term);
 }
 
-static void	sigquit_handler(int sig)
+static void	child_sigint_handler(int sig)
 {
 	(void)sig;
-	rl_redisplay();
-}
-
-static void	sigint_handler(int sig)
-{
-	(void)sig;
-	g_exit_status = 1;
 	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
 }
 
-void	heredoc_sigint_handler(int sig)
+static void	child_sigquit_handler(int sig)
 {
 	(void)sig;
-	g_exit_status = 1;
-	printf("\n");
-	exit(1);
 }
 
-void	init_signal(void)
+void	child_signal(void)
 {
-	dead_echo();
-	signal(SIGQUIT, sigquit_handler);
-	signal(SIGINT, sigint_handler);
+	revive_echo();
+	signal(SIGINT, child_sigint_handler);
+	signal(SIGQUIT, child_sigquit_handler);
 }
