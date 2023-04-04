@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/31 16:21:09 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:53:23 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,13 @@ void	built_in_echo(t_command **cmd)
 				break ;
 		while ((*cmd)->word[idx] != NULL)
 		{
-			// ft_putstr_fd((*cmd)->word[idx], 1);
-			ft_putstr_fd((*cmd)->word[idx], (*cmd)->std_out);
+			ft_putstr_fd((*cmd)->word[idx], 1);
 			if ((*cmd)->word[idx + 1] != NULL)
-				ft_putchar_fd(' ', (*cmd)->std_out);
-				// ft_putchar_fd(' ', 1);
+				ft_putchar_fd(' ', 1);
 			idx++;
 		}
 		if (option_n == 0)
-			ft_putchar_fd('\n', (*cmd)->std_out);
-			// ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', 1);
 	}
 	g_exit_status = 0;
 }

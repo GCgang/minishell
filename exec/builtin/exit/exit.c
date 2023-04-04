@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/31 13:28:53 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:23:00 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,34 @@ void	built_in_exit(t_command **cmd)
 		g_exit_status = ft_atol((*cmd)->word[1]);
 	}
 	exit (g_exit_status);
+}
+
+long long	ft_atol(const char *str)
+{
+	long long	result;
+	long long	before;
+	int			sign;
+
+	result = 0;
+	sign = 1;
+	while ((9 <= *str && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str) != 0)
+	{
+		before = result;
+		result *= 10 + (*str - '0');
+		if (before > result)
+		{
+			ft_putstr_fd("Minishell: exit: numeric argument required\n", 2);
+			return (255);
+		}
+		str++;
+	}
+	return (result * sign);
 }

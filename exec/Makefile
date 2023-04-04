@@ -1,10 +1,10 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 AR = ar
 ARFLAGS = rc
 NAME = exec.a
-HEADER = ./include/builtin.h ./inclue/execute.h
+HEADER = ./include/builtin.h ./inclue/execute.h ./include/redirection.h
 RM = rm -f
-SRC = ./builtin/cd/cd ./builtin/echo/echo ./builtin/env/env ./builtin/export/export ./builtin/exit/exit ./builtin/pwd/pwd ./builtin/unset/unset ./execute/execute ./execute/ft_atol ./execute/ft_isalpha ./execute/ft_isdigit ./execute/ft_putchar_fd ./execute/ft_putstr_fd ./execute/ft_strcmp
+SRC = ./builtin/cd/cd ./builtin/echo/echo ./builtin/env/env ./builtin/export/export ./builtin/exit/exit ./builtin/pwd/pwd ./builtin/unset/unset ./execute/execute ./execute/execute_built_in ./execute/execve_cmd ./execute/execute_utils ./redirection/redirection ./redirection/process_io_dup ./here_doc/get_next_line ./here_doc/get_next_line_utils ./here_doc/here_document
 SRCC = $(addsuffix .c, $(SRC))
 OBJ = $(addsuffix .o, $(SRC))
 

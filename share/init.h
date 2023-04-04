@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 12:04:55 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/03/31 19:09:38 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include "../pars/include/pars.h"
 
 int		g_exit_status;
-char 	*g_line;
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);

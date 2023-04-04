@@ -1,14 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_signal.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/31 19:11:12 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/04/04 14:28:20 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init.h"
 
-/*
-	전체적으로 사용할 signal을 종합적으로 정리하는 곳
-	1. init_signal : signal을 적용
-		1-a. cut_echo : ^C, ^D 등 ctrl 키를 입력했을 시, 터미널에 echo가 발생하는 걸 막기 위함
-		1-b. sigquit_handler : ctrl_C 동작 설정
-		1-c. sigint_handler : ctrl_D 동작 설정
-	2. heredoc_sigint_handler : 자식 프로세스 종료를 위함
-*/
-static void	cut_echo(void)
+static void	dead_echo(void)
 {
 	struct termios	term;
 
@@ -43,7 +47,7 @@ void	heredoc_sigint_handler(int sig)
 
 void	init_signal(void)
 {
-	cut_echo();
+	dead_echo();
 	signal(SIGQUIT, sigquit_handler);
 	signal(SIGINT, sigint_handler);
 }

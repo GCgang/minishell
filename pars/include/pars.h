@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 14:10:47 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:25:18 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	lstdelone_token(t_token *lst);
 void	lstclear_token(t_token **lst);
 void	lstdelone_token_elem(t_token *before, t_token *now);
 
-void	pars_line(char *line, t_token **token, t_env **env_list);
-int		chk_have_token(char *line, char *meta);
+void	pars_line(char *line, t_token **token, t_env **env_list, char **envp);
+int		chk_close_quote(char *line);
 int		make_token(char *line, char *meta, t_token **token);
 int		trim_token(t_token **token);
 int		chk_oper_token(t_token *token);
@@ -42,14 +42,13 @@ int		env_search(t_token *token, t_env *env_list);
 int		word_cnt(t_token **token, t_command *com);
 int		make_com(t_token **token, t_env **env_list, t_command **com);
 int		pars_com(t_token **token, t_command *com);
-void	free_array(char **arr);
 int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
 void	trim_env_token(t_token *token, t_env *env_list, int **loca);
-int		trans_env_token(t_token *token, char **tgt, int **loca);
+int		trans_env_token(t_token *token, char **tgt, int **loca, int flag);
+void	exec(t_command **cmd, t_env **env_list, char **envp);
 
 int		record_builtin(t_command **com, t_env *env_list);
 int		record_path(t_command **com, t_env *env_list);
-void	exec(t_command **cmd, t_env **env_list);
 
 #endif

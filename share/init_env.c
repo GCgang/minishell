@@ -1,26 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/31 19:11:28 by jaehjoo           #+#    #+#             */
+/*   Updated: 2023/04/04 20:13:06 by jaehjoo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init.h"
 
-/*
-	envp 내용물을 env_list에 담기 위한 내용
-	1. init_env : 각각의 환경변수를 등호 기준으로 좌변과 우변으로 분리하여 list에 저장
-	2. conv_env : 등호 기준으로 나누어 놓은 내용물을 연결 리스트에 담는 과정
-	3. add_exit_status : 무한 반복문 탈출을 위한 기준으로서 env_list에 최선두에 들어감
-		3-1. name은 c로 넣고, 추후, 종료 조건을 만족할 시, 안에 있는 val은 exit로 바뀔 예정
-*/
-static t_env	*conv_env(char *front, char *back)
+static int	ft_stridx(char *str, char tgt)
+{
+	int	idx;
+
+	idx = -1;
+	if (!str)
+		return (-1);
+	while (str[++idx])
+	{
+		if (str[idx] == tgt)
+			break ;
+	}
+	return (idx);
+}
+
+static t_env	*conv_env(char *tgt, int len)
 {
 	char	*name;
 	char	*val;
 	t_env	*node;
 
-	name = ft_strdup(front);
+	name = ft_substr(tgt, 0, len);
 	if (name == 0)
 		return (0);
-	val = ft_strdup(back);
-	if (val == 0)
+	if (!tgt[len])
+		val = 0;
+	else
 	{
-		free(name);
-		return (0);
+		val = ft_substr(tgt, len + 1, ft_strlen(tgt));
+		if (val == 0)
+		{
+			free(name);
+			return (0);
+		}
 	}
 	node = lstnew_env(name, val);
 	return (node);
@@ -29,27 +54,28 @@ static t_env	*conv_env(char *front, char *back)
 int	init_env(char **envp, t_env **env_list)
 {
 	int		idx;
-	char	*equal;
+	int		len;
 	t_env	*node;
 
 	idx = 0;
 	*env_list = 0;
 	while (envp[idx] != 0)
 	{
-		equal = ft_strchr(envp[idx], '=');
-		*equal = 0;
-		if (ft_strncmp(envp[idx], "OLDPWD", 7) != 0)
+		len = ft_stridx(envp[idx], '=');
+		if (len == -1)
+			return (0);
+		if (ft_strncmp(envp[idx], "OLDPWD=", 7) != 0)
 		{
-			node = conv_env(envp[idx], equal + 1);
+			node = conv_env(envp[idx], len);
 			if (node == 0)
-				return (0);
+				return (1);
 			lstadd_back_env(env_list, node);
 		}
 		idx++;
 	}
-	node = conv_env("OLDPWD", 0);
+	node = conv_env("OLDPWD", ft_strlen("OLDPWD"));
 	if (node == 0)
-		return (0);
+		return (1);
 	lstadd_back_env(env_list, node);
-	return (1);
+	return (0);
 }

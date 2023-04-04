@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/31 16:27:08 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:54:39 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_export_syntax(char *cmd)
 	return (1);
 }
 
-void	print_export(t_command **cmd, t_env *env_list)
+void	print_export(t_env *env_list)
 {
 	t_env	*tmp_list;
 
@@ -35,23 +35,16 @@ void	print_export(t_command **cmd, t_env *env_list)
 	{
 		if (tmp_list->name != NULL)
 		{
-			// ft_putstr_fd("declare -x ", 1);
-			// ft_putstr_fd(tmp_list->name, 1);
-			ft_putstr_fd("declare -x ", (*cmd)->std_out);
-			ft_putstr_fd(tmp_list->name, (*cmd)->std_out);
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(tmp_list->name, 1);
 			if (tmp_list->val != NULL)
 			{
-				// ft_putchar_fd('=', 1);
-				// ft_putchar_fd('"', 1);
-				// ft_putstr_fd(tmp_list->val, 1);
-				// ft_putchar_fd('"', 1);
-				ft_putchar_fd('=', (*cmd)->std_out);
-				ft_putchar_fd('"', (*cmd)->std_out);
-				ft_putstr_fd(tmp_list->val, (*cmd)->std_out);
-				ft_putchar_fd('"', (*cmd)->std_out);
+				ft_putchar_fd('=', 1);
+				ft_putchar_fd('"', 1);
+				ft_putstr_fd(tmp_list->val, 1);
+				ft_putchar_fd('"', 1);
 			}
-			// ft_putchar_fd('\n', 1);
-			ft_putchar_fd('\n', (*cmd)->std_out);
+			ft_putchar_fd('\n', 1);
 		}
 		tmp_list = tmp_list->next;
 	}
@@ -120,7 +113,7 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		print_export(cmd, (*env_list)->next);
+		print_export((*env_list)->next);
 		g_exit_status = 0;
 	}
 	else
