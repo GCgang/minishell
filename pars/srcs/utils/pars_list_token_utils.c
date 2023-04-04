@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:07 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 13:04:27 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 20:26:26 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	lstclear_token(t_token **lst)
 	{
 		cur = (*lst)->next;
 		lstdelone_token(*lst);
+		free(*lst);
 		*lst = cur;
 	}
 	*lst = 0;
@@ -59,7 +60,6 @@ void	lstdelone_token(t_token *lst)
 		free(lst->val);
 	if (lst->quote != 0)
 		free(lst->quote);
-	free(lst);
 }
 
 t_token	*lstnew_token(char type, char *val)
@@ -71,6 +71,7 @@ t_token	*lstnew_token(char type, char *val)
 		return (0);
 	tmp->type = type;
 	tmp->val = val;
+	tmp->quote = 0;
 	tmp->next = 0;
 	return (tmp);
 }
