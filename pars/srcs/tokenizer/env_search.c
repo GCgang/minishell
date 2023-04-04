@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 17:27:01 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 21:18:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int	env_search(t_token *token, t_env *env_list)
 			if (is_env(token, env_list, &loca, flag))
 				return (1);
 			if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
-				trim_env_token(token, env_list, &loca);
+				if (trim_env_token(token, env_list, &loca))
+					return (1);
 		}
 		if (token->val[loca[0]] != 0)
 			(loca[0])++;
