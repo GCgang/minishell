@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:53:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:48:49 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 13:04:16 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	lstdelone_token_elem(t_token *before, t_token *now)
 		return ;
 	tmp = now->next;
 	if (now->val != 0)
-		free((void *)now->val);
+		free(now->val);
 	before->next = tmp;
-	free((void *)now);
+	free(now);
 }
