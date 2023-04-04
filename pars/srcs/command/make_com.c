@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:46 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:56:45 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 17:29:21 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ static int	init_command(t_command **com)
 	(*com)->builtin = 0;
 	(*com)->std_in = 0;
 	(*com)->std_out = 1;
-	(*com)->std_err = 2;
+	(*com)->backup_fd = 0;
 	(*com)->pipe = 0;
 	(*com)->pipe_fd[0] = 0;
 	(*com)->pipe_fd[1] = 0;
+	(*com)->heredoc_fd = 0;
+	(*com)->std_in_dup = 0;
+	(*com)->std_out_dup = 1;
 	(*com)->err_buf = 0;
 	(*com)->next = 0;
 	return (0);

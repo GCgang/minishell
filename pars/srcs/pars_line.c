@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:14:15 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/04 17:29:51 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	test_print_all(t_env **env_list, t_command **com)
 			printf("%s ", tmp2->redir_val[idx]);
 		printf("\n");
 		printf("val_type->%c\n", tmp2->val_type);
-		printf("com3 : builtin->%c, std_in->%d, std_out->%d, std_err->%d, pipe->%d, pipe_in->%d, pipe_out->%d\n", tmp2->builtin, tmp2->std_in, tmp2->std_out, tmp2->std_err, tmp2->pipe, tmp2->pipe_fd[0], tmp2->pipe_fd[1]);
+		printf("com3 : builtin->%c, std_in->%d, std_out->%d, pipe->%d, pipe_in->%d, pipe_out->%d\n", tmp2->builtin, tmp2->std_in, tmp2->std_out, tmp2->pipe, tmp2->pipe_fd[0], tmp2->pipe_fd[1]);
 		tmp2 = tmp2->next;
 	}
 }

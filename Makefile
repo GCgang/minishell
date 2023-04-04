@@ -1,4 +1,4 @@
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address
 CF_FLAGS = -L/Users/hyeoan/.brew/opt/readline/lib -lreadline
 OBJ_FLAGS = -I/Users/hyeoan/.brew/opt/readline/include
 PARS = -L./pars -lpars
@@ -6,7 +6,7 @@ EXEC = -L./exec -lexec
 PARSA = ./pars/pars.a
 EXECA = ./exec/exec.a
 RM = rm -rf
-SRC = minishell init_env init_list_utils init_signal init_utils list_clear_env list_clear_com clear_all err_msg
+SRC = minishell init_env init_list_utils init_signal init_utils list_clear_env list_clear_com clear_all err_msg 
 SRCC = $(addsuffix .c, $(addprefix share/, $(SRC)))
 OBJ = $(SRCC:c=o)
 HEADER = ./share/init.h
