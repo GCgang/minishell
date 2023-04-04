@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:38:46 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 16:30:50 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 20:42:15 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int	o_append_redirection(t_command **cmd, int idx)
 {
 	int	outfile_fd;
 
-	outfile_fd = open((*cmd)->redir_val[idx], O_RDWR | O_CREAT | O_APPEND, 0644);
+	outfile_fd = open((*cmd)->redir_val[idx], \
+						O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (outfile_fd == -1)
 	{
 		ft_putstr_fd("Minishell: ", 2);

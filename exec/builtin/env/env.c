@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/03 00:57:00 by jun              ###   ########.fr       */
+/*   Updated: 2023/04/04 19:53:33 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,6 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 				ft_putchar_fd('=', 1);
 				ft_putstr_fd(tmp_list->val, 1);
 				ft_putchar_fd('\n', 1);
-				// ft_putstr_fd(tmp_list->name, (*cmd)->std_out);
-				// ft_putchar_fd('=', 1);
-				// ft_putstr_fd(tmp_list->val, (*cmd)->std_out);
-				// ft_putchar_fd('\n', (*cmd)->std_out);
 			}
 			tmp_list = tmp_list->next;
 		}
