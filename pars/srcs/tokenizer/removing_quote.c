@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:56:27 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/05 20:47:18 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 static void	chk_quote(t_token **token, char tgt, int *idx)
 {
 	t_token	*tmp;
+	int		first;
 
 	tmp = *token;
 	tmp->quote[*idx] = '1';
+	first = *idx;
 	(*idx)++;
 	while (tmp->val[*idx] != 0 && tmp->val[*idx] != tgt)
 	{
 		tmp->quote[*idx] = '0';
 		(*idx)++;
 	}
-	tmp->quote[*idx] = '1';
+	if (tmp->val[*idx] != tgt)
+		tmp->quote[first] = '0';
 }
 
 static int	record_quote(t_token **token)
@@ -47,7 +50,8 @@ static int	record_quote(t_token **token)
 			chk_quote(&tmp, '\"', &idx);
 		else
 			tmp->quote[idx] = '0';
-		idx++;
+		if (tmp->val[idx])
+			idx++;
 	}
 	return (0);
 }

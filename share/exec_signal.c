@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:47:17 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/05 13:58:32 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/05 19:45:37 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ static void	exec_handler(int sig)
 
 static void	heredoc_handler(int sig)
 {
-	char	str[2];
-
-	str[0] = 0x1A;
-	str[1] = 0;
 	if (sig == SIGINT)
 	{
-		printf("%s", str);
+		printf("^C\n");
+		close(0);
 	}
 	if (sig == SIGQUIT)
 	{

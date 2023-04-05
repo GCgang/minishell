@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 20:45:13 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/05 20:07:03 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ static void	cpy_special(char *spe, char *tmp)
 
 void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 {
-	char		spe[5];
+	char		spe[7];
 	t_command	*com;
 
 	*token = 0;
 	com = 0;
-	cpy_special(spe, "<> |");
+	cpy_special(spe, "<> |\n\t");
 	if (chk_close_quote(line) > 0)
 	{
 		if (make_token(line, spe, token) || mix_token(token, 0)
 			|| rotate_env_token(token, env_list) || mix_token(token, 1)
 			|| trim_token(token) || chk_oper_token(*token)
-			|| removing_quote(token))
+			|| removing_quote(token) || !(*token))
 		{
 			lstclear_token(token);
 			return ;

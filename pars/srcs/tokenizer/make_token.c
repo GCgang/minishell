@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:50 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 13:13:51 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/05 20:15:15 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static char	*sep_none_quote(char *line, int *idx, int *len)
 {
 	if (line[*idx] != 0 && line[*idx] != '\'' && line[*idx] != '\"')
 	{
+		if (line[*idx] == '\n' || line[*idx] == '\t')
+			line[*idx] = ' ';
 		(*idx)++;
 		(*len)++;
 	}
