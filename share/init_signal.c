@@ -37,14 +37,6 @@ static void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
-void	heredoc_sigint_handler(int sig)
-{
-	(void)sig;
-	g_exit_status = 1;
-	printf("\n");
-	exit(1);
-}
-
 void	init_signal(void)
 {
 	dead_echo();

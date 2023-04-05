@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:57:22 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 19:24:34 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/05 14:06:28 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int	main(int ac, char **av, char**envp)
 		if (*line != 0)
 			add_history(line);
 		pars_line(line, &tokens, &env_list, envp);
-		free(line);
-		if (g_exit_status < 0)
-			break ;
 	}
 	clear_all(&tokens, &env_list, 0);
 	return (0);

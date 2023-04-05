@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:54:02 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 20:41:35 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:28:37 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	run_execve(t_command *process, t_env **env_list, char **envp)
 	ret = execve(path_cmd, process->word, envp);
 	if (ret == -1)
 	{
-		if (ft_strchr(process->word[0], '/') != NULL
-			|| get_value(*env_list, "PATH") == NULL)
+		if (ft_strchr(process->word[0], '/') != NULL || get_value(*env_list, "PATH") == NULL)
 		{
 			ft_putstr_fd("Minishell: ", 2);
 			ft_putstr_fd(process->word[0], 2);

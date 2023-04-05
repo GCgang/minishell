@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:59:21 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 21:39:14 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/05 13:45:47 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-void	execute_binary(t_command **process, t_env **env_list,
-						int cmd_cnt, char **envp)
+void	execute_binary(t_command **process, t_env **env_list, int cmd_cnt, char **envp)
 {
 	pid_t		pid;
 
@@ -38,8 +37,7 @@ void	parent_process(t_command **process)
 	close((*process)->pipe_fd[1]);
 }
 
-void	child_process(t_command **process, t_env **env_list,
-						int cmd_cnt, char **envp)
+void	child_process(t_command **process, t_env **env_list, int cmd_cnt, char **envp)
 {
 	if ((*process)->std_in != 0)
 		child_stdin_dup2((*process)->std_in, STDIN_FILENO);
@@ -77,11 +75,8 @@ void	exec(t_command **cmd, t_env **env_list, char **envp)
 			break ;
 		if (process->word != NULL && process->word[0] != NULL)
 		{
-			if (is_built_in(process->word[0])
-				&& process->pipe == 0 && cmd_cnt == 0)
-			{
+			if (is_built_in(process->word[0]) && process->pipe == 0 && cmd_cnt == 0)
 				only_built_in(process, env_list);
-			}
 			else
 				execute_binary(&process, env_list, cmd_cnt, envp);
 			cmd_cnt++;
@@ -95,7 +90,9 @@ void	wait_process(int cmd_cnt)
 {
 	int	status;
 
+	exec_signal(0);
 	status = 0;
 	while (cmd_cnt--)
 		waitpid(-1, &status, 0);
+	init_signal();
 }

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 10:44:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/31 16:29:31 by hyeoan           ###   ########.fr       */
+/*   Created: 2023/03/17 13:13:17 by hyeoan            #+#    #+#             */
+/*   Updated: 2023/03/28 12:49:04 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef PWD_H
-# define PWD_H
-# define PATH_MAX 1024
-# include "../../include/execute.h"
+#include "../include/execute.h"
 
-void	built_in_pwd(t_command **cmd);
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}

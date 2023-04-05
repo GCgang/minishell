@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 19:54:39 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/03 00:58:27 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	check_export_syntax(char *cmd)
 	return (1);
 }
 
-void	print_export(t_env *env_list)
+void	print_export(t_command **cmd, t_env *env_list)
 {
 	t_env	*tmp_list;
-
+	(void)cmd;//
 	tmp_list = sort_export(env_list);
 	tmp_list = env_list;
 	while (tmp_list != NULL)
@@ -37,14 +37,21 @@ void	print_export(t_env *env_list)
 		{
 			ft_putstr_fd("declare -x ", 1);
 			ft_putstr_fd(tmp_list->name, 1);
+			// ft_putstr_fd("declare -x ", (*cmd)->std_out);
+			// ft_putstr_fd(tmp_list->name, (*cmd)->std_out);
 			if (tmp_list->val != NULL)
 			{
 				ft_putchar_fd('=', 1);
 				ft_putchar_fd('"', 1);
 				ft_putstr_fd(tmp_list->val, 1);
 				ft_putchar_fd('"', 1);
+				// ft_putchar_fd('=', (*cmd)->std_out);
+				// ft_putchar_fd('"', (*cmd)->std_out);
+				// ft_putstr_fd(tmp_list->val, (*cmd)->std_out);
+				// ft_putchar_fd('"', (*cmd)->std_out);
 			}
 			ft_putchar_fd('\n', 1);
+			// ft_putchar_fd('\n', (*cmd)->std_out);
 		}
 		tmp_list = tmp_list->next;
 	}
@@ -113,7 +120,7 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		print_export((*env_list)->next);
+		print_export(cmd, (*env_list)->next);
 		g_exit_status = 0;
 	}
 	else

@@ -10,7 +10,6 @@ SRC = ./srcs/utils/pars_list_token_utils \
 	  ./srcs/utils/pars_utils \
 	  ./srcs/utils/pars_utils2 \
 	  ./srcs/utils/pars_utils3 \
-	  ./srcs/utils/child_signal \
 	  ./srcs/tokenizer/chk_close_quote \
 	  ./srcs/tokenizer/make_token \
 	  ./srcs/tokenizer/mix_token \

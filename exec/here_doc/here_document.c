@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_document.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:13:30 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 19:06:54 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/05 13:11:49 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	here_document(t_command *process, int idx)
 	char	*limiter;
 
 	limiter = process->redir_val[idx];
+	exec_signal(1);
 	while (1)
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_next_line(0);
+		line = readline("> ");
 		if (ft_strncmp(line, limiter, (ft_strlen(line) - 1)) == 0 || \
 		line == NULL)
 		{
@@ -61,4 +61,5 @@ void	here_document(t_command *process, int idx)
 		free(line);
 	}
 	close(process->heredoc_fd);
+	exec_signal(0);
 }

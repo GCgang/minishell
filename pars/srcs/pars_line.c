@@ -91,6 +91,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 		if (make_com(token, env_list, &com) == 0)
 		{
 			//test_print_all(env_list, &com);
+			free(line);
 			exec(&com, env_list, envp);
 		}
 	}
