@@ -72,12 +72,12 @@ static void	cpy_special(char *spe, char *tmp)
 
 void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 {
-	char		spe[7];
+	char		spe[11];
 	t_command	*com;
 
 	*token = 0;
 	com = 0;
-	cpy_special(spe, "<> |\n\t");
+	cpy_special(spe, "<> |&;()\n\t");
 	if (chk_close_quote(line) > 0)
 	{
 		if (make_token(line, spe, token) || mix_token(token, 0)

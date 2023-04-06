@@ -49,11 +49,12 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 	char	*tmp;
 
 	loca[0][1] = loca[0][0] + 1;
-	if (token->val[loca[0][1]] && ft_strchr("$?", token->val[loca[0][1]]))
+	if (token->val[loca[0][1]]
+		&& ft_strchr("$*?@#-!0123456789", token->val[loca[0][1]]))
 		(loca[0][1])++;
 	else
-		while (token->val[loca[0][1]]
-			&& !ft_strchr(" $\"\'/|&", token->val[loca[0][1]]))
+		while (token->val[loca[0][1]] && !ft_strchr(" \n\t$*?@#-!\"\'/|&;(){}[]",
+					token->val[loca[0][1]]))
 			(loca[0][1])++;
 	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
 	if (tmp == 0)

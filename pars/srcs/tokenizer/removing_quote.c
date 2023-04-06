@@ -28,6 +28,8 @@ static void	chk_quote(t_token **token, char tgt, int *idx)
 	}
 	if (tmp->val[*idx] != tgt)
 		tmp->quote[first] = '0';
+	else
+		tmp->quote[*idx] = '1';
 }
 
 static int	record_quote(t_token **token)

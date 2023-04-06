@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:47:29 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 21:41:26 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:36:14 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ static int	free_str(char **del_0, char **del_1)
 	return (1);
 }
 
-static int	search_ifs(t_token **token, int *len, char ifs)
+static int	search_ifs(t_token **token, int *len, char *ifs)
 {
 	*len = 0;
 	while ((*token)->val && (*token)->val[*len])
 	{
-		if ((*token)->val[*len] == ifs)
+		if (ft_strchr(ifs, (*token)->val[*len]) != 0)
 			return (0);
 		(*len)++;
 	}
 	return (1);
 }
 
-static int	search_token(t_token **token, int len, char ifs)
+static int	search_token(t_token **token, int len, char *ifs)
 {
 	t_token	*new;
 	t_token	*next;
@@ -56,7 +56,7 @@ static int	search_token(t_token **token, int len, char ifs)
 	if ((*token)->val == 0)
 		return (1);
 	free(new_val);
-	if (search_ifs(&new, &len, ifs) == 0)
+	if (!search_ifs(&new, &len, ifs))
 		return (search_token(&new, len, ifs));
 	return (0);
 }
@@ -65,20 +65,22 @@ int	trim_env_token(t_token *token, t_env *env_list, int **loca)
 {
 	int		idx;
 	int		len;
-	char	ifs;
+	char	*ifs;
 
 	idx = loca[0][0];
 	len = loca[0][0] + loca[0][2];
-	ifs = ' ';
+	ifs = " \n\t";
 	while (env_list)
 	{
 		if (!ft_strncmp(env_list->name, "IFS", 4))
-			ifs = env_list->val[0];
+			ifs = ft_strdup(env_list->val);
+		if (!ifs)
+			return (1);
 		env_list = env_list->next;
 	}
 	while (idx < len && token->val[idx])
 	{
-		if (token->val[idx] == ifs)
+		if (ft_strchr(ifs, token->val[idx]) != 0)
 			return (search_token(&token, idx, ifs));
 		idx++;
 	}

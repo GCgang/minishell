@@ -12,12 +12,6 @@
 
 #include "init.h"
 
-static void	sigquit_handler(int sig)
-{
-	(void)sig;
-	rl_redisplay();
-}
-
 static void	sigint_handler(int sig)
 {
 	(void)sig;
@@ -30,6 +24,6 @@ static void	sigint_handler(int sig)
 
 void	init_signal(void)
 {
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint_handler);
 }
