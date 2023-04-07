@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:14 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:31:28 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:51:38 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static t_token	*search_token(t_token **token, int len)
 	return (new);
 }
 
-int	trim_env_token(t_token *token, t_env *env_list, int **loca)
+void	trim_env_token(t_token *token, t_env *env_list, int **loca)
 {
 	int		idx;
 	int		len;
@@ -112,5 +112,4 @@ int	trim_env_token(t_token *token, t_env *env_list, int **loca)
 		else
 			idx++;
 	}
-	return (0);
 }

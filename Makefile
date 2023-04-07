@@ -1,4 +1,4 @@
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra
 CF_FLAGS = -L/Users/hyeoan/.brew/opt/readline/lib -lreadline
 OBJ_FLAGS = -I/Users/hyeoan/.brew/opt/readline/include
 PARS = -L./pars -lpars

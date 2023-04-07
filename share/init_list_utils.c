@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:11:08 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:11:09 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:24:01 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_env	*lstnew_env(char *name, char *val)
 		return (NULL);
 	temp->name = name;
 	temp->val = val;
-	temp->mean = 'e';
-	temp->status = 1;
 	temp->next = 0;
 	return (temp);
 }

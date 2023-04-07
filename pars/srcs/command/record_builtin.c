@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:50:28 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:22:45 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:30:46 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,28 @@ static char	chk_extend_builtin(t_command *com, char *tgt)
 
 static int	builtin(t_command *com, char *tgt)
 {
+	char	builtin;
+
+	builtin = 0;
 	if (com->word != 0)
 	{
 		str_tolower(tgt);
 		if (ft_strncmp(tgt, "echo", 5) == 0)
-			com->builtin = 'e';
+			builtin = 'e';
 		else if (ft_strncmp(tgt, "cd", 3) == 0)
-			com->builtin = 'c';
+			builtin = 'c';
 		else if (ft_strncmp(tgt, "pwd", 4) == 0)
-			com->builtin = 'p';
+			builtin = 'p';
 		else if (ft_strncmp(tgt, "env", 4) == 0)
-			com->builtin = 'n';
+			builtin = 'n';
 		else if (ft_strncmp(tgt, "exit", 5) == 0)
-			com->builtin = 'i';
+			builtin = 'i';
 		else
-			com->builtin = chk_extend_builtin(com, tgt);
+			builtin = chk_extend_builtin(com, tgt);
 	}
-	if (ft_strchr_null("ecpni", com->builtin) != 0)
+	if (ft_strchr_null("ecpni", builtin) != 0)
 		str_tolower(com->word[0]);
-	if (ft_strchr_null("ecpxuni", com->builtin) != 0)
+	if (ft_strchr_null("ecpxuni", builtin) != 0)
 		return (1);
 	return (0);
 }

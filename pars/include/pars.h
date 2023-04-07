@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 16:33:10 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 20:07:29 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		make_com(t_token **token, t_env **env_list, t_command **com);
 int		pars_com(t_token **token, t_command *com);
 int		mix_token(t_token **token, int qoute_flag);
 int		rotate_env_token(t_token **token, t_env **env_list);
-int		trim_env_token(t_token *token, t_env *env_list, int **loca);
+void	trim_env_token(t_token *token, t_env *env_list, int **loca);
 int		trans_env_token(t_token *token, char **tgt, int **loca, int flag);
 void	exec(t_command **cmd, t_env **env_list, char **envp);
 

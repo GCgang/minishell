@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:24 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:25:05 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 20:56:31 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	chk_meta_token_err(t_token *token)
 		else
 			tmp = ft_strdup(token->val);
 		g_exit_status = 2;
-		if (tmp != 0)
+		if (tmp == 0)
 		{
 			free(tmp);
 			return (err_msg("Error : Malloc failed(chk_meta_token_err)", 1, 0));

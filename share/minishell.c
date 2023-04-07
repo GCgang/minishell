@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:57:22 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 16:44:02 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:22:18 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int ac, char **av, char**envp)
 		if (!line)
 		{
 			printf("exit\n");
-			return (0);
+			break ;
 		}
 		if (*line != 0)
 			add_history(line);

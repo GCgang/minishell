@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:58 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:22:55 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:05:12 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	word_cnt(t_token **token, t_command *com)
 			return (err_msg("Error : Malloc failed(word_cnt)", 1, 0));
 		com->word[cnt] = 0;
 		if (word_array(token, com))
-			return (1);	
+			return (1);
 	}
 	return (0);
 }

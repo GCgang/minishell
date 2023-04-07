@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/06 21:42:41 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:01:53 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 	t_command	*com;
 
 	*token = 0;
-	com = 0;
 	ft_strlcpy(spe, "<> |&\n;(\t)", 12);
 	if (chk_close_quote(line) > 0)
 	{
@@ -27,7 +26,7 @@ void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 			|| trim_token(token) || chk_oper_token(*token)
 			|| removing_quote(token) || !(*token))
 		{
-			lstclear_token(token);
+			free(line);
 			return ;
 		}
 		if (make_com(token, env_list, &com) == 0)
@@ -36,6 +35,8 @@ void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 			lstclear_token(token);
 			exec(&com, env_list, envp);
 		}
+		else
+			free(line);
 	}
 	clear_all(token, 0, &com);
 }

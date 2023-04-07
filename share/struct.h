@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:55:36 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/05 13:46:15 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:25:46 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,15 @@ typedef struct s_env
 {
 	char			*name;
 	char			*val;
-	char			mean;
-	int				status;
 	struct s_env	*next;
 }	t_env;
 
 typedef struct s_command
 {
-	int					order;
 	char				**word;
 	char				**path;
-	int					path_err;
 	char				**redir;
 	char				**redir_val;
-	char				val_type;
-	char				builtin;
 	int					std_in;
 	int					std_out;
 	int					backup_fd;
@@ -50,7 +44,6 @@ typedef struct s_command
 	int					out_file_fd;
 	int					pipe;
 	int					pipe_fd[2];
-	char				*err_buf;
 	struct s_command	*next;
 }	t_command;
 
