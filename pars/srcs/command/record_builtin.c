@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:50:28 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 14:13:31 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:22:45 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	record_builtin(t_command **com, t_env *env_list)
 	{
 		tmp = ft_strdup((*com)->word[0]);
 		if (tmp == 0)
-			return (err_msg("Error : Malloc failed(word_cnt)"));
+			return (err_msg("Error : Malloc failed(word_cnt)", 1, 0));
 		builtin((*com), tmp);
 		free(tmp);
 	}
@@ -95,7 +95,7 @@ int	record_path(t_command **com, t_env *env_list)
 		{
 			tmp_path = ft_split(tmp->val, ':');
 			if (tmp_path == 0)
-				return (err_msg("Error : Malloc failed(record_path)"));
+				return (err_msg("Error : Malloc failed(record_path)", 1, 0));
 			if ((*com)->path != 0)
 				free((*com)->path);
 			(*com)->path = tmp_path;

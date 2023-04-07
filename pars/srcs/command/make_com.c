@@ -6,17 +6,18 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:46 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 17:29:21 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:25:17 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pars.h"
+#include "sys/stat.h"
 
 static int	init_command(t_command **com)
 {
 	(*com) = (t_command *)malloc(sizeof(t_command));
 	if (*com == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(init_command)", 1, 0));
 	(*com)->order = 0;
 	(*com)->word = 0;
 	(*com)->redir = 0;
@@ -57,8 +58,7 @@ int	make_com(t_token **token, t_env **env_list, t_command **com)
 	int			order;
 
 	order = 0;
-	init_command(com);
-	if (word_cnt(token, *com) || pars_com(token, *com))
+	if (init_command(com) || word_cnt(token, *com) || pars_com(token, *com))
 		return (1);
 	(*com)->order = order;
 	while ((*token) != 0 && (*token)->type == 'p')

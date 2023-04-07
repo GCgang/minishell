@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/05 20:47:18 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:45:17 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	record_quote(t_token **token)
 	tmp->quote = (char *)malloc(sizeof(char)
 			* (ft_strlen(tmp->val) + 1));
 	if (tmp->quote == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(record_quote)", 1, 0));
 	while (tmp != 0 && tmp->val != 0 && tmp->val[idx] != 0)
 	{
 		tmp->quote[ft_strlen(tmp->val)] = 0;
@@ -72,13 +72,13 @@ static int	remove_quote(t_token **token)
 			(*token)->val[idx] = 0;
 			tmp = ft_strjoin((*token)->val, (*token)->val + idx + 1);
 			if (tmp == 0)
-				return (1);
+				return (err_msg("Error : Malloc failed(remove_quote)", 1, 0));
 			free((*token)->val);
 			(*token)->val = tmp;
 			(*token)->quote[idx] = 0;
 			tmp = ft_strjoin((*token)->quote, (*token)->quote + idx + 1);
 			if (tmp == 0)
-				return (1);
+				return (err_msg("Error : Malloc failed(remove_quote)", 1, 0));
 			free((*token)->quote);
 			(*token)->quote = tmp;
 			idx--;

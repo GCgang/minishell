@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:50 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/05 20:15:15 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:21:09 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	input_token(char *now, t_token **token, int *len, char *spe)
 		else
 			tmp = lstnew_token('w', val);
 		if (!tmp)
-			return (err_msg("Error : Malloc failed(input_token)"));
+			return (err_msg("Error : Malloc failed(input_token)", 1, 0));
 		lstadd_back_token(token, tmp);
 		now = 0;
 		*len = 0;

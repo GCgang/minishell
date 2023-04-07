@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:04:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 20:48:11 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:01:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	rotate_env_token(t_token **token, t_env **env_list)
 		{
 			if (env_search(tmp, *env_list))
 				return (1);
-			tmp->type = 'w';
+			if (tmp->type == 'e')
+				tmp->type = 'w';
 		}
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:47:17 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/06 14:16:38 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/06 20:57:54 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	heredoc_handler(int sig)
 void	exec_signal(int phase)
 {
 	if (phase == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (phase == 1)
 	{
 		signal(SIGINT, exec_sigint_handler);
 		signal(SIGQUIT, exec_sigquit_handler);

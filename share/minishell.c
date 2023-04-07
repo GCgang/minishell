@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:57:22 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/05 20:24:27 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:44:02 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	introduce(void)
 static int	init_chk(int ac, char **envp, t_env **env_list)
 {
 	if (ac > 1)
-		return (err_msg("Error : You don't need to insert argument"));
+		return (err_msg("Error : You don't need to insert argument", 1, 0));
 	init_signal();
 	if (init_env(envp, env_list) == 1)
-		return (err_msg("Error : Malloc failed(init_env)"));
+		return (err_msg("Error : Malloc failed(init_env)", 1, 0));
 	introduce();
 	return (0);
 }

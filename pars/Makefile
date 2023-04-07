@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 AR = ar
 ARFLAGS = rc
 NAME = pars.a
@@ -16,6 +16,7 @@ SRC = ./srcs/utils/pars_list_token_utils \
 	  ./srcs/tokenizer/rotate_env_token \
 	  ./srcs/tokenizer/env_search \
 	  ./srcs/tokenizer/env_search2 \
+	  ./srcs/tokenizer/env_search3 \
 	  ./srcs/tokenizer/chk_oper_token \
 	  ./srcs/command/make_com \
 	  ./srcs/command/pars_com \

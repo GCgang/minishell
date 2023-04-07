@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:54 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:56:50 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:22:35 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static int	input_redir(t_command *com, t_token **token)
 		{
 			com->redir[idx] = ft_strdup((*token)->val);
 			if (com->redir[idx] == 0)
-				return (err_msg("Error : Malloc failed(input_redir)"));
+				return (err_msg("Error : Malloc failed(input_redir)", 1, 0));
 		}
 		else
 		{
 			com->redir_val[idx] = ft_strdup((*token)->val);
 			if (com->redir_val[idx] == 0)
-				return (err_msg("Error : Malloc failed(input_redir)"));
+				return (err_msg("Error : Malloc failed(input_redir)", 1, 0));
 			idx++;
 		}
 		tmp = (*token);
@@ -44,11 +44,11 @@ static int	malloc_redir(t_command *com, int cnt)
 {
 	com->redir = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (com->redir == 0)
-		return (err_msg("Error : Malloc failed(malloc_redir)"));
+		return (err_msg("Error : Malloc failed(malloc_redir)", 1, 0));
 	com->redir[cnt] = 0;
 	com->redir_val = (char **)malloc(sizeof(char *) * (cnt + 1));
 	if (com->redir_val == 0)
-		return (err_msg("Error : Malloc failed(malloc_redir)"));
+		return (err_msg("Error : Malloc failed(malloc_redir)", 1, 0));
 	com->redir_val[cnt] = 0;
 	return (0);
 }
