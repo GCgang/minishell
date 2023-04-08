@@ -1,4 +1,4 @@
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address
 CF_FLAGS = -L/opt/homebrew/opt/readline/lib -lreadline
 OBJ_FLAGS = -I/opt/homebrew/opt/readline/include
 PARS = -L./pars -lpars
