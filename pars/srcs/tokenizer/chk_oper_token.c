@@ -12,11 +12,19 @@
 
 #include "../../include/pars.h"
 
+static int	extra_msg(void)
+{
+	err_msg("Minishell: Syntax error near unexpected token ", 0, 0);
+	return (err_msg("\'newline\'", 1, 0));
+}
+
 int	chk_meta_token_err(t_token *token)
 {
 	char	*tmp;
 
-	if (token->type == 't')
+	if (token->type != 't' && !token->next)
+		return (extra_msg());
+	else if (token->type == 't')
 	{
 		if (token->next == 0)
 			tmp = ft_strdup("newline");
