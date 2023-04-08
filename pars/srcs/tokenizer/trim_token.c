@@ -29,8 +29,10 @@ int	trim_token(t_token **token)
 		if (now != 0 && now->next != 0 && now->next->type == 't'
 			&& (!now->next->val[0] || !ft_strncmp(now->next->val, " ", 2)))
 			lstdelone_token_elem(now, now->next);
-		if (now->next != 0 && (!ft_strncmp(now->next->val, " ", 2)
-				|| !now->next->val[0]))
+		if (now->next != 0 && ft_strncmp(now->next->val, " ", 2)
+				&& now->next->val[0])
+			now = now->next;
+		else if (now->next != 0 && now->type != 't')
 			now = now->next;
 	}
 	if (now != 0 && now->next == 0 && now->type == 't'

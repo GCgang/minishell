@@ -48,6 +48,6 @@ int	main(int ac, char **av, char**envp)
 			add_history(line);
 		pars_line(line, &tokens, &env_list, envp);
 	}
-	clear_all(&tokens, &env_list, 0);
+	clear_all(0, &env_list, 0);
 	return (0);
 }

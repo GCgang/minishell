@@ -40,7 +40,7 @@ void	lstclear_token(t_token **lst)
 {
 	t_token	*cur;
 
-	if (!lst)
+	if (!lst || !*lst)
 		return ;
 	while (*lst)
 	{
