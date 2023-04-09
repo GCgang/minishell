@@ -18,6 +18,43 @@ SRC = minishell \
 	  exec_signal
 SRCC = $(addsuffix .c, $(addprefix share/, $(SRC)))
 OBJ = $(SRCC:c=o)
+PARS_SRC = ./pars/srcs/utils/pars_list_token_utils \
+	  	   ./pars/srcs/utils/pars_list_token_utils2 \
+	  	   ./pars/srcs/utils/pars_split_utils \
+		   ./pars/srcs/utils/pars_utils \
+		   ./pars/srcs/utils/pars_utils2 \
+		   ./pars/srcs/utils/pars_utils3 \
+		   ./pars/srcs/tokenizer/chk_close_quote \
+		   ./pars/srcs/tokenizer/make_token \
+		   ./pars/srcs/tokenizer/mix_token \
+		   ./pars/srcs/tokenizer/rotate_env_token \
+		   ./pars/srcs/tokenizer/env_search \
+		   ./pars/srcs/tokenizer/env_search2 \
+		   ./pars/srcs/tokenizer/env_search3 \
+		   ./pars/srcs/tokenizer/chk_oper_token \
+		   ./pars/srcs/command/make_com \
+		   ./pars/srcs/command/pars_com \
+		   ./pars/srcs/tokenizer/removing_quote \
+		   ./pars/srcs/pars_line \
+		   ./pars/srcs/command/record_builtin \
+		   ./pars/srcs/tokenizer/trim_token \
+		   ./pars/srcs/command/word_cnt
+PARS_SRCC = $(addsuffix .c, $(PARS_SRC))
+EXEC_SRC = ./exec/builtin/cd/cd \
+		   ./exec/builtin/echo/echo \
+		   ./exec/builtin/env/env \
+		   ./exec/builtin/export/export \
+		   ./exec/builtin/exit/exit \
+		   ./exec/builtin/pwd/pwd \
+		   ./exec/builtin/unset/unset \
+		   ./exec/execute/execute \
+		   ./exec/execute/execute_built_in \
+		   ./exec/execute/execve_cmd \
+		   ./exec/execute/execute_utils \
+		   ./exec/redirection/redirection \
+		   ./exec/redirection/process_io_dup \
+		   ./exec/here_doc/here_document
+EXEC_SRCC = $(addsuffix .c, $(EXEC_SRC))
 HEADER = ./share/init.h
 INCLUDES = -I./share -I./pars/include
 NAME = minishell
@@ -30,10 +67,10 @@ $(NAME): $(OBJ) $(PARSA) $(EXECA)
 %.o: %.c $(HEADER)
 			$(CC) -c $(CFLAGS) $(OBJ_FLAGS) $< -o $@ $(INCLUDES)
 
-$(PARSA):
+$(PARSA): $(PARS_SRCC)
 			make -sC ./pars/
 
-$(EXECA):
+$(EXECA): $(EXEC_SRCC)
 			make -sC ./exec/
 
 clean:
@@ -41,11 +78,12 @@ clean:
 			make -sC ./pars clean
 			make -sC ./exec clean
 
-fclean: clean
+fclean:
+			make -s clean
 			$(RM) $(NAME) $(OBJ) $(PARSA) $(EXECA)
 
 re:
-			make fclean
-			make all
+			make -s fclean
+			make -s all
 
 .PHONY: all clean fclean re

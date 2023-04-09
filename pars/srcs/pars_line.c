@@ -27,13 +27,13 @@ void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
 			|| removing_quote(token) || !(*token))
 		{
 			free(line);
-			lstclear_token(token);
+			clear_all(token, 0, 0);
 			return ;
 		}
 		free(line);
 		if (make_com(token, env_list, &com) == 0)
 		{
-			lstclear_token(token);
+			clear_all(token, 0, 0);
 			exec(&com, env_list, envp);
 		}
 	}

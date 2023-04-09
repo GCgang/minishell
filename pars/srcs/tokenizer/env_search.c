@@ -113,8 +113,6 @@ int	env_search(t_token *token, t_env *env_list)
 		if (flag == 0 || flag == 1)
 			if (is_env(token, env_list, &loca, flag))
 				return (1);
-		if (flag == 0 && token->val[0] == 0)
-			token->type = 't';
 		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 			trim_env_token(token, env_list, &loca);
 		if (token->val[loca[0]] != 0)

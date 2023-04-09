@@ -14,6 +14,24 @@
 
 static void	introduce(void)
 {
+printf("   /\\                                                        /\\\n");
+printf("  |  |                                                      |  |\n");
+printf(" /----\\                by heyoan, jaehjoo                  /----\\\n"
+		);
+printf("[______]              welcome minishell castle            [______]\n");
+printf(" |    |         _____                        _____         |    |\n");
+printf(" |[]  |        [     ]                      [     ]        |  []|\n");
+printf(" |    |       [_______][ ][ ][ ][][ ][ ][ ][_______]       |    |\n");
+printf(" |    [ ][ ][ ]|     |  ,----------------,  |     |[ ][ ][ ]    |\n");
+printf(" |             |     |/'    ____..____    '\\|     |             |\n");
+printf("  \\  []        |     |    /'    ||    '\\    |     |        []  /\n");
+printf("   |      []   |     |   |o     ||     o|   |     |  []       |\n");
+printf("   |           |  _  |   |     _||_     |   |  _  |           |\n");
+printf("   |   []      | (_) |   |    (_||_)    |   | (_) |       []  |\n");
+printf("   |           |     |   |     (||)     |   |     |           |\n");
+printf("   |           |     |   |      ||      |   |     |           |\n");
+printf(" /''           |     |   |o     ||     o|   |     |           ''\\\n");
+printf("[_____________[_______]--'------''------'--[_______]_____________]\n");
 }
 
 static int	init_chk(int ac, char **envp, t_env **env_list)

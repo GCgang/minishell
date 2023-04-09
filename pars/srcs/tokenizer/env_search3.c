@@ -12,6 +12,16 @@
 
 #include "../../include/pars.h"
 
+static void	chk_ifs_token(t_token **token, char *ifs)
+{
+	if (ifs[(int)' '] == '1' || ifs[(int)'\n'] == '1'
+		|| ifs[(int)'\t'] == '1')
+	{
+		if ((*token)->val[0] == 0)
+			(*token)->type = 't';
+	}
+}
+
 static void	setting_ifs(char *ifs, char *tgt)
 {
 	int	idx;
@@ -60,7 +70,7 @@ static int	search_ifs(t_token **token, int *cur, int len, char *ifs)
 	return (-1);
 }
 
-static t_token	*search_token(t_token **token, int len)
+static t_token	*search_token(t_token **token, int len, char *ifs)
 {
 	t_token	*new;
 	t_token	*next;
@@ -84,6 +94,7 @@ static t_token	*search_token(t_token **token, int len)
 	(*token)->val = ft_substr(new_val, 0, len);
 	if ((*token)->val == 0)
 		return (0);
+	chk_ifs_token(token, ifs);
 	free(new_val);
 	return (new);
 }
@@ -108,8 +119,10 @@ void	trim_env_token(t_token *token, t_env *env_list, int **loca)
 	{
 		cur = search_ifs(&token, &idx, len, ifs);
 		if (cur != -1)
-			token = search_token(&token, cur);
+			token = search_token(&token, cur, ifs);
 		else
 			idx++;
 	}
+	if (token && token->type == 'w' && token->val[0] == 0)
+		token->type = 't';
 }
