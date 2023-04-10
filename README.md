@@ -1,43 +1,25 @@
 # minishell
 
-1. pars에서 exec 수정한 사항
-
-가. execute.c
-void	wait_process(int cmd_cnt)
-{
-	int	status;
-
-	exec_signal(0);
-	status = 0;
-	while (cmd_cnt--)
-		waitpid(-1, &status, 0);
-	init_signal();
-}
-
-나. here_document.c
-void	here_document(t_command *process, int idx)
-{
-	char	*line;
-	char	*limiter;
-
-	limiter = process->redir_val[idx];
-	exec_signal(1);
-	while (1)
-	{
-		line = readline("> ");
-		if (ft_strncmp(line, limiter, (ft_strlen(line) - 1)) == 0 || \
-		line == NULL)
-		{
-			free(line);
-			break ;
-		}
-		ft_putstr_fd(line, process->heredoc_fd);
-		free(line);
-	}
-	close(process->heredoc_fd);
-	exec_signal(0);
-}
-
-다. Makefile get_next_line, get_next_line_utils 삭제
-
-라. heredoc에서 get_next_line, get_next_line_utils source 삭제
+1. pars 흐름
+	가. 단어와 단어를 구분해주는 metacharacter 및 기본 구분자(space, newline, tab)를 spe 집합에 넣는다.
+	나. 따옴표(' 또는 ")가 닫혀있는지 여부 확인. 
+		나-1. 닫혀있으면 다 항으로 진행
+		나-2. 닫혀있지 않으면 printf : syntax_err, exit_status = 2, main loop로 복귀
+	다. make token : 따옴표(', ") 기준으로 token을 분리하고 따옴표가 없으면 한 자 씩 분류. special 문자에 속하면 't', 문자가 '$'면 'e', 그 외는 'w'로 분류
+	라. mix token : phase를 0과 1로 분리. 0일 시에는 e + w, t + t 조합만 토큰 내용물을 합친다. 1은 w + w 조합도 추가
+		라-1. e + w는 w가 따옴표로 구성된 경우 합치지 않으며 추후 환경변수 변환 후에 토큰의 종류가 'w'로 변환했을 시, phase 1에서 w + w 조합 시에 합친다. 
+		라-2. t + t는 < + < 또는 > + > 인 경우에만 합친다.
+		라-3. w + w는 phase 1에서만 수행하며 별도 조건 없이 바로 합친다.
+	마. rotate env token : mix token이 phase 1로 넘어가기 전에 실행. 토큰을 순회하며 heredoc 용 토큰과 env 토큰, 큰 따옴표 토큰을 별도 분류한다.
+		마-1. heredoc 뒤에 오는 토큰은 유형이 't'가 아닐 시에 'w'로 취급한다.
+		마-2. 토큰 유형이 'e'거나 큰 따옴표 토큰인 경우, 내부에 변환할 환경변수가 있는 지 검색하고, 해당 토큰들 유형을 일괄 'w'로 변환
+	바. env search : 토큰의 value 값을 확인하여 환경변수 존재 시, 환경변수 값을 변환하여 돌려준다.
+		바-1. loca : loca[0]은 $가 시작되는 지점, loca[1]은 loca[0]에서 시작하여 구분자를 만나는 지점, loca[2]는 $가 변환 시, 삽입할 내용물의 길이.
+		바-2. is env : env search에서 token->val 순회 시, $를 발견한 경우, 변환값을 만들고 그 값을 집어 넣는다.
+			바-2-가. 최초는 $ expansion 값이 있는 지 검사. 없으면 구분자를 만날 때까지 loca[1] 값을 늘려준다
+			바-2-나. 환경변수의 이름을 잘라서 별도의 문자열 포인터를 만들고 기존 환경변수 목록에서 동일한 값이 있는 지 확인한다
+			바-2-다. 있으면 환경변수의 내용물을 복사하고, 없으면 확인하기 위해 별도의 파싱을 시도한다.
+				바-2-다-1. 값이 subject에서 명시한 $?인 경우, exit_status 값을 복사한다.
+				바-2-다-2. 단순 리터럴인 경우, "$"로 복사.
+				바-2-다-3. 어느 쪽도 소속되지 않은 경우, 제거하기 위해 빈 문자열로 만들어준다.
+		바-3. trans env token : 
