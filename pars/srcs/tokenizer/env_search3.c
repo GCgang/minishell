@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:14 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:51:38 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 12:59:20 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	chk_ifs_token(t_token **token, char *ifs)
 {
-	if (ifs[(int)' '] == '1' || ifs[(int)'\n'] == '1'
-		|| ifs[(int)'\t'] == '1')
+	if (ifs[(int) ' '] == '1' || ifs[(int) '\n'] == '1'
+		|| ifs[(int) '\t'] == '1')
 	{
 		if ((*token)->val[0] == 0)
 			(*token)->type = 't';

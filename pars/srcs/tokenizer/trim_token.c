@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:38 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 21:54:34 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:06:40 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	trim_token(t_token **token)
 	t_token	*now;
 
 	now = *token;
-	if (now != 0 && now->type == 't' && !(ft_strncmp(now->val, " ", 2)
+	while (now != 0 && now->type == 't' && !(ft_strncmp(now->val, " ", 2)
 			&& now->val[0]))
 	{
 		*token = (*token)->next;
@@ -30,12 +30,10 @@ int	trim_token(t_token **token)
 			&& (!now->next->val[0] || !ft_strncmp(now->next->val, " ", 2)))
 			lstdelone_token_elem(now, now->next);
 		if (now->next != 0 && ft_strncmp(now->next->val, " ", 2)
-				&& now->next->val[0])
+			&& now->next->val[0])
 			now = now->next;
 		else if (now->next != 0 && now->next->type != 't')
 			now = now->next;
 	}
-	if (now != 0 && (!now->val[0] || !ft_strncmp(now->val, " ", 2)))
-		return (1);
 	return (0);
 }

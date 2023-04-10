@@ -6,32 +6,45 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:57:22 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 22:22:18 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:14:17 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static void	introduce(void)
+static void	introduce_before(void)
 {
-printf("   /\\                                                        /\\\n");
-printf("  |  |                                                      |  |\n");
-printf(" /----\\                by heyoan, jaehjoo                  /----\\\n"
-		);
-printf("[______]              welcome minishell castle            [______]\n");
-printf(" |    |         _____                        _____         |    |\n");
-printf(" |[]  |        [     ]                      [     ]        |  []|\n");
-printf(" |    |       [_______][ ][ ][ ][][ ][ ][ ][_______]       |    |\n");
-printf(" |    [ ][ ][ ]|     |  ,----------------,  |     |[ ][ ][ ]    |\n");
-printf(" |             |     |/'    ____..____    '\\|     |             |\n");
-printf("  \\  []        |     |    /'    ||    '\\    |     |        []  /\n");
-printf("   |      []   |     |   |o     ||     o|   |     |  []       |\n");
-printf("   |           |  _  |   |     _||_     |   |  _  |           |\n");
-printf("   |   []      | (_) |   |    (_||_)    |   | (_) |       []  |\n");
-printf("   |           |     |   |     (||)     |   |     |           |\n");
-printf("   |           |     |   |      ||      |   |     |           |\n");
-printf(" /''           |     |   |o     ||     o|   |     |           ''\\\n");
-printf("[_____________[_______]--'------''------'--[_______]_____________]\n");
+	printf("   /\\                                                        /\\\n");
+	printf("  |  |                                                      |  |\n");
+	printf(" /----\\                by heyoan, jaehjoo");
+	printf("                  /----\\\n");
+	printf("[______]              ");
+	printf("welcome minishell castle            [______]\n");
+	printf(" |    |         _____            ");
+	printf("            _____         |    |\n");
+	printf(" |[]  |        [     ]                      ");
+	printf("[     ]        |  []|\n");
+	printf(" |    |       [_______][ ][ ][ ][][ ][ ][ ][_______]");
+	printf("       |    |\n");
+}
+
+static void	introduce_after(void)
+{
+	printf(" |    [ ][ ][ ]|     |  ,----------------,  |");
+	printf("     |[ ][ ][ ]    |\n");
+	printf(" |             |     |/'    ____..____    '\\|     |");
+	printf("             |\n");
+	printf("  \\  []        |     |    /'    ||    '\\    ");
+	printf("|     |        []  /\n");
+	printf("   |      []   |     |   |o     ||     o|   |     |  []       |\n");
+	printf("   |           |  _  |   |     _||_     |   |  _  |           |\n");
+	printf("   |   []      | (_) |   |    (_||_)    |   | (_) |       []  |\n");
+	printf("   |           |     |   |     (||)     |   |     |           |\n");
+	printf("   |           |     |   |      ||      |   |     |           |\n");
+	printf(" /''           |     |   |o     ||     o|   |     |");
+	printf("           ''\\\n");
+	printf("[_____________[_______]--'------''------'--[_______]");
+	printf("_____________]\n");
 }
 
 static int	init_chk(int ac, char **envp, t_env **env_list)
@@ -41,7 +54,8 @@ static int	init_chk(int ac, char **envp, t_env **env_list)
 	init_signal();
 	if (init_env(envp, env_list) == 1)
 		return (err_msg("Error : Malloc failed(init_env)", 1, 0));
-	introduce();
+	introduce_before();
+	introduce_after();
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:55:36 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 22:25:46 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 12:51:29 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*val;
+	int				unset_flag;
 	struct s_env	*next;
 }	t_env;
 
