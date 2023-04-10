@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:51:58 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 22:05:12 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:55:15 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	chk_cnt(t_token **token)
 		{
 			tmp = tmp->next;
 			if (tmp != 0 && tmp->type == 'w')
-				tmp->type = 'h';
+				tmp->type = 'v';
 		}
 		else
 			cnt++;

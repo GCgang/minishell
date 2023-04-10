@@ -6,11 +6,24 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:04:52 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 16:01:00 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:27:16 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pars.h"
+
+static void	rotate_trans_l_token(t_token **token)
+{
+	t_token	*tmp;
+
+	tmp = *token;
+	while (tmp)
+	{
+		if (tmp->type == 'l')
+			tmp->type = 'w';
+		tmp = tmp->next;
+	}
+}
 
 int	rotate_env_token(t_token **token, t_env **env_list)
 {
@@ -23,8 +36,12 @@ int	rotate_env_token(t_token **token, t_env **env_list)
 		{
 			if (tmp->next != 0 && tmp->next->type == 'e')
 				tmp->next->type = 'w';
+			if (tmp->next != 0 && tmp->next->type == 't'
+				&& tmp->next->val[0] == ' ' && tmp->next->next != 0
+				&& tmp->next->next->type != 't')
+				tmp->next->next->type = 'l';
 		}
-		else if (tmp->type == 'e' || tmp->val[0] == '\"')
+		else if (tmp->type == 'e' || (tmp->val[0] == '\"' && tmp->type != 'l'))
 		{
 			if (env_search(tmp, *env_list))
 				return (1);
@@ -33,5 +50,6 @@ int	rotate_env_token(t_token **token, t_env **env_list)
 		}
 		tmp = tmp->next;
 	}
+	rotate_trans_l_token(token);
 	return (0);
 }

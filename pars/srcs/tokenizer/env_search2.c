@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:47:29 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:28:24 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:07:18 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	char	*tmp;
 	char	*tmp2;
 
-	if (flag == 0 && token->next && token->next->val[0] == '\"'
-		&& *tgt != 0 && (*tgt)[0] == '$')
+	if (flag == 0 && token->next && (token->next->val[0] == '\"'
+			|| token->next->val[0] == '\'') && *tgt != 0 && (*tgt)[0] == '$')
 		(*tgt)[0] = 0;
 	loca[0][2] = ft_strlen(*tgt);
 	token->val[loca[0][0]] = 0;

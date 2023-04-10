@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:57 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 22:09:24 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:03:03 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,12 @@ static int	remove_quote(t_token **token)
 int	removing_quote(t_token **token)
 {
 	t_token	*now;
-	t_token	*before;
 
 	now = *token;
-	before = now;
 	while (now != 0)
 	{
-		if (before != now && before->type == 'r'
-			&& ft_strncmp(before->val, "<<", 3) == 0)
-			now->type = 'h';
 		if (record_quote(&now))
 			return (1);
-		before = now;
 		now = now->next;
 	}
 	now = *token;

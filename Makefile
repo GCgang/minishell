@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/10 14:45:37 by jaehjoo           #+#    #+#              #
+#    Updated: 2023/04/10 17:02:17 by jaehjoo          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CFLAGS = -Werror -Wall -Wextra -fsanitize=address
 CF_FLAGS = -L/Users/jaehjoo/.brew/opt/readline/lib -lreadline
 OBJ_FLAGS = -I/Users/jaehjoo/.brew/opt/readline/include

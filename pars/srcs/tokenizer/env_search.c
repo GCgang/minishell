@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 21:59:08 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:05:57 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static t_env	*compare_env_token(char *token, t_env *env_list)
 {
 	while (env_list)
 	{
-		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1))
+		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1)
+			&& !env_list->unset_flag)
 			break ;
 		env_list = env_list->next;
 	}
@@ -113,6 +114,8 @@ int	env_search(t_token *token, t_env *env_list)
 		if (flag == 0 || flag == 1)
 			if (is_env(token, env_list, &loca, flag))
 				return (1);
+		if (flag == 0 && !token->val[0])
+			token->type = 't';
 		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 			trim_env_token(token, env_list, &loca);
 		if (token->val[loca[0]] != 0)
