@@ -15,12 +15,14 @@
 static void	exec_sigint_handler(int sig)
 {
 	(void)sig;
+    g_exit_status = 130;
 	printf("\n");
 }
 
 static void	exec_sigquit_handler(int sig)
 {
 	(void)sig;
+    g_exit_status = 131;
 	printf("Quit: 3\n");
 }
 
