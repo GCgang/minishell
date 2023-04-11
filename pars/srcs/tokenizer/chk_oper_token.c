@@ -58,7 +58,6 @@ int	chk_oper_token(t_token *token)
 	}
 	while (token != 0)
 	{
-		printf("token : %s\n", token->val);
 		if (token->type == 't')
 		{
 			if (token->val[0] == '>' || token->val[0] == '<')
