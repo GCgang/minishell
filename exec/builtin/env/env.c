@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/07 17:59:46 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 12:46:50 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	init_envp(t_env **env_list, char *name, char *val)
 	t_env	*tmp;
 	t_env	*new;
 	char	*env_name;
+	int		unset_flag;
 
 	tmp = *env_list;
+	unset_flag = 0;
 	while (tmp->next != NULL)
 	{
 		env_name = tmp->next->name;
@@ -30,6 +32,7 @@ void	init_envp(t_env **env_list, char *name, char *val)
 		tmp = tmp->next;
 	}
 	new = lstnew_env(ft_strdup(name), ft_strdup(val));
+	new->unset_flag = 0;
 	if (new != NULL)
 		lstadd_back_env(env_list, new);
 }
@@ -72,7 +75,7 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 
 	if ((*cmd)->word[1] == NULL)
 	{
-		tmp_list = env_list->next;
+		tmp_list = env_list;
 		while (tmp_list != NULL)
 		{
 			if (tmp_list->name != NULL && tmp_list->val != NULL)
@@ -88,9 +91,14 @@ void	built_in_env(t_command **cmd, t_env *env_list)
 	}
 	else
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd((*cmd)->word[1], 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		env_error_msg((*cmd)->word[1]);
 		g_exit_status = 127;
 	}
+}
+
+void	env_error_msg(char *err_word)
+{
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(err_word, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 }

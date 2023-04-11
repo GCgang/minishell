@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/07 17:59:54 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 12:47:43 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	print_export(t_env *env_list)
 	t_env	*tmp_list;
 
 	tmp_list = sort_export(env_list);
-	tmp_list = env_list;
 	while (tmp_list != NULL)
 	{
 		if (tmp_list->name != NULL)
@@ -62,7 +61,6 @@ void	print_export(t_env *env_list)
 		}
 		tmp_list = tmp_list->next;
 	}
-	free(tmp_list);
 }
 
 t_env	*sort_export(t_env *env_list)
@@ -127,7 +125,7 @@ void	built_in_export(t_command **cmd, t_env **env_list)
 	i = 0;
 	if ((*cmd)->word[1] == NULL)
 	{
-		print_export((*env_list)->next);
+		print_export(*env_list);
 		g_exit_status = 0;
 	}
 	else
