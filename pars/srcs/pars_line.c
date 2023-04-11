@@ -19,6 +19,7 @@ void	pars_line(char *line, t_env **env_list, char **envp)
 	t_command	*com;
 
 	token = 0;
+	com = 0;
 	ft_strlcpy(spe, "<> |&\n;(\t)", 12);
 	if (chk_close_quote(line) > 0)
 	{
@@ -26,17 +27,16 @@ void	pars_line(char *line, t_env **env_list, char **envp)
 			|| mix_token(&token, 0) || rotate_env_token(&token, env_list)
 			|| mix_token(&token, 1) || trim_token(&token)
 			|| chk_oper_token(token) || removing_quote(&token) || !token)
+			;
+		else if (make_com(&token, env_list, &com) == 0)
 		{
 			free(line);
-			clear_all(&token, 0, 0);
-			return ;
-		}
-		free(line);
-		if (make_com(&token, env_list, &com) == 0)
-		{
+			line = 0;
 			clear_all(&token, 0, 0);
 			exec(&com, env_list, envp);
 		}
 		clear_all(&token, 0, &com);
 	}
+	if (line)
+		free(line);
 }

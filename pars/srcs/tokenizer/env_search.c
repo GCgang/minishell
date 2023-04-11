@@ -117,7 +117,7 @@ int	env_search(t_token *token, t_env *env_list)
 			token->type = 't';
 		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 			trim_env_token(token, env_list, &loca);
-		if (token->val[loca[0]] != 0)
+		if (token->val[loca[0]] != 0 && token->val[loca[0]] != '$')
 			(loca[0])++;
 	}
 	free(loca);

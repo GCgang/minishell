@@ -24,7 +24,9 @@ int	chk_meta_token_err(t_token *token)
 
 	if (token->type != 't' && !token->next)
 		return (extra_msg());
-	else if (token->type == 't')
+	else if (token->type == 't' || token->next == 0
+				|| (token->next != 0 && token->next->type == 't'
+				&& !ft_strchr("<>", token->next->val[0])))
 	{
 		if (token->next == 0)
 			tmp = ft_strdup("newline");
@@ -56,6 +58,7 @@ int	chk_oper_token(t_token *token)
 	}
 	while (token != 0)
 	{
+		printf("token : %s\n", token->val);
 		if (token->type == 't')
 		{
 			if (token->val[0] == '>' || token->val[0] == '<')
