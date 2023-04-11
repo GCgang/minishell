@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/10 16:05:57 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:18:59 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static char	*find_special_env(t_token *token, int **loca)
 	tmp2 = tmp;
 	if (ft_strncmp(tmp2, "$?", 3) == 0)
 		tmp = ft_itoa(g_exit_status);
+	else if (ft_strncmp(tmp2, "$0", 3) == 0)
+		tmp = ft_strdup("Minishell");
 	else if (!tmp2[1])
 		tmp = ft_strdup("$");
 	else
@@ -117,7 +119,8 @@ int	env_search(t_token *token, t_env *env_list)
 			token->type = 't';
 		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 			trim_env_token(token, env_list, &loca);
-		if (token->val[loca[0]] != 0 && token->val[loca[0]] != '$')
+		if (token->val[loca[0]] != 0 && (token->val[loca[0]] != '$'
+				|| token->val[loca[0] + 1] == 0))
 			(loca[0])++;
 	}
 	free(loca);

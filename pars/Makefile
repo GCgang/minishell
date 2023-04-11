@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rc
 NAME = pars.a

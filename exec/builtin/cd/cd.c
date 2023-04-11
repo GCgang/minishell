@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:49 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/11 01:09:24 by jun              ###   ########.fr       */
+/*   Updated: 2023/04/11 18:22:43 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	change_oldpwd_dir(t_env **env_list)
 	}
 	else
 	{
-		ft_putstr_fd(get_value(*env_list, "OLDPWD"), 1);//
+		ft_putstr_fd(get_value(*env_list, "OLDPWD"), 1);
 		ft_putchar_fd('\n', 1);
 	}
 	update_pwd(env_list, old_pwd);
