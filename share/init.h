@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:24:21 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/11 16:09:30 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include "struct.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>

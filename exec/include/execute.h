@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/10 14:57:09 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:09:03 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
 # define EXECUTE_H
 
 # include "../../share/init.h"
-# include <string.h>
 # include "builtin.h"
 # include "redirection.h"
 # include "here_doc.h"
-# include <sys/types.h>
-# include <sys/stat.h>
 
 enum	e_EXECVE_CMD_ERROR
 {
