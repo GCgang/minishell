@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:58 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/07 17:59:51 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:31:49 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ long long	ft_atol(char *str)
 	i = 0;
 	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 		i++;
+	if (ft_strcmp(&str[i], "-9223372036854775808") == 0)
+		return (0);
 	if (str[i] == '+' || str[i] == '-')
 	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			sign = -1;
-		i++;
 	}
 	while (ft_isdigit(str[i]) != 0)
 	{
 		before = result;
-		result = result * 10 + (str[i] - '0');
+		result = result * 10 + (str[i++] - '0');
 		if (before > result)
 			return (print_exit_numeric_error(str));
-		i++;
 	}
 	return (result * sign);
 }

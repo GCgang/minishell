@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/11 12:46:50 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:03:46 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	init_envp(t_env **env_list, char *name, char *val)
 	t_env	*tmp;
 	t_env	*new;
 	char	*env_name;
-	int		unset_flag;
 
 	tmp = *env_list;
-	unset_flag = 0;
 	while (tmp->next != NULL)
 	{
 		env_name = tmp->next->name;
@@ -32,7 +30,6 @@ void	init_envp(t_env **env_list, char *name, char *val)
 		tmp = tmp->next;
 	}
 	new = lstnew_env(ft_strdup(name), ft_strdup(val));
-	new->unset_flag = 0;
 	if (new != NULL)
 		lstadd_back_env(env_list, new);
 }
