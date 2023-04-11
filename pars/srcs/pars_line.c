@@ -12,30 +12,31 @@
 
 #include "../include/pars.h"
 
-void	pars_line(char *line, t_token **token, t_env **env_list, char **envp)
+void	pars_line(char *line, t_env **env_list, char **envp)
 {
 	char		spe[12];
+	t_token		*token;
 	t_command	*com;
 
-	*token = 0;
+	token = 0;
 	ft_strlcpy(spe, "<> |&\n;(\t)", 12);
 	if (chk_close_quote(line) > 0)
 	{
-		if (make_token(line, spe, token) || mix_token(token, 0)
-			|| rotate_env_token(token, env_list) || mix_token(token, 1)
-			|| trim_token(token) || chk_oper_token(*token)
-			|| removing_quote(token) || !(*token))
+		if (make_token(line, spe, &token)
+			|| mix_token(&token, 0) || rotate_env_token(&token, env_list)
+			|| mix_token(&token, 1) || trim_token(&token)
+			|| chk_oper_token(token) || removing_quote(&token) || !token)
 		{
 			free(line);
-			clear_all(token, 0, 0);
+			clear_all(&token, 0, 0);
 			return ;
 		}
 		free(line);
-		if (make_com(token, env_list, &com) == 0)
+		if (make_com(&token, env_list, &com) == 0)
 		{
-			clear_all(token, 0, 0);
+			clear_all(&token, 0, 0);
 			exec(&com, env_list, envp);
 		}
+		clear_all(&token, 0, &com);
 	}
-	clear_all(token, 0, &com);
 }

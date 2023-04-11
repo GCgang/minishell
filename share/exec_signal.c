@@ -28,6 +28,7 @@ static void	heredoc_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
+	g_exit_status = 130;
 	close(0);
 }
 

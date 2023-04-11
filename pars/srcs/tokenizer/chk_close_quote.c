@@ -42,7 +42,7 @@ int	chk_close_quote(char *line)
 	int	idx;
 
 	idx = 0;
-	if (!line[0])
+	if (!line || !line[0])
 		return (0);
 	while (line[idx] != 0)
 	{

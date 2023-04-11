@@ -29,7 +29,6 @@ t_env	*lstnew_env(char *name, char *val)
 		return (NULL);
 	temp->name = name;
 	temp->val = val;
-	temp->unset_flag = 0;
 	temp->next = 0;
 	return (temp);
 }

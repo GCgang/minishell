@@ -32,7 +32,7 @@ void	lstdelone_token(t_token *lst);
 void	lstclear_token(t_token **lst);
 void	lstdelone_token_elem(t_token *before, t_token *now);
 
-void	pars_line(char *line, t_token **token, t_env **env_list, char **envp);
+void	pars_line(char *line, t_env **env_list, char **envp);
 int		chk_close_quote(char *line);
 int		make_token(char *line, char *meta, t_token **token);
 int		trim_token(t_token **token);

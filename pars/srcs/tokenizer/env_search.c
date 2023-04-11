@@ -37,8 +37,7 @@ static t_env	*compare_env_token(char *token, t_env *env_list)
 {
 	while (env_list)
 	{
-		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1)
-			&& !env_list->unset_flag)
+		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1))
 			break ;
 		env_list = env_list->next;
 	}

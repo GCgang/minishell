@@ -25,8 +25,8 @@ static int	fusion_token(t_token **token)
 		free(now->val);
 	now->val = tmp_str;
 	lstdelone_token_elem(now, now->next);
-	if (now->type == 't' && (ft_strncmp(now->val, "<<", 3) == 0
-			|| ft_strncmp(now->val, ">>", 3) == 0))
+	if (now->type == 't' && (!ft_strncmp(now->val, "<<", 3)
+			|| !ft_strncmp(now->val, ">>", 3)))
 		return (1);
 	return (2);
 }
@@ -85,7 +85,10 @@ int	mix_token(t_token **token, int quote_flag)
 		if (select == 0)
 			return (1);
 		else if (select == 1)
-			now = now->next;
+		{
+			if (now->next != 0)
+				now = now->next;
+		}
 	}
 	return (0);
 }

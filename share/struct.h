@@ -25,7 +25,6 @@ typedef struct s_env
 {
 	char			*name;
 	char			*val;
-	int				unset_flag;
 	struct s_env	*next;
 }	t_env;
 
