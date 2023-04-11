@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:46:26 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/28 12:49:10 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/06 17:06:09 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../../include/execute.h"
 
-int		check_unset_syntax(char *variable);
 void	delete_envp(t_env *env_list, char *name);
 void	built_in_unset(t_command **cmd, t_env *env_list);
 #endif

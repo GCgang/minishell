@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:09:38 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:24:21 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	clear_all(t_token **token, t_env **env_list, t_command **com);
 
 void	init_signal(void);
 void	heredoc_sigint_handler(int sig);
+void	exec_signal(int phase);
 int		init_env(char **envp, t_env **env_list);
-int		err_msg(char *str);
+int		err_msg(char *str, int newline, int **fr);
 
 #endif

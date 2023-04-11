@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:38:23 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:54:00 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:45:32 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	fusion_token(t_token **token)
 	now = *token;
 	tmp_str = ft_strjoin(now->val, now->next->val);
 	if (!tmp_str)
-		return (err_msg("Error : Malloc failed(fusion_token)") - 1);
+		return (err_msg("Error : Malloc failed(fusion_token)", 1, 0));
 	if (now->val != 0)
 		free(now->val);
 	now->val = tmp_str;

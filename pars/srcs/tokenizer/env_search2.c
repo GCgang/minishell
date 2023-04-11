@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:47:29 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 19:43:58 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:07:18 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,13 @@ static int	free_str(char **del_0, char **del_1)
 	return (1);
 }
 
-void	trim_env_token(t_token *token, t_env *env_list, int **loca)
-{
-	int		idx;
-	int		len;
-	char	ifs;
-
-	idx = loca[0][0];
-	len = loca[0][0] + loca[0][2];
-	ifs = ' ';
-	while (env_list)
-	{
-		if (!ft_strncmp(env_list->name, "IFS", 4))
-			ifs = env_list->val[0];
-		env_list = env_list->next;
-	}
-	while (idx < len && token->val[idx])
-	{
-		if (token->val[idx] == ifs)
-		{
-			token->val[idx] = 0;
-			return ;
-		}
-		idx++;
-	}
-}
-
 int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	if (flag == 0 && token->next && token->next->val[0] == '\"'
-		&& ((*tgt)[0] == '$' || (*tgt)[0] == '\0'))
+	if (flag == 0 && token->next && (token->next->val[0] == '\"'
+			|| token->next->val[0] == '\'') && *tgt != 0 && (*tgt)[0] == '$')
 		(*tgt)[0] = 0;
 	loca[0][2] = ft_strlen(*tgt);
 	token->val[loca[0][0]] = 0;
@@ -62,7 +36,7 @@ int	trans_env_token(t_token *token, char **tgt, int **loca, int flag)
 	else
 		tmp = ft_strjoin(token->val, *tgt);
 	if (tmp == 0)
-		return (1);
+		return (err_msg("Error : Malloc failed(trans_env_token)", 1, 0));
 	tmp2 = ft_strdup(token->val + loca[0][1]);
 	if (tmp2 == 0)
 		return (free_str(&tmp, 0));

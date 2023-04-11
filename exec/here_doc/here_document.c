@@ -6,59 +6,130 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:13:30 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 19:06:54 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 11:51:48 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/here_doc.h"
 
-void	check_here_document(t_command *process)
+char	*open_here_doc_file(t_command *process, int idx)
 {
-	t_command	*tmp_proc;
-	int			idx;
+	char	*here_doc_file;
 
-	tmp_proc = process;
-	while (tmp_proc != NULL)
+	here_doc_file = ft_strjoin("/tmp/", process->redir_val[idx]);
+	if (here_doc_file == NULL)
 	{
-		idx = -1;
-		while (tmp_proc->redir[++idx] != NULL)
-		{
-			if (ft_strcmp((tmp_proc)->redir[idx], "<<") == 0)
-			{
-				tmp_proc->heredoc_fd = open((tmp_proc)->redir_val[idx], O_WRONLY | O_CREAT | O_APPEND, 0644);
-				if (tmp_proc->heredoc_fd == -1)
-				{
-					perror("Minishell: temp: ");
-					g_exit_status = 1;
-					return ;
-				}
-				here_document(tmp_proc, idx);
-				free(tmp_proc->redir[idx]);
-				tmp_proc->redir[idx] = ft_strdup("<");
-			}
-		}
-		tmp_proc = tmp_proc->next;
+		ft_putstr_fd("Error : Malloc failed(open_here_doc_file)", 2);
+		g_exit_status = 1;
+		return (NULL);
 	}
+	process->heredoc_fd = open(here_doc_file, \
+							O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (process->heredoc_fd == -1)
+	{
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(here_doc_file, 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
+		free(here_doc_file);
+		g_exit_status = 1;
+		return (NULL);
+	}
+	return (here_doc_file);
 }
 
-void	here_document(t_command *process, int idx)
+int	update_redir(t_command *process, int idx, char *here_doc_file_name)
+{
+	free(process->redir[idx]);
+	process->redir[idx] = ft_strdup("<");
+	if (process->redir[idx] == NULL)
+	{
+		ft_putstr_fd("Error : Malloc failed(update_redir)", 2);
+		g_exit_status = 1;
+		return (-1);
+	}
+	free(process->redir_val[idx]);
+	process->redir_val[idx] = here_doc_file_name;
+	return (1);
+}
+
+int	check_here_document(t_command *process)
+{
+	int			idx;
+	char		*here_doc_file;
+
+	while (process != NULL)
+	{
+		idx = -1;
+		while (process->redir[++idx] != NULL)
+		{
+			if (ft_strcmp((process)->redir[idx], "<<") == 0)
+			{
+				here_doc_file = open_here_doc_file(process, idx);
+				if (here_doc_file == NULL)
+					return (-1);
+				if (here_document(process, idx) == -1
+					|| update_redir(process, idx, here_doc_file) == -1)
+				{
+					free(here_doc_file);
+					return (-1);
+				}
+				close(process->heredoc_fd);
+			}
+		}
+		process = process->next;
+	}
+	return (1);
+}
+
+int	here_document(t_command *process, int idx)
 {
 	char	*line;
 	char	*limiter;
 
 	limiter = process->redir_val[idx];
+	exec_signal(2);
+	parent_std_io_copy(process);
+	g_exit_status = 0;
 	while (1)
 	{
-		ft_putstr_fd("> ", 0);
-		line = get_next_line(0);
-		if (ft_strncmp(line, limiter, (ft_strlen(line) - 1)) == 0 || \
-		line == NULL)
+		line = readline("> ");
+		if (ft_strcmp(line, limiter) == 0 || line == NULL)
 		{
 			free(line);
-			break ;
+			parent_std_io_reset(process);
+			close(process->heredoc_fd);
+			if (line == NULL)
+				return (-1);
+			else
+				break ;
 		}
 		ft_putstr_fd(line, process->heredoc_fd);
+		ft_putchar_fd('\n', process->heredoc_fd);
 		free(line);
 	}
-	close(process->heredoc_fd);
+	return (1);
+}
+
+void	unlink_file(t_command *cmd)
+{
+	t_command	*process;
+	int			i;
+
+	process = cmd;
+	while (process != NULL)
+	{
+		if (process->redir_val != NULL)
+		{
+			i = -1;
+			while (process->redir_val[++i] != NULL)
+			{
+				if (ft_strncmp("/tmp/", (process)->redir_val[i], 5) == 0)
+				{
+					unlink((process)->redir_val[i]);
+				}
+			}
+		}
+		process = process->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/31 17:27:01 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:05:57 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static t_env	*compare_env_token(char *token, t_env *env_list)
 {
 	while (env_list)
 	{
-		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1))
+		if (!ft_strncmp(token, env_list->name, ft_strlen(env_list->name) + 1)
+			&& !env_list->unset_flag)
 			break ;
 		env_list = env_list->next;
 	}
@@ -49,15 +50,16 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 	char	*tmp;
 
 	loca[0][1] = loca[0][0] + 1;
-	if (token->val[loca[0][1]] && ft_strchr("$?", token->val[loca[0][1]]))
+	if (token->val[loca[0][1]]
+		&& ft_strchr("$*?@#-!0123456789", token->val[loca[0][1]]))
 		(loca[0][1])++;
 	else
-		while (token->val[loca[0][1]]
-			&& !ft_strchr(" $\"\'/|&", token->val[loca[0][1]]))
+		while (token->val[loca[0][1]] && !ft_strchr(" :\n\t$*?@#-!\"\'/|&;(){}[]",
+					token->val[loca[0][1]]))
 			(loca[0][1])++;
 	tmp = ft_substr(token->val, loca[0][0] + 1, loca[0][1] - loca[0][0] - 1);
 	if (tmp == 0)
-		return (err_msg("Error : Malloc failed(is_env)"));
+		return (err_msg("Error : Malloc failed(is_env)", 1, loca));
 	env_list = compare_env_token(tmp, env_list);
 	free(tmp);
 	if (env_list != 0)
@@ -65,9 +67,9 @@ static int	is_env(t_token *token, t_env *env_list, int **loca, int flag)
 	else
 		tmp = find_special_env(token, loca);
 	if (tmp == 0)
-		return (err_msg("Error : Malloc failed(is_env)"));
+		return (err_msg("Error : Malloc failed(is_env)", 1, loca));
 	if (trans_env_token(token, &tmp, loca, flag))
-		return (err_msg("Error : Malloc failed(trans_env_token)"));
+		return (err_msg("Error : Malloc failed(trans_env_token)", 1, loca));
 	return (0);
 }
 
@@ -104,18 +106,18 @@ int	env_search(t_token *token, t_env *env_list)
 
 	loca = (int *)malloc(sizeof(int) * 3);
 	if (!loca)
-		return (err_msg("Error : Malloc failed(env_search)"));
+		return (err_msg("Error : Malloc failed(env_search)", 1, 0));
 	loca[0] = 0;
 	while (token->val != 0 && token->val[loca[0]])
 	{
 		flag = find_icon(token->val, &loca);
 		if (flag == 0 || flag == 1)
-		{
 			if (is_env(token, env_list, &loca, flag))
 				return (1);
-			if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
-				trim_env_token(token, env_list, &loca);
-		}
+		if (flag == 0 && !token->val[0])
+			token->type = 't';
+		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
+			trim_env_token(token, env_list, &loca);
 		if (token->val[loca[0]] != 0)
 			(loca[0])++;
 	}

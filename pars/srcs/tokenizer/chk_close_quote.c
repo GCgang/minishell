@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chk_have_token.c                                   :+:      :+:    :+:   */
+/*   chk_close_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:19 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/03/29 19:55:59 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:21:41 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static int	chk_quote(char *line, int *idx, char quote)
 			(*idx)++;
 		if (line[*idx] != quote)
 		{
-			err_msg("Error : Don't have closed quote");
-			return (-42);
+			err_msg("Minishell: Syntax error unclosed quote", 1, 0);
+			g_exit_status = 2;
+			return (2);
 		}
 		(*idx)++;
 		return (1);
@@ -45,9 +46,9 @@ int	chk_close_quote(char *line)
 		return (0);
 	while (line[idx] != 0)
 	{
-		if (chk_quote(line, &idx, '\'') == -42)
+		if (chk_quote(line, &idx, '\'') == 2)
 			return (0);
-		if (chk_quote(line, &idx, '\"') == -42)
+		if (chk_quote(line, &idx, '\"') == 2)
 			return (0);
 		chk_none_quote(line, &idx);
 	}

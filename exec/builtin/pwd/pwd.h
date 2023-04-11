@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 10:44:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 19:55:14 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:18:18 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 # define PATH_MAX 1024
 # include "../../include/execute.h"
 
-void	built_in_pwd(void);
+void	built_in_pwd(t_env *env_list);
 
-#endif
+# endif

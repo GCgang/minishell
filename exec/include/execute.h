@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/04 19:51:58 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:57:09 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,26 @@
 # include "builtin.h"
 # include "redirection.h"
 # include "here_doc.h"
+# include <sys/types.h>
+# include <sys/stat.h>
 
-int				is_built_in(char *word);
-void			only_built_in(t_command *process, t_env **env_list);
-void			execute_built_in(t_command **cmd, t_env **env_list);
+enum	e_EXECVE_CMD_ERROR
+{
+	FILENAME_ARGUMENT_REQUIRED = 1,
+	IS_A_DIRECTORY,
+	NO_SUCH_FILE_OR_DIRECTORY,
+	COMMAND_NOT_FOUND	
+};
+
+int				is_built_in(t_command *process);
+void			only_built_in(t_command **process, t_env **env_list, \
+																int cmd_cnt);
+void			execute_built_in(t_command **cmd, t_env **env_list, \
+																int cmd_cnt);
 
 char			*check_cmd(t_command *process, t_env **env_list);
 void			run_execve(t_command *process, t_env **env_list, char **envp);
+void			execve_error(int err_flag, char *err_word, int exit_status);
 
 void			execute_binary(t_command **process, \
 							t_env **env_list, int cmd_cnt, char **envp);
@@ -41,6 +54,6 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 int				ft_isdigit(int c);
 int				ft_isalpha(int c);
-long long		ft_atol(const char *str);
+long long		ft_atol(char *str);
 
 #endif

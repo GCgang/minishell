@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:11:28 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/04 20:13:06 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:31:15 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,11 @@ int	init_env(char **envp, t_env **env_list)
 		len = ft_stridx(envp[idx], '=');
 		if (len == -1)
 			return (0);
-		if (ft_strncmp(envp[idx], "OLDPWD=", 7) != 0)
-		{
-			node = conv_env(envp[idx], len);
-			if (node == 0)
-				return (1);
-			lstadd_back_env(env_list, node);
-		}
+		node = conv_env(envp[idx], len);
+		if (node == 0)
+			return (1);
+		lstadd_back_env(env_list, node);
 		idx++;
 	}
-	node = conv_env("OLDPWD", ft_strlen("OLDPWD"));
-	if (node == 0)
-		return (1);
-	lstadd_back_env(env_list, node);
 	return (0);
 }

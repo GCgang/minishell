@@ -51,6 +51,7 @@ static void	lstdelone_com(t_command *lst)
 		free(lst->path);
 	}
 	lstdelone_com_redir(lst);
+	free(lst);
 }
 
 void	lstclear_com(t_command **lst)
@@ -63,7 +64,6 @@ void	lstclear_com(t_command **lst)
 	{
 		cur = (*lst)->next;
 		lstdelone_com(*lst);
-		free(*lst);
 		*lst = cur;
 	}
 }

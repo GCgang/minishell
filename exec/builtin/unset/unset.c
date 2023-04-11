@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/03/31 13:14:56 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/10 23:09:25 by jun              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unset.h"
-
-int	check_unset_syntax(char *variable)
-{
-	if (ft_isalpha(*variable) == 0 && *variable != '_')
-		return (0);
-	while (*variable)
-	{
-		if (ft_isalpha(*variable) == 0
-			&& ft_isdigit(*variable) == 0
-			&& *variable != '_')
-		{
-			return (0);
-		}
-		variable++;
-	}
-	return (1);
-}
 
 void	delete_envp(t_env *env_list, char *name)
 {
@@ -53,15 +36,6 @@ void	built_in_unset(t_command **cmd, t_env *env_list)
 
 	i = 0;
 	while ((*cmd)->word[++i])
-	{
-		if (check_unset_syntax((*cmd)->word[i]) == 0)
-		{
-			ft_putstr_fd("Minishell: unset: not a valid identifier\n", 2);
-			g_exit_status = 1;
-		}
-		else
-			delete_envp(env_list, (*cmd)->word[i]);
-	}
+		delete_envp(env_list, (*cmd)->word[i]);
 	g_exit_status = 0;
-	return ;
 }
