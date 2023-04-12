@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:56 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/11 14:03:46 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:29:30 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	init_envp(t_env **env_list, char *name, char *val)
 		}
 		tmp = tmp->next;
 	}
+	if (ft_strcmp((*env_list)->name, name) == 0)
+	{
+		tmp = *env_list;
+		*env_list = (*env_list)->next;
+		lstdelone_env(tmp);
+	}
 	new = lstnew_env(ft_strdup(name), ft_strdup(val));
 	if (new != NULL)
 		lstadd_back_env(env_list, new);
@@ -39,7 +45,7 @@ char	*get_name(t_env *env_list, char *name)
 	t_env	*tmp_list;
 	char	*tmp_name;
 
-	tmp_list = env_list->next;
+	tmp_list = env_list;
 	while (tmp_list != NULL)
 	{
 		tmp_name = tmp_list->name;
@@ -55,7 +61,7 @@ char	*get_value(t_env *env_list, char *name)
 	t_env	*tmp_list;
 	char	*tmp_name;
 
-	tmp_list = env_list->next;
+	tmp_list = env_list;
 	while (tmp_list != NULL)
 	{
 		tmp_name = tmp_list->name;
@@ -66,13 +72,13 @@ char	*get_value(t_env *env_list, char *name)
 	return (NULL);
 }
 
-void	built_in_env(t_command **cmd, t_env *env_list)
+void	built_in_env(t_command **cmd, t_env **env_list)
 {
 	t_env	*tmp_list;
 
 	if ((*cmd)->word[1] == NULL)
 	{
-		tmp_list = env_list;
+		tmp_list = *env_list;
 		while (tmp_list != NULL)
 		{
 			if (tmp_list->name != NULL && tmp_list->val != NULL)

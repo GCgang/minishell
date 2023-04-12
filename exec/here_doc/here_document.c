@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:13:30 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/11 11:51:48 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:57:33 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	check_here_document(t_command *process)
 	int			idx;
 	char		*here_doc_file;
 
+	if (process->redir == NULL || process->redir_val == NULL)
+		return (1);
 	while (process != NULL)
 	{
 		idx = -1;
@@ -66,9 +68,7 @@ int	check_here_document(t_command *process)
 			if (ft_strcmp((process)->redir[idx], "<<") == 0)
 			{
 				here_doc_file = open_here_doc_file(process, idx);
-				if (here_doc_file == NULL)
-					return (-1);
-				if (here_document(process, idx) == -1
+				if (here_doc_file == NULL || here_document(process, idx) == -1
 					|| update_redir(process, idx, here_doc_file) == -1)
 				{
 					free(here_doc_file);

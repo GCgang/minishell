@@ -6,13 +6,13 @@
 #    By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/10 14:45:37 by jaehjoo           #+#    #+#              #
-#    Updated: 2023/04/11 16:10:01 by hyeoan           ###   ########.fr        #
+#    Updated: 2023/04/12 15:37:34 by hyeoan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -Werror -Wall -Wextra
-CF_FLAGS = -L/Users/jaehjoo/.brew/opt/readline/lib -lreadline
-OBJ_FLAGS = -I/Users/jaehjoo/.brew/opt/readline/include
+CF_FLAGS = -L/Users/hyeoan/.brew/opt/readline/lib -lreadline
+OBJ_FLAGS = -I/Users/hyeoan/.brew/opt/readline/include
 PARS = -L./pars -lpars
 EXEC = -L./exec -lexec
 PARSA = ./pars/pars.a

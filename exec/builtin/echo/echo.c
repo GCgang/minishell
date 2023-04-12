@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:26:52 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/07 17:59:43 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:50:45 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	check_echo_option(char *cmd, int *option_n)
 	int	i;
 
 	i = 0;
-	if (cmd[i] != '-')
+	if (cmd[i++] != '-')
 	{
 		return (0);
 	}
-	while (cmd[++i] == 'n')
-		;
-	if (cmd[i] == '\0')
+	while (cmd[i] == 'n')
+		i++;
+	if (cmd[i] == '\0' && i > 1)
 	{
 		*option_n = 1;
 		return (1);

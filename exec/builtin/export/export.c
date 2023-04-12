@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:00 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/11 12:47:43 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 17:16:09 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	update_export_envp(t_env **env_list, char *name)
 
 void	built_in_export(t_command **cmd, t_env **env_list)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if ((*cmd)->word[1] == NULL)

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jun <jun@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:27:05 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/10 23:09:25 by jun              ###   ########.fr       */
+/*   Updated: 2023/04/12 19:41:52 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unset.h"
 
-void	delete_envp(t_env *env_list, char *name)
+void	delete_envp(t_env **env_list, char *name)
 {
 	t_env	*tmp;
 	char	*del_name;
 
-	tmp = env_list;
+	tmp = *env_list;
 	while (tmp->next != NULL)
 	{
 		del_name = tmp->next->name;
@@ -28,9 +28,15 @@ void	delete_envp(t_env *env_list, char *name)
 		}
 		tmp = tmp->next;
 	}
+	if (ft_strcmp((*env_list)->name, name) == 0)
+	{
+		tmp = *env_list;
+		*env_list = (*env_list)->next;
+		lstdelone_env(tmp);
+	}
 }
 
-void	built_in_unset(t_command **cmd, t_env *env_list)
+void	built_in_unset(t_command **cmd, t_env **env_list)
 {
 	int	i;
 

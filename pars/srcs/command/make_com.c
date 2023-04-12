@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_com.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:46 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 22:26:55 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 21:10:53 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	init_command(t_command **com)
 	(*com)->pipe_fd[0] = 0;
 	(*com)->pipe_fd[1] = 0;
 	(*com)->heredoc_fd = 0;
+	(*com)->in_file_fd = 0;
+	(*com)->out_file_fd = 0;
 	(*com)->std_in_dup = 0;
 	(*com)->std_out_dup = 1;
 	(*com)->next = 0;
