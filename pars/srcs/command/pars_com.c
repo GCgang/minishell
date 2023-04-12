@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:54 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 17:22:35 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 20:09:14 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,34 @@ static int	malloc_redir(t_command *com, int cnt)
 
 static int	redir_cnt(t_token **token)
 {
-	int		cnt;
+	int		redir_cnt;
+	int		redir_val_cnt;
 	t_token	*tmp;
 
-	cnt = 0;
 	tmp = *token;
+	redir_cnt = 0;
+	redir_val_cnt = 0;
 	while (tmp != 0 && tmp->type != 'p')
 	{
 		if (tmp->type == 'r')
-			cnt++;
+			redir_cnt++;
+		else if (tmp->type == 'v')
+			redir_val_cnt++;
 		tmp = tmp->next;
 	}
-	return (cnt);
+	if (redir_cnt != redir_val_cnt)
+		return (-1);
+	return (redir_cnt);
 }
 
 int	pars_com(t_token **token, t_command *com)
 {
 	int	cnt;
 
+	cnt = 0;
 	cnt = redir_cnt(token);
+	if (cnt == -1)
+		return (1);
 	if (malloc_redir(com, cnt) || input_redir(com, token))
 		return (1);
 	return (0);

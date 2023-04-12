@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_clear_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:11:42 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/12 17:00:01 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/04 13:04:54 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	lstdelone_env_elem(t_env *before, t_env *now)
 	before->next = tmp;
 	free(now);
 }
-
 
 void	lstdelone_env(t_env *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:30 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/11 18:18:59 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 22:18:32 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static char	*find_special_env(t_token *token, int **loca)
 	else if (ft_strncmp(tmp2, "$0", 3) == 0)
 		tmp = ft_strdup("Minishell");
 	else if (!tmp2[1])
+	{		
 		tmp = ft_strdup("$");
+		loca[0][3] = 1;
+	}
 	else
 		tmp = ft_strdup("");
 	free(tmp2);
@@ -105,12 +108,13 @@ int	env_search(t_token *token, t_env *env_list)
 	int	*loca;
 	int	flag;
 
-	loca = (int *)malloc(sizeof(int) * 3);
+	loca = (int *)malloc(sizeof(int) * 4);
 	if (!loca)
 		return (err_msg("Error : Malloc failed(env_search)", 1, 0));
 	loca[0] = 0;
 	while (token->val != 0 && token->val[loca[0]])
 	{
+		loca[3] = 0;
 		flag = find_icon(token->val, &loca);
 		if (flag == 0 || flag == 1)
 			if (is_env(token, env_list, &loca, flag))
@@ -120,7 +124,8 @@ int	env_search(t_token *token, t_env *env_list)
 		if (flag == 0 && token->val[0] && ft_strncmp(token->val, "\"\"", 3))
 			trim_env_token(token, env_list, &loca);
 		if (token->val[loca[0]] != 0 && (token->val[loca[0]] != '$'
-				|| token->val[loca[0] + 1] == 0))
+				|| !token->val[loca[0] + 1]
+				|| (token->val[loca[0]] == '$' && loca[3] == 1)))
 			(loca[0])++;
 	}
 	free(loca);

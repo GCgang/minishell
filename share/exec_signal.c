@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:47:17 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/11 18:06:46 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 22:01:20 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	exec_sigint_handler(int sig)
 {
 	(void)sig;
-	g_exit_status = 130;
 	printf("\n");
+	g_exit_status = 130;
 }
 
 static void	exec_sigquit_handler(int sig)

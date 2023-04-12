@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:44:24 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/11 18:58:09 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 19:58:08 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	chk_meta_token_err(t_token *token)
 		return (extra_msg());
 	else if (token->type == 't' || token->next == 0
 		|| (token->next != 0 && token->next->type == 't'
-			&& !ft_strchr("<>", token->next->val[0])))
+			&& ft_strchr("<>", token->next->val[0])))
 	{
 		if (token->next == 0)
 			tmp = ft_strdup("newline");

@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:49:55 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/12 21:26:21 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:09:30 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../pars/include/pars.h"
-# include "../exec/include/execute.h"
 
 int		g_exit_status;
 

@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:22:47 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/10 17:08:59 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 19:42:03 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	lstdelone_token_elem(t_token *before, t_token *now);
 void	pars_line(char *line, t_env **env_list, char **envp);
 int		chk_close_quote(char *line);
 int		make_token(char *line, char *meta, t_token **token);
-int		trim_token(t_token **token);
+int		trim_token(t_token **token, int phase);
 int		chk_oper_token(t_token *token);
 int		removing_quote(t_token **token);
 int		env_search(t_token *token, t_env *env_list);

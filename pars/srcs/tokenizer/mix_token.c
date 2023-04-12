@@ -6,7 +6,7 @@
 /*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:38:23 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/07 16:45:32 by jaehjoo          ###   ########.fr       */
+/*   Updated: 2023/04/12 19:47:00 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	mix_token(t_token **token, int quote_flag)
 	int		select;
 
 	now = *token;
-	while (now->next != 0)
+	while (now != 0 && now->next != 0)
 	{
 		select = select_phase(&now, &(now->next), quote_flag);
 		if (select == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:03 by jaehjoo           #+#    #+#             */
-/*   Updated: 2023/04/12 21:30:15 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:02:53 by jaehjoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pars_line(char *line, t_env **env_list, char **envp)
 	{
 		if (make_token(line, spe, &token)
 			|| mix_token(&token, 0) || rotate_env_token(&token, env_list)
-			|| mix_token(&token, 1) || trim_token(&token)
+			|| mix_token(&token, 1) || trim_token(&token, 1)
 			|| chk_oper_token(token) || removing_quote(&token) || !token)
 			;
 		else if (make_com(&token, env_list, &com) == 0)

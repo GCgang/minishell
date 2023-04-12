@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+         #
+#    By: jaehjoo <jaehjoo@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/10 14:45:37 by jaehjoo           #+#    #+#              #
-#    Updated: 2023/04/12 15:37:34 by hyeoan           ###   ########.fr        #
+#    Updated: 2023/04/12 22:21:21 by jaehjoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ $(EXECA): $(EXEC_SRCC)
 			make -sC ./exec/
 
 clean:
-			$(RM) $(NAME) $(OBJ)
+			$(RM) $(OBJ)
 			make -sC ./pars clean
 			make -sC ./exec clean
 
