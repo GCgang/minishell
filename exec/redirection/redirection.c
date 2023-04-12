@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:38:46 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/12 21:32:42 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/12 22:11:55 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	redirection(t_command **cmd)
 		else if (ft_strcmp(process->redir[idx], ">>") == 0)
 			process->std_out = o_append_redirection(cmd, idx);
 		if (process->std_out == -1)
-		{
 			return (-1);
-		}
 	}
 	return (1);
 }
