@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:00:55 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/12 21:25:34 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/13 13:17:39 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ char			*check_cmd(t_command *process, t_env **env_list);
 void			run_execve(t_command *process, t_env **env_list, char **envp);
 void			execve_error(int err_flag, char *err_word, int exit_status);
 
-void			execute_binary(t_command **process, \
+pid_t			execute_binary(t_command **process, \
 							t_env **env_list, int cmd_cnt, char **envp);
 void			child_process(t_command **process, \
 							t_env **env_list, int cmd_cnt, char **envp);
 void			parent_process(t_command **process);
 void			exec(t_command **cmd, t_env **env_list, char **envp);
-void			wait_process(int cmd_cnt);
+void			wait_process(int cmd_cnt, pid_t pid);
 
 int				ft_strcmp(char *s1, char *s2);
 void			ft_putchar_fd(char c, int fd);
