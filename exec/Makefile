@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 ARFLAGS = rc
 NAME = exec.a
 HEADER = ./include/builtin.h ./inclue/execute.h ./include/redirection.h ./include/here_doc.h

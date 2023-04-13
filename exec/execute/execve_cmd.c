@@ -6,7 +6,7 @@
 /*   By: hyeoan <hyeoan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:54:02 by hyeoan            #+#    #+#             */
-/*   Updated: 2023/04/12 21:49:31 by hyeoan           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:46:48 by hyeoan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,13 @@ void	run_execve(t_command *process, t_env **env_list, char **envp)
 		if (S_ISDIR(file_info.st_mode))
 		{
 			if (ft_strcmp(process->word[0], ".") == 0)
+			{
 				execve_error(FILENAME_ARGUMENT_REQUIRED, process->word[0], 2);
+				return ;
+			}
 			else if (ft_strcmp(process->word[0], "..") == 0)
-				execve_error(COMMAND_NOT_FOUND, process->word[0], 127);
-			else if (ft_strcmp(process->word[0], "./") == 0 \
-					|| ft_strcmp(process->word[0], "../") == 0)
-				execve_error(IS_A_DIRECTORY, process->word[0], 126);
-			else if (ft_strchr(process->word[0], '.') == NULL)
-				execve_error(IS_A_DIRECTORY, process->word[0], 126);
+				return (execve_error(COMMAND_NOT_FOUND, process->word[0], 127));
+			execve_error(IS_A_DIRECTORY, process->word[0], 126);
 		}
 		else if (ft_strchr(process->word[0], '/') != NULL
 			|| get_value(*env_list, "PATH") == NULL)
