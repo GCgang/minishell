@@ -11,8 +11,15 @@
 # **************************************************************************** #
 
 CFLAGS = -Werror -Wall -Wextra
-CF_FLAGS = -L/Users/hyeoan/.brew/opt/readline/lib -lreadline
-OBJ_FLAGS = -I/Users/hyeoan/.brew/opt/readline/include
+READLINE_PATH := $(shell brew --prefix readline 2>/dev/null)
+
+ifeq ($(READLINE_PATH),)
+    CF_FLAGS = -L/usr/local/lib -lreadline 
+    OBJ_FLAGS = -I/usr/local/include      
+else
+    CF_FLAGS = -L$(READLINE_PATH)/lib -lreadline
+    OBJ_FLAGS = -I$(READLINE_PATH)/include
+endif
 PARS = -L./pars -lpars
 EXEC = -L./exec -lexec
 PARSA = ./pars/pars.a
